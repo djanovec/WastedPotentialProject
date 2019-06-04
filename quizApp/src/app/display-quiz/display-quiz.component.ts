@@ -8,9 +8,14 @@ import { GetQuestionsService } from 'src/app/get-questions.service';
 })
 export class DisplayQuizComponent implements OnInit {
 
-  constructor(private getQuestions: GetQuestionsService) { }
+  constructor(private questionsService: GetQuestionsService) { }
 
   ngOnInit() {
   }
 
+  displayQuestions() {
+    this.questionsService.getQuestion().subscribe(res => {
+      let results = res;
+    })
+  }
 }

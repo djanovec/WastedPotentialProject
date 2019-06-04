@@ -1,3 +1,5 @@
-<p>
-  display-quiz works!
-</p>
+<div *ngIf="questions">
+  <div *ngFor="let question of Questions">
+      <p>{{question}}</p>
+  </div>
+</div>

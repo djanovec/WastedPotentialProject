@@ -6,11 +6,13 @@ async function getQuiz(req, res){
     try{
         const getRes = await Quizzes.find();
         console.log(getRes);
+        res.status(201).send(getRes);
     }catch(err){
         console.log('Error:' + '' + err);
     }
 }
-function postQuiz(req, res){
+async function postQuiz(req, res){
+    try{
         const postReq = new Quizzes({
             hash: 'abc123',
             title: 'Super Cool Quiz',
@@ -18,11 +20,13 @@ function postQuiz(req, res){
             instructions: 'take the damn quiz',
             questions: ['this is a question', 'also a question', 'oh look another question'],
         })
-        Quizzes.create({postReq}, function(err, postReq){
-            if(err){
-                return console.log('Error:' + ' ' + err)
-            }
-        })
+        var postRes = await postReq.save();
+        console.log(postRes);
+        res.status(201).send('Added quiz')
+    } catch(err){
+        console.log('Error:' + ' ' + err);
+    }
+
 }
 
 module.exports.getQuiz = getQuiz;

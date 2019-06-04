@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GetQuestionsService } from 'src/app/get-questions.service';
 
 @Component({
   selector: 'app-display-quiz',
@@ -8,7 +7,7 @@ import { GetQuestionsService } from 'src/app/get-questions.service';
 })
 export class DisplayQuizComponent implements OnInit {
 
-  constructor(private getQuestions: GetQuestionsService) { }
+  constructor() { }
 
   ngOnInit() {
   }

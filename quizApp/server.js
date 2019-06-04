@@ -1,8 +1,10 @@
 const express = require('express');
-const routes = require('./routes/index');
-const path = require('path');
 const bodyParser = require('body-parser');
+const getQuizRoute = require('./routes/quiz.routes');
 
 const app = express();
 
-module.expores = app;
+app.use('/api', getQuizRoute);
+app.use(bodyParser);
+
+module.exports = app;

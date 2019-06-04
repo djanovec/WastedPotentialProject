@@ -6,11 +6,13 @@ async function getQuiz(req, res){
     try{
         const getRes = await Quizzes.find();
         console.log(getRes);
+        res.status(201).send(getRes);
     }catch(err){
         console.log('Error:' + '' + err);
     }
 }
 async function postQuiz(req, res){
+    try{
         const postReq = new Quizzes({
             hash: 'abc123',
             title: 'Super Cool Quiz',
@@ -20,6 +22,10 @@ async function postQuiz(req, res){
         })
         var postRes = await postReq.save();
         console.log(postRes);
+        res.status(201).send('Added quiz')
+    } catch(err){
+        console.log('Error:' + ' ' + err);
+    }
 
 }
 

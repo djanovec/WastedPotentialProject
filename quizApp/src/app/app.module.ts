@@ -34,10 +34,12 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { QuizResultsComponent } from './quiz-results/quiz-results.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    QuizResultsComponent
   ],
   imports: [
     BrowserModule,

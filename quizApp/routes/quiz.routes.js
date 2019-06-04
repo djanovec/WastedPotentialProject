@@ -8,5 +8,8 @@ router.get('/getQuiz', (req, res)=>{
 router.post('/postQuiz', (req, res)=>{
     quizAPI.postQuiz();
 })
+router.get('/getQuizResults'), (req, res)=>{
+    quizAPI.getQuizResults();
+}
 
 module.exports = router;

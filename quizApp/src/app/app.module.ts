@@ -75,7 +75,8 @@ import { QuizResultsComponent } from './quiz-results/quiz-results.component';
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCardModule
     
   ],
   providers: [],

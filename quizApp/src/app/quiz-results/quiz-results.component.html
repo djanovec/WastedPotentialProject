@@ -1,3 +1,11 @@
-<div id="quiz"></div>
-<button id="submit">Get Results</button>
-<div id="results"></div>
+<h1>{{quiz.title}}</h1>
+
+<mat-card *ngFor="let question of quiz.questions">
+    <mat-card-title>
+        {{question.prompt}}
+    </mat-card-title>
+    <mat-card-subtitle *ngFor="let choice of question.choices">
+        {{choice}}
+    </mat-card-subtitle>
+
+</mat-card>

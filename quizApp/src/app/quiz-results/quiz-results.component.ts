@@ -22,7 +22,7 @@ export class QuizResultsComponent implements OnInit {
           "3",
           "4"
         ],
-        correct: 3,
+        correct: 4,
         answered: 3
       },
       {
@@ -39,14 +39,6 @@ export class QuizResultsComponent implements OnInit {
     ],
 
   };
-
-  // function displayDetails() {
-  //   document.getElementById("results").innerHTML = this.item;
-  //   }
-    
-  //   question.showDetails = displayDetails;
-    
-  //   .showDetails();
 
   constructor() {}
 

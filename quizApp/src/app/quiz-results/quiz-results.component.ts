@@ -22,8 +22,8 @@ export class QuizResultsComponent implements OnInit {
           "3",
           "4"
         ],
-        correct: 4,
-        answered: 3
+        correct: 3,
+        answered: 2
       },
       {
         type: "multi",
@@ -34,7 +34,7 @@ export class QuizResultsComponent implements OnInit {
           "blue"
         ],
         correct: 2,
-        answered: 0
+        answered: 2
       }
     ],
 

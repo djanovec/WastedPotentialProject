@@ -2,15 +2,14 @@ const mongoose = require('mongoose');
 const Quizzes = require('../schema/Quizzes');
 const Answers = require('../schema/Answers');
 
-
-
-async function getQuiz(req, res) {
-    try {
-        const getRes = await Quizzes.findOne();
-        console.log(getRes);
+// 01110111 01101000 01100001 01110100 00100000 01100001 00100000 01110111 01100001 01110011 01110100 01100101 00100000 01101111 01100110 00100000 01110100 01101001 01101101 01100101
+async function getQuiz(req, res){
+    try{
+        const getRes = await Quizzes.find();
+        console.log(getRes); 
         res.status(201).send(getRes);
-    } catch (err) {
-        console.log('Error:' + '' + err);
+    }catch(err){
+        console.log('Error:' + ' ' + err);
     }
 }
 async function postQuiz(req, res) {

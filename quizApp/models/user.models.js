@@ -4,15 +4,22 @@ const bcrypt = require('bcrypt');
 
 async function createUser(req, res) {
     try {
-        const userPost = new User({
-            email: req.body.email,
-            username: req.body.username,
-            password: req.body.password,
-            admin: req.body.isAdmin
+        User.findOne({ email: req.body.email }, function (err, userExists) {
+            if (userExists) {
+                return res.send({ ERROR: 'ACCOUNT ALREADY EXISTS' })
+            } else {
+                let password = bcrypt.hashSync(req.body.password, 5);
+                const userPost = new User({
+                    email: req.body.email,
+                    username: req.body.username,
+                    password: password,
+                    admin: req.body.isAdmin
+                })
+                var userPostRes = await userPost.save();
+                console.log(userPostRes);
+                return res.status(201).send('User created')
+            }
         })
-        var userPostRes = await userPost.save();
-        console.log(userPostRes);
-        res.status(201).send('User created')
     } catch (err) {
         console.log("Error:" + ' ' + err);
     }

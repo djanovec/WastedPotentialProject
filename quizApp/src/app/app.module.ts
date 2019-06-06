@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,15 +36,18 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { QuizResultsComponent } from './quiz-results/quiz-results.component';
+import { DisplayQuizComponent } from './display-quiz/display-quiz.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuizResultsComponent
+    DisplayQuizComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatCheckboxModule,
@@ -75,9 +79,8 @@ import { QuizResultsComponent } from './quiz-results/quiz-results.component';
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule,
-    MatCardModule
-    
+    MatPaginatorModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

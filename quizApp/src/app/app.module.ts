@@ -37,12 +37,17 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { DisplayQuizComponent } from './display-quiz/display-quiz.component';
 import { QuizFormComponent } from './quiz-form/quiz-form.component';
+import { FormsModule } from '@angular/forms';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { QuizResultsComponent } from './quiz-results/quiz-results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DisplayQuizComponent,
-    QuizFormComponent
+    QuizFormComponent,
+    DashboardComponent,
+    QuizResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +84,8 @@ import { QuizFormComponent } from './quiz-form/quiz-form.component';
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule,FormsModule
+    MatPaginatorModule,
+    FormsModule
 
   ],
   providers: [],

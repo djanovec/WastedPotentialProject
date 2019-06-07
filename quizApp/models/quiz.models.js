@@ -74,12 +74,34 @@ async function getResults(){
     }
 }
 
+async function getStudentsByQuizID(){
+    try {
+        var query = Answers.where({quizzes_id: req.body.quizID});
+        await query.find(function(err, answer) {
+            if (err) return handleError(err);
+            if (answer) {
+                var answers = Answers.where({ quizzes_id: req.body.quizID});
+                await answers.find(function (err, answer){
+                    if (err) return handleError(err);
+                    if (answers) {
+                        answers['quiz'] = quiz
+                        return res.status(201).send(answer)
+                    }
+                })
+            }
+        })
+    }
+    catch (err) {
+        console.log('Error: ' + err);
+    }
+}
 
 module.exports.getQuiz = getQuiz;
 module.exports.postQuiz = postQuiz;
 module.exports.getQuizAnswers = getQuizAnswers;
 module.exports.postAnswers = postAnswers;
 module.exports.getResults = getResults;
+module.exports.getStudentsByQuizID = getStudentsByQuizID;
 /* Model for the anwsers schema
 const answerSchema = new mongoose.Schema({
     _id: {

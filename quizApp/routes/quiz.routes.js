@@ -17,4 +17,7 @@ router.post('/postAnswers', (req, res)=>{
 router.get('/getResults', (req, res) => {
     quizAPI.getResults(req, res);
 })
+router.get('/getStudentsByQuizID/:id', (req, res)=>{
+    quizAPI.getStudentsByQuizId(req, res);
+})
 module.exports = router;

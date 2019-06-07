@@ -29,10 +29,10 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput type="email" placeholder="Email" formControlName="email" id="email">
-    <!-- <mat-hint align="end">Must be a valid Email Address.</mat-hint> -->
-    <mat-error *ngIf="hasError('email', 'required')">Email is required</mat-error>
-    <mat-error *ngIf="hasError('email', 'email')">Email must be valid</mat-error>
+    <input matInput type="email" placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher" id="email">
+    <!-- <mat-hint align="end">Must be a valid email address.</mat-hint> -->
+    <mat-error *ngIf="emailFormControl.hasError('email') && emailFormControl.hasError('required')">Please enter a valid email address</mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">Email must be valid</mat-error>
   </mat-form-field>
   
   <mat-form-field>
@@ -44,7 +44,7 @@
 
   <mat-card-actions>
       <mat-card-actions align="center">
-          <button mat-raised-button color="primary" [disabled]="!ownerForm.valid">Register</button>
+          <button mat-raised-button color="primary" [disabled]="!ownerForm.valid">Submit</button>
           <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
         </mat-card-actions>
   </mat-card-actions>

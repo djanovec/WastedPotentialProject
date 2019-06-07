@@ -37,6 +37,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { DisplayQuizComponent } from './display-quiz/display-quiz.component';
 import { QuizFormComponent } from './quiz-form/quiz-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { QuizFormComponent } from './quiz-form/quiz-form.component';
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule,FormsModule
+    MatPaginatorModule,
+    FormsModule
 
   ],
   providers: [],

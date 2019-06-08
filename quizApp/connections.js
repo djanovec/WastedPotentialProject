@@ -1,8 +1,10 @@
 const { Pool, Client } = require('pg');
-const pool = new Pool({
-  connectionString: process.env.DATABASE
-});
 require('dotenv').config();
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+});
+
 
 // This is what happens when you decide to switch databases and have to rewrite your backend
 // mongoose.connect(process.env.DATABASE,  { useNewUrlParser: true });
@@ -20,7 +22,7 @@ require('dotenv').config();
 //   process.exit(-1)
 // })
 
-pool.connect();
+pool.connect(); // What's  this doing?
 
 module.exports = pool;
 // module.exports = {

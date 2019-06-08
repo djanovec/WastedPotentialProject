@@ -4,7 +4,7 @@ const pool = require("../connections");
 function login(req, res){
     pool.query("SELECT * FROM users", (err, result)=>{
         res.send({
-            err: err,
+            error: err,
             result: result
         })
     })

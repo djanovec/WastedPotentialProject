@@ -3,7 +3,7 @@
 <mat-card-title>{{quiz.title}}</mat-card-title>
 <h3> {{quiz.questions[0].prompt}}</h3>
 <mat-radio-group name="question" aria-label="Select an option">
-  <mat-radio-button *ngFor="let currentChoices of currentChoices; let i = index" value="i">{{currentChoices}}</mat-radio-button>
+  <mat-radio-button *ngFor="let currentChoices of currentChoices" name="question">{{currentChoices}}</mat-radio-button>
 </mat-radio-group><br>
 <button mat-button> Next Question</button>
 </mat-card>

@@ -40,6 +40,7 @@ import { QuizFormComponent } from './quiz-form/quiz-form.component';
 import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuizResultsComponent } from './quiz-results/quiz-results.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { QuizResultsComponent } from './quiz-results/quiz-results.component';
     DisplayQuizComponent,
     QuizFormComponent,
     DashboardComponent,
-    QuizResultsComponent
+    QuizResultsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

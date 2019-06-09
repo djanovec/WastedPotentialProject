@@ -1,9 +1,10 @@
-
+<form>
 <mat-card>
 <mat-card-title>{{quiz.title}}</mat-card-title>
-<h3> {{quiz.questions[0].prompt}}</h3>
+<h3> {{currentQuestion}}</h3>
 <mat-radio-group name="question" aria-label="Select an option">
-  <mat-radio-button *ngFor="let currentChoices of currentChoices" name="question">{{currentChoices}}</mat-radio-button>
+  <mat-radio-button mat-radio-checked="false" *ngFor="let currentChoices of currentChoices" name="question">{{currentChoices}}</mat-radio-button>
 </mat-radio-group><br>
-<button mat-button> Next Question</button>
+<button (click)="nextQuestion()" mat-button> Next Question</button>
 </mat-card>
+</form>

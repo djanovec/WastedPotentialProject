@@ -1,26 +1,9 @@
-<nav class="mblue">
-    <span>
-  <h1 class="mfont white"><img src="./assets/images/quizWhipSmall.png" alt="Quiz Whip Logo" class="headerLogo"></h1>
-
-  <button mat-button [matMenuTriggerFor]="options">Options</button>
-
-
-  <mat-menu #options="matMenu">
-  <button mat-menu-item><a class="navLink" [routerLink]="[ '/login' ]" routerLinkActive="active">Login</a></button>
-  <button mat-menu-item><a class="navLink" [routerLink]="[ '/register' ]" routerLinkActive="active">Register</a></button>
-</mat-menu>
-
-<mat-menu #menu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>dialpad</mat-icon>
-      <span>Redial</span>
-    </button>
-    <button mat-menu-item disabled>
-      <mat-icon>voicemail</mat-icon>
-      <span>Check voicemail</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>notifications_off</mat-icon>
-      <span>Disable alerts</span>
-    </button>
-  </mat-menu>
+<mat-toolbar class="mblue">
+    
+  <img src="./assets/images/quizWhipSmall.png" alt="Quiz Whip Logo" class="headerLogo">
+  <button class ="white" id="justifyRight" mat-button [matMenuTriggerFor]="options">Options</button>
+  <mat-menu class="white" #options="matMenu">
+      <button mat-menu-item><a class="navLink" [routerLink]="[ '/login' ]" routerLinkActive="active">Login</a></button>
+      <button mat-menu-item><a class="navLink" [routerLink]="[ '/register' ]" routerLinkActive="active">Register</a></button>
+    </mat-menu>
+</mat-toolbar>

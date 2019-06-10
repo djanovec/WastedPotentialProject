@@ -36,8 +36,8 @@ export class DisplayQuizComponent implements OnInit {
   formControl = new FormControl('');
   x = 0;
   selectedRB: MatRadioButton;
-  selectedRadio;
-
+  selectedRadio: string;
+userAnswers: any[] = [];
 
   // @ViewChild('selected') 
   // selectedRadio: MatRadioButton;
@@ -77,22 +77,20 @@ currentChoices = this.quiz.questions[this.x].choices;
 
     ngOnInit() {
  }
+ // identifying which radio button is selected
+ onSelectionChange(currentChoice) {
+      this.selectedRadio = currentChoice;
+      console.log(this.selectedRadio);
 
+    } 
  // function that activates on click of "next button." Changes the question.
 nextQuestion() {
-  // console.log(this.selectedRadio.checked);
-  
+  this.userAnswers.push(this.selectedRadio);
+  console.log(this.userAnswers);
       this.x = this.x + 1;
       this.currentQuestion = this.quiz.questions[this.x].prompt;
       this.currentChoices = this.quiz.questions[this.x].choices;
-
-
-
     }
-    
-    onSelectionChange(currentChoice) {
-      this.selectedRadio = currentChoice;
-      console.log(this.selectedRadio)
-      
-    } 
+
+   
 }

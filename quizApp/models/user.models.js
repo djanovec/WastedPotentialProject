@@ -13,7 +13,10 @@ function createUser(req, res){
         console.log(password);
         let passwordSend = bcrypt.hashSync(password, 5);
         let email = req.body.email;
-        pool.query("INSERT INTO users (email, password) VALUES($1,$2)", [email, passwordSend], (err, result)=>{
+        let firstName = req.body.firstName;
+        let lastName = req.body.lastName;
+        let isAdmin = false;
+        pool.query("INSERT INTO users (email, password, firstName, lastName, isAdmin) VALUES($1,$2, $3, $4, $5)", [email, passwordSend, firstName, lastName, isAdmin], (err, result)=>{
             if(!err){
                 console.log(result);
                 return res.send({user: {email: req.body.email, id: result.insertId}});

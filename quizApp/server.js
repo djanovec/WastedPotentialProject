@@ -5,7 +5,9 @@ const quizRoutes = require('./routes/quiz.routes');
 const userRoutes = require('./routes/user.routes');
 const bodyParser = require("body-parser");
 
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 // Activate this later for production
 // app.use(express.static(__dirname+'/dist'))

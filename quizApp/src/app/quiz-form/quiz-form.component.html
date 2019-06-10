@@ -51,17 +51,21 @@
           </td>
           <td> <button mat-raised-button (click)=addChoice(question)>Add Choices</button></td>
           <td>
+            <mat-radio-group aria-label="Select an option" *ngFor="let type of types" [value]="type">
+              <table *ngFor="let choice of question.choices">
+                <tr>
+                  <button mat-raised-button (click)=removeChoice(choice,question)>Remove</button>
 
-            <table *ngFor="let choice of question.choices">
-              <tr>
-                <button mat-raised-button (click)=removeChoice(choice,question)>Remove</button>
 
-                <input matInput placeholder="Insert Multiple Choice">
-              </tr>
-
-            </table>
-          </td>
+                  <mat-radio-button value="question.choices"><input matInput placeholder="Insert Multiple Choice">
+                  </mat-radio-button>
+          
         </tr>
+
+      </table>
+      </mat-radio-group>
+      </td>
+      </tr>
       </table>
 
     </mat-card-content>

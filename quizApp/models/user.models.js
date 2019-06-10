@@ -1,16 +1,19 @@
 
 const pool = require("../connections");
+const bcrypt = require('bcrypt');
 
-function create(req, res){
+function createUser(req, res){
+    console.log("hit");
     pool.query("SELECT * FROM users WHERE email = $1", 
     [req.body.email], (err, queryReturn)=>{
-        console.log(err);
         if(queryReturn[0]){
             return res.send("USERNAME ALREADY EXISTS")
         }
-        let password = bcrypt.hashSync(req.body.password, 5);
+        let password = req.body.password;
+        console.log(password);
+        let passwordSend = bcrypt.hashSync(password, 5);
         let email = req.body.email;
-        pool.query("INSERT INTO USER (email, password) VALUES($1,$2)", [email, password], (err, result)=>{
+        pool.query("INSERT INTO users (email, password) VALUES($1,$2)", [email, passwordSend], (err, result)=>{
             if(!err){
                 console.log(result);
                 return res.send({user: {email: req.body.email, id: result.insertId}});

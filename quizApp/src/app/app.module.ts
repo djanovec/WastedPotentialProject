@@ -38,15 +38,16 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { DisplayQuizComponent } from './display-quiz/display-quiz.component';
 import { QuizFormComponent } from './quiz-form/quiz-form.component';
 import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RegisterFormComponent } from './register-form/register-form.component'
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { QuizResultsComponent } from './quiz-results/quiz-results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DisplayQuizComponent,
     QuizFormComponent,
-    RegisterFormComponent
+    DashboardComponent,
+    QuizResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -84,8 +85,7 @@ import { RegisterFormComponent } from './register-form/register-form.component'
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    FormsModule,
-    ReactiveFormsModule
+    FormsModule
 
   ],
   providers: [],

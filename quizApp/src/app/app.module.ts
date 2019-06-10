@@ -39,13 +39,17 @@ import { DisplayQuizComponent } from './display-quiz/display-quiz.component';
 import { QuizFormComponent } from './quiz-form/quiz-form.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { QuizResultsComponent } from './quiz-results/quiz-results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DisplayQuizComponent,
     QuizFormComponent,
-    HeaderComponent
+    HeaderComponent,
+    DashboardComponent,
+    QuizResultsComponent
   ],
   imports: [
     BrowserModule,

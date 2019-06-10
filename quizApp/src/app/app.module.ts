@@ -38,12 +38,14 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { DisplayQuizComponent } from './display-quiz/display-quiz.component';
 import { QuizFormComponent } from './quiz-form/quiz-form.component';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DisplayQuizComponent,
-    QuizFormComponent
+    QuizFormComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

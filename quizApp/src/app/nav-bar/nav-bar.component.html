@@ -1,8 +1,26 @@
-<div>
-  login works
-</div>
+<nav class="mblue">
+    <span>
+  <h1 class="mfont white"><img src="./assets/images/quizWhipSmall.png" alt="Quiz Whip Logo" class="headerLogo"></h1>
+
+  <button mat-button [matMenuTriggerFor]="options">Options</button>
 
 
-<!-- <nav class="navbar navbar-expand-lg mblue">
-  <h1 class="mfont white navbar-brand ">quizWhip</h1>
-</nav> -->
+  <mat-menu #options="matMenu">
+  <button mat-menu-item><a class="navLink" [routerLink]="[ '/login' ]" routerLinkActive="active">Login</a></button>
+  <button mat-menu-item><a class="navLink" [routerLink]="[ '/register' ]" routerLinkActive="active">Register</a></button>
+</mat-menu>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>dialpad</mat-icon>
+      <span>Redial</span>
+    </button>
+    <button mat-menu-item disabled>
+      <mat-icon>voicemail</mat-icon>
+      <span>Check voicemail</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>notifications_off</mat-icon>
+      <span>Disable alerts</span>
+    </button>
+  </mat-menu>

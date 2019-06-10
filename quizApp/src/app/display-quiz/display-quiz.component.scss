@@ -7,6 +7,9 @@
     background-color: #0e2340;
    
 }
+.morange{
+  background-color: #ee7623;
+}
 
 *{
   font-family: 'Montserrat', sans-serif;
@@ -18,4 +21,11 @@
 .quizTitle{
     text-align: center;
     font-weight: 600;
+}
+#searchsubmit
+{    
+    visibility: hidden;
+}
+#visible {
+  visibility: visible;
 }

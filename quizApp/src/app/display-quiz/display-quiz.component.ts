@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { GetQuestionsService } from 'src/app/get-questions.service';
 import { FormControl, FormGroup, ControlValueAccessor } from '@angular/forms';
-import { MatRadioChange, MatRadioButton } from '@angular/material';
+import { MatRadioChange, MatButton} from '@angular/material';
 
 // Object Interface for data
 export interface Quiz {
@@ -35,7 +35,7 @@ export interface Quiz {
 export class DisplayQuizComponent implements OnInit {
   formControl = new FormControl('');
   x = 0;
-  selectedRB: MatRadioButton;
+  matButton: MatButton;
   selectedRadio: string;
   userAnswers: any[] = [];
 

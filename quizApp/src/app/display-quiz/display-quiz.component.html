@@ -9,6 +9,8 @@
 <br>
 <button mat-raised-button (click)="nextQuestion()" mat-button> Next Question</button>
 
+
+
 </mat-card>
 </form>
 
@@ -17,3 +19,4 @@
   <ol><mat-card-subtitle *ngFor="let n = index; let userAnswer of userAnswers">
   <li><strong>Question:</strong> {{quiz.questions[n].prompt}}  <strong>  You chose:</strong> {{userAnswer}}</li> </mat-card-subtitle></ol>
 </mat-card>
+<button mat-raised-button  id="searchsubmit" mat-button> Submit </button>

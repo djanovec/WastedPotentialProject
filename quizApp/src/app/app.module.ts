@@ -35,11 +35,14 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { QuizFormComponent } from './quiz-form/quiz-form.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { QuizGuardComponent } from './quiz-guard/quiz-guard.component'; 
 @NgModule({
   declarations: [
     AppComponent,
-    QuizFormComponent
+    QuizFormComponent,
+    QuizGuardComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,7 @@ import { QuizFormComponent } from './quiz-form/quiz-form.component';
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule,FormsModule
+    MatPaginatorModule,FormsModule,ReactiveFormsModule,HttpClientModule 
     
   ],
   providers: [],

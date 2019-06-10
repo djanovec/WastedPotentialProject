@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import { QuizServiceService } from '../quiz-service.service';
+import { Quiz } from './Models/quiz.model';
 
 @Component({
   selector: 'app-quiz-form',
@@ -7,8 +9,20 @@ import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms'
   styleUrls: ['./quiz-form.component.scss']
 })
 export class QuizFormComponent implements OnInit {
+    quiz: Quiz = {
+    quizTitle: "",
+    quizDescription: "",
+    quizInstructions: "",
+    quizQuestions: "",
+    correctAnswers: "",
+    
 
-  constructor() { }
+     }
+  
+
+  constructor(private fb: FormBuilder, private quizService: QuizServiceService ) { }
+
+
 questions: Array<Object> = [
   {
     type: "multi",
@@ -47,29 +61,19 @@ types: string [] = ["multi"]
  addChoice(val){
    let x = this.questions[this.questions.indexOf(val)]
    x['choices'].push("")
-   
+
  }
+   quizFormSubmit(){
+    // if(this.quizForm.valid){
+    this.quizService.quizFormSubmit(this.quiz).subscribe(res => console.log(res))
+  // }
+  
+  
+   
+}
 
+ngOnInit() {
+  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  ngOnInit() {
-  }
-
+}
 }

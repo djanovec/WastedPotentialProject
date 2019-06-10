@@ -1,8 +1,19 @@
-
-mat-form-field{
-    width: 400px;
-    width: 70%;
+.spacing {
+    padding-bottom: 20px;
 }
-mat-card-title{
+
+.center {
+    margin: auto;
     text-align: center;
 }
+
+  .form{
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+
+   
+  .full-width {
+    width: 400px;
+  }

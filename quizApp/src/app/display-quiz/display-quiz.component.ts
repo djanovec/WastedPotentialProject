@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { GetQuestionsService } from 'src/app/get-questions.service';
-import {FormControl} from '@angular/forms';
+import {FormControl, FormGroup, ControlValueAccessor} from '@angular/forms';
+import { MatRadioChange, MatRadioButton } from '@angular/material';
 
-
+// Object Interface
 export interface Quiz {
 title: string;
 description: string;
@@ -17,19 +18,33 @@ questions: [
     choices: [string, string, string, string],
     answer: string} ];
 }
-
+// export interface ControlValueAccessor {
+//   writeValue(obj: any): void
+//   registerOnChange(fn: any): void
+//   registerOnTouched(fn: any): void
+//   setDisabledState(isDisabled: boolean)?: void
+// }
 
 @Component({
   selector: 'app-display-quiz',
   templateUrl: './display-quiz.component.html',
   styleUrls: ['./display-quiz.component.scss']
 })
+
+
 export class DisplayQuizComponent implements OnInit {
-  name = new FormControl('')
+  formControl = new FormControl('');
   x = 0;
+  selectedRB: MatRadioButton;
+  selectedRadio;
+
+
+  // @ViewChild('selected') 
+  // selectedRadio: MatRadioButton;
+
   constructor(private questionsService: GetQuestionsService) { }
 
-  //hard coded json for testing
+  // hard coded json for testing
 quiz: Quiz = {
     title: 'HTML Quiz',
     description: 'This is a quiz here',
@@ -57,27 +72,27 @@ quiz: Quiz = {
 
 currentQuestion = this.quiz.questions[this.x].prompt;
 
-
 // insolating the page choices
 currentChoices = this.quiz.questions[this.x].choices;
 
-// observing the changing x value
-// scope.$watch('x', function(newValue, oldValue) {
-//   console.log(newValue);
-//   scope.someVar = [Do something with someVar];
-// });
-
-// const questionObservable = (this.x);
-// const questionObserverObject = { next: x => console.log('Observer got a next value: ' + x)};
-// questionObservable.subscribe(currentChoices);
     ngOnInit() {
  }
 
  // function that activates on click of "next button." Changes the question.
 nextQuestion() {
+  // console.log(this.selectedRadio.checked);
+  
       this.x = this.x + 1;
       this.currentQuestion = this.quiz.questions[this.x].prompt;
       this.currentChoices = this.quiz.questions[this.x].choices;
-}
 
+
+
+    }
+    
+    onSelectionChange(currentChoice) {
+      this.selectedRadio = currentChoice;
+      console.log(this.selectedRadio)
+      
+    } 
 }

@@ -1,10 +1,13 @@
-<form>
+<form #questionForm="ngForm">
 <mat-card>
 <mat-card-title>{{quiz.title}}</mat-card-title>
 <h3> {{currentQuestion}}</h3>
-<mat-radio-group name="question" aria-label="Select an option">
-  <mat-radio-button mat-radio-checked="false" *ngFor="let currentChoices of currentChoices" name="question">{{currentChoices}}</mat-radio-button>
-</mat-radio-group><br>
+<mat-radio-group name="question" aria-label="Select an option" *ngFor="let currentChoice of currentChoices; let i = index">
+  <mat-radio-button  value="i" (change)="onSelectionChange(currentChoice)" >{{currentChoice}}</mat-radio-button>
+</mat-radio-group>
+<br>
 <button (click)="nextQuestion()" mat-button> Next Question</button>
+<mat-card-subtitle>You choose {{selectedRadio}}</mat-card-subtitle>
 </mat-card>
 </form>
+

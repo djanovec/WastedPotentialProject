@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -34,19 +35,28 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { DisplayQuizComponent } from './display-quiz/display-quiz.component';
 import { QuizFormComponent } from './quiz-form/quiz-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { QuizGuardComponent } from './quiz-guard/quiz-guard.component'; 
+import { FormsModule } from '@angular/forms';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { QuizResultsComponent } from './quiz-results/quiz-results.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterFormComponent } from './register-form/register-form.component';
+
 @NgModule({
   declarations: [
     AppComponent,
+    DisplayQuizComponent,
     QuizFormComponent,
-    QuizGuardComponent
+    DashboardComponent,
+    QuizResultsComponent,
+    LoginComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatCheckboxModule,
@@ -78,8 +88,8 @@ import { QuizGuardComponent } from './quiz-guard/quiz-guard.component';
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule,FormsModule,ReactiveFormsModule,HttpClientModule 
-    
+    MatPaginatorModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

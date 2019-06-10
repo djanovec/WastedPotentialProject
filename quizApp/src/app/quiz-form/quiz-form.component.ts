@@ -20,7 +20,7 @@ export class QuizFormComponent implements OnInit {
      }
   
 
-  constructor(private fb: FormBuilder, private quizService: QuizServiceService ) { }
+  constructor(private quizService: QuizServiceService ) { }
 
 
 questions: Array<Object> = [
@@ -65,7 +65,7 @@ types: string [] = ["multi"]
  }
    quizFormSubmit(){
     // if(this.quizForm.valid){
-    this.quizService.quizFormSubmit(this.quiz).subscribe(res => console.log(res))
+    this.quizService['this.quiz'].subscribe(res => console.log(res))
   // }
   
   

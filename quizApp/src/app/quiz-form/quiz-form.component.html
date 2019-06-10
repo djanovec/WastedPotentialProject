@@ -1,4 +1,4 @@
-<form (ngSubmit)="quizFormSubmit">
+<form #quizForm="ngForm">
   <mat-card>
     <mat-card-header>
       <mat-card-title>Quiz Whip Form</mat-card-title>
@@ -8,7 +8,7 @@
       <div>
         <mat-form-field>
           <mat-label>Title</mat-label>
-          <input matInput name="quizTitle" type="text" [(ngModel)]="title">
+          <input matInput name="quizTitle" type="text" [(ngModel)]="quiz.quizTitle" #quizTitle="ngModel">
         </mat-form-field>
       </div>
 
@@ -16,18 +16,22 @@
         <mat-form-field>
           <mat-label>Description</mat-label>
 
-          <input matInput name="quizDescription" type="text" [(ngModel)]="description">
+          <input matInput name="quizDescription" type="text" [(ngModel)]="quiz.quizDescription"
+            #quizDescription="ngModel">
         </mat-form-field>
       </div>
 
       <div>
         <mat-form-field>
           <mat-label>Instructions</mat-label>
-          <input matInput name="quizInstructions" type="text" [(ngModel)]="instructions">
+          <input matInput name="quizInstructions" type="text" [(ngModel)]="quiz.quizInstructions"
+            #quizInstructions="ngModel">
         </mat-form-field>
       </div>
 
-      <table *ngFor="let question of questions">
+      
+      <table *ngFor="let question of questions; let i = index">
+        
         <tr>
           <td><button mat-raised-button (click)=removeQuestion(question)>Remove</button></td>
           <td>
@@ -44,12 +48,19 @@
           </td>
           <td>
             <mat-form-field>
-              <input matInput placeholder="Quiz question">
-
-
+              <input matInput placeholder="Quiz question" name="quizQuestions" [(ngModel)]="quiz.quizQuestions"
+                #quizQuestions="ngModel">
             </mat-form-field>
           </td>
-          <td> <button mat-raised-button (click)=addChoice(question)>Add Choices</button></td>
+          <div>
+              
+            <td> 
+             
+              <button mat-raised-button (click)=addChoice(question)>Add Choices</button>
+
+            </td>
+          
+          </div>
           <td>
             <mat-radio-group aria-label="Select an option" *ngFor="let type of types" [value]="type">
               <table *ngFor="let choice of question.choices">
@@ -67,12 +78,12 @@
       </td>
       </tr>
       </table>
-
+ 
+      
+    
     </mat-card-content>
-    <button mat-raised-button (click)=addQuestion() type="submit">Add</button>
-
     <mat-card-actions>
-      <button mat-raised-button type="submit">Submit</button>
+      <button mat-raised-button type="submit" (ngSubmit)="quizFormSubmit(quizForm.value)">Submit</button>
     </mat-card-actions>
 
 

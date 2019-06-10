@@ -22,7 +22,7 @@ const pool = new Pool({
 //   process.exit(-1)
 // })
 
-pool.connect(); // What's  this doing?
+pool.connect(); // What's  this doing? -- I had it in my last project and it does something I think.
 
 module.exports = pool;
 // module.exports = {

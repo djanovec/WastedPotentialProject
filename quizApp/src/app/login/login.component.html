@@ -1,0 +1,22 @@
+<!-- insert nav bar once complete -->
+<mat-card>
+  <mat-card-title class="center spacing">Login to Quiz Whip!</mat-card-title>
+  <mat-card-content>
+    <form class="center form">
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" name="email">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Password" name="password">
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions class="center">
+    <button mat-raised-button (click)="login()" color="primary">LOGIN</button>
+  </mat-card-actions>
+  <mat-card-actions class="center">
+    <button mat-raised-button (click)="register()" color="primary">REGISTER</button>
+  </mat-card-actions>
+</mat-card>

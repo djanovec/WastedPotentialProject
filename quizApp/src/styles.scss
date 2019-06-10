@@ -35,7 +35,9 @@ $mlblue: (
         A200: $black-87-opacity,
         A400: $black-87-opacity,
         A700: white,
-        // need to change contrast colors
+        //NOTE: Need to change contrast colors
+        //This is where I got the stuff from:
+        //https://stackoverflow.com/questions/41440998/how-can-i-use-custom-theme-palettes-in-angular
     )
 );
 $mlorange: (
@@ -77,3 +79,9 @@ $quiz-app-accent: mat-palette($mlorange);
 $quiz-app-theme: mat-light-theme($quiz-app-primary, $quiz-app-accent);
 
 @include angular-material-theme($quiz-app-theme);
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600&display=swap');
+
+*{
+    font-family: 'Montserrat', sans-serif;
+}

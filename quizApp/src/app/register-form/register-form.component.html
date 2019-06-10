@@ -10,41 +10,40 @@
     </mat-card>
 </section>
 
-<form [formGroup]="userRegister" autocomplete="off" novalidate (ngSubmit)="userRegister(userRegister.value)" fxLayout="column wrap"
-      fxLayoutAlign="center center" fxLayoutGap="10px">
+<form autocomplete="off" fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
   <mat-card-content>
   </mat-card-content>
   <mat-form-field>
-    <input matInput type="text" placeholder="First name" formControlName="firstName" id="firstName">
+    <input matInput type="text" placeholder="First name" id="firstName">
     <!-- <mat-hint align="end">Not more than 60 characters long.</mat-hint> -->
-    <mat-error *ngIf="hasError('firstName', 'required')">First name is required</mat-error>
-    <mat-error *ngIf="hasError('firstName', 'maxlength')">You have more than 60 characters</mat-error>
+    <!-- <mat-error *ngIf="hasError('firstName', 'required')">First name is required</mat-error>
+    <mat-error *ngIf="hasError('firstName', 'maxlength')">You have more than 60 characters</mat-error> -->
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput type="text" placeholder="Last name" formControlName="lastName" id="lastName">
+    <input matInput type="text" placeholder="Last name" id="lastName">
     <!-- <mat-hint align="end">Not more than 60 characters long.</mat-hint> -->
-    <mat-error *ngIf="hasError('lastName', 'required')">Last name is required</mat-error>
-    <mat-error *ngIf="hasError('lastName', 'maxlength')">You have more than 60 characters</mat-error>
+    <!-- <mat-error *ngIf="hasError('lastName', 'required')">Last name is required</mat-error>
+    <mat-error *ngIf="hasError('lastName', 'maxlength')">You have more than 60 characters</mat-error> -->
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput type="email" placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher" id="email">
+    <input matInput type="email" placeholder="Email" id="email">
     <!-- <mat-hint align="end">Must be a valid email address.</mat-hint> -->
-    <mat-error *ngIf="emailFormControl.hasError('email') && emailFormControl.hasError('required')">Please enter a valid email address</mat-error>
-    <mat-error *ngIf="emailFormControl.hasError('required')">Email must be valid</mat-error>
+    <!-- <mat-error *ngIf="emailFormControl.hasError('email') && emailFormControl.hasError('required')">Please enter a valid email address</mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">Email must be valid</mat-error> -->
   </mat-form-field>
   
   <mat-form-field>
-    <input matInput type="password" placeholder="Password" formControlName="password" id="password">
+    <input matInput type="password" placeholder="Password" id="password">
     <!-- <mat-hint align="end">Not more than 60 characters long.</mat-hint> -->
-    <mat-error *ngIf="hasError('password', 'required')">Password is required</mat-error>
-    <mat-error *ngIf="hasError('password', 'maxlength')">You have more than 60 characters</mat-error>
+    <!-- <mat-error *ngIf="hasError('password', 'required')">Password is required</mat-error>
+    <mat-error *ngIf="hasError('password', 'maxlength')">You have more than 60 characters</mat-error> -->
   </mat-form-field>
 
   <mat-card-actions>
       <mat-card-actions align="center">
-          <button mat-raised-button color="primary" [disabled]="!ownerForm.valid">Submit</button>
+          <button mat-raised-button color="primary">Submit</button>
           <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
         </mat-card-actions>
   </mat-card-actions>

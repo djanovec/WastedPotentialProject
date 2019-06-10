@@ -29,6 +29,7 @@
 
       <table *ngFor="let question of questions">
         <tr>
+            <mat-radio-group aria-label="Select an option" *ngFor="let type of types">
           <td><button mat-raised-button (click)=removeQuestion(question)>Remove</button></td>
           <td>
             <mat-form-field>
@@ -51,17 +52,22 @@
           </td>
           <td> <button mat-raised-button (click)=addChoice(question)>Add Choices</button></td>
           <td>
+           
+              <table *ngFor="let choice of question.choices; let i=index"> 
+                <mat-radio-button value="i"><input matInput placeholder="Insert Multiple Choice">
+                  </mat-radio-button>
+                <tr>
+                  <button mat-raised-button (click)=removeChoice(choice,question)>Remove</button>
 
-            <table *ngFor="let choice of question.choices">
-              <tr>
-                <button mat-raised-button (click)=removeChoice(choice,question)>Remove</button>
 
-                <input matInput placeholder="Insert Multiple Choice">
-              </tr>
-
-            </table>
-          </td>
+                 
+          
         </tr>
+      </table>
+    
+      </td>
+    </mat-radio-group>
+      </tr>
       </table>
 
     </mat-card-content>

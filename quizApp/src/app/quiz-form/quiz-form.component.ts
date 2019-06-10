@@ -15,11 +15,11 @@ export class QuizFormComponent implements OnInit {
     quizInstructions: "",
     quizQuestions: "",
     correctAnswers: "",
-    
+   
 
      }
-  
 
+     valueList: 'Amy test';
   constructor(private quizService: QuizServiceService ) { }
 
 

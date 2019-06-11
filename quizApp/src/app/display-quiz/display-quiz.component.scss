@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600&display=swap');
+
+.mat-radio-button {
+    margin-left: 16px;
+  }
+  .mblue{
+    background-color: #0e2340;
+   
+}
+.morange{
+  background-color: #ee7623;
+}
+
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.center{
+  justify-content: center;
+}
+.quizTitle{
+    text-align: center;
+    font-weight: 600;
+}
+#searchsubmit
+{    
+    visibility: hidden;
+}
+#visible {
+  visibility: visible;
+}

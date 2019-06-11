@@ -81,10 +81,15 @@ export class DisplayQuizComponent implements OnInit {
 
   }
 
-  createSubmitButton() {
-    const btn = document.createElement('BUTTON');
-    btn.innerHTML = 'submit';
-    document.body.appendChild(btn);
+  // createSubmitButton() {
+  //   const btn = document.createElement('BUTTON');
+  //   btn.innerHTML = 'submit';
+  //   btn.className = 'mat-raised-button' + 'mat-button';
+  //   document.getElementsByClassName('mat-card')[1].appendChild(btn);
+  // }
+
+  unhideButton() {
+      const submitBt = document.getElementById('searchsubmit').id = 'visible';
 
   }
 
@@ -98,7 +103,7 @@ export class DisplayQuizComponent implements OnInit {
     this.currentChoices = this.quiz.questions[this.x].choices;
   }
   else {
-  this.createSubmitButton();
+  this.unhideButton();
     }
   }
 }

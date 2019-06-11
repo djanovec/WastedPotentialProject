@@ -84,7 +84,20 @@ function postQuiz(req, res) {
         res.status(201).send(result);
     })
 }
-
+function getScoresAdmin(req,res){
+    quizId = req.body.quizId;
+    pool.query('SELECT score, "userId" FROM "userAnswers" WHERE "quizId" = $1', [quizId], (err, result)=>{
+        if(err){
+            console.log("Error: " + err)
+        } else{
+            pool.query('SELECT token FROM quizzes where id = $1', [quizId], (err, token)=>{
+                result['token'] = token.rows[0].token;
+                res.status(201).send(result)
+            })
+        }
+    })
+}
+module.exports.getScoresAdmin = getScoresAdmin;
 module.exports.postQuiz = postQuiz;
 module.exports.getScore = getScore;
 module.exports.getQuiz = getQuiz;

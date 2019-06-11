@@ -1,53 +1,56 @@
+<app-header></app-header>
 
 <section fxLayout="row wrap" fxLayoutAlign="center center">
-  <mat-card fxFlex="500px" fxFlex.xs="100%">
-      <mat-card-title>Welcome to QuizWhip!</mat-card-title>
+  <!-- <mat-card>
       <mat-card-content>
       </mat-card-content>
       <mat-card-actions>
         
       </mat-card-actions>
-    </mat-card>
+    </mat-card> -->
 </section>
 
-<form autocomplete="off" fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
-  <mat-card-content>
-  </mat-card-content>
-  <mat-form-field>
-    <input matInput type="text" required placeholder="First name" id="firstName">
-    <mat-hint>Not more than 60 characters long.</mat-hint>
-    <!-- <mat-error *ngIf="hasError('firstName', 'required')">First name is required</mat-error>
-    <mat-error *ngIf="hasError('firstName', 'maxlength')">You have more than 60 characters</mat-error> -->
-  </mat-form-field>
+<mat-card>
+  <mat-card-title>Register for QuizWhip account</mat-card-title>
+  <form autocomplete="off" fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <mat-card-content>
+    </mat-card-content>
+    <mat-form-field>
+      <input matInput type="text" maxlength="60" required placeholder="First name" id="firstName">
+      <mat-hint>Not more than 60 characters long.</mat-hint>
+      <!-- <mat-error *ngIf="hasError('firstName', 'required')">First name is required</mat-error>
+      <mat-error *ngIf="hasError('firstName', 'maxlength')">You have more than 60 characters</mat-error> -->
+    </mat-form-field>
 
-  <mat-form-field>
-    <input matInput type="text" required placeholder="Last name" id="lastName">
-    <mat-hint>Not more than 60 characters long.</mat-hint>
-    <!-- <mat-error *ngIf="hasError('lastName', 'required')">Last name is required</mat-error>
-    <mat-error *ngIf="hasError('lastName', 'maxlength')">You have more than 60 characters</mat-error> -->
-  </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" maxlength="60" required placeholder="Last name" id="lastName">
+      <mat-hint>Not more than 60 characters long.</mat-hint>
+      <!-- <mat-error *ngIf="hasError('lastName', 'required')">Last name is required</mat-error>
+      <mat-error *ngIf="hasError('lastName', 'maxlength')">You have more than 60 characters</mat-error> -->
+    </mat-form-field>
 
-  <mat-form-field>
-    <input matInput type="email" required placeholder="Email" id="email">
-    <mat-hint>Must be a valid email address.</mat-hint>
-    <!-- <mat-error *ngIf="emailFormControl.hasError('required')">Please work</mat-error> -->
+    <mat-form-field>
+      <input matInput type="email" required placeholder="Email" id="email">
+      <mat-hint>Must be a valid email address.</mat-hint>
+      <!-- <mat-error *ngIf="email.invalid">Please work</mat-error> -->
+      
+    </mat-form-field>
     
-  </mat-form-field>
-  
-  <mat-form-field>
-    <input matInput type="password" required placeholder="Password" id="password">
-    <mat-hint>Not more than 60 characters long.</mat-hint>
-    <!-- <mat-error *ngIf="hasError('password', 'required')">Password is required</mat-error>
-    <mat-error *ngIf="hasError('password', 'maxlength')">You have more than 60 characters</mat-error> -->
-  </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" maxlength="60" required placeholder="Password" id="password">
+      <mat-hint>Not more than 60 characters long.</mat-hint>
+      <!-- <mat-error *ngIf="hasError('password', 'required')">Password is required</mat-error>
+      <mat-error *ngIf="hasError('password', 'maxlength')">You have more than 60 characters</mat-error> -->
+    </mat-form-field>
 
-  <mat-card-actions>
+    <mat-card-actions>
       <mat-card-actions align="center">
         <button mat-raised-button color="primary">Submit</button>
         <button type="button" mat-raised-button color="accent" (click)="onCancel()">Cancel</button>
       </mat-card-actions>
-  </mat-card-actions>
-</form>
+    </mat-card-actions>
+  </form>
+</mat-card>
 
 <!-- Previous form below -->
 

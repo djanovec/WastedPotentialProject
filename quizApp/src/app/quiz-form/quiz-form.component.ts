@@ -19,9 +19,8 @@ export class QuizFormComponent implements OnInit {
 
      }
 
-     valueList: number[] = [1, 0, 2, 3, 4, 5];
+     valueList: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
   constructor(private quizService: QuizServiceService ) { }
-
 
 questions: Array<Object> = [
   {
@@ -67,17 +66,10 @@ types: string [] = ["multi"]
     // if(this.quizForm.valid){
     this.quizService['this.quiz'].subscribe(res => console.log(res))
   // }
-  
-  
-   
+
 }
 
 ngOnInit() {
-  
 
-}
-
-randomNumber(max) {
-  return Math.floor(Math.random() * Math.floor(max));
 }
 }

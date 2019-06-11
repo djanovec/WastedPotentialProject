@@ -86,6 +86,11 @@ export class DisplayQuizComponent implements OnInit {
 
   }
 
+  unhidePreviousButton() {
+    document.getElementById('searchsubmit').id = 'visible';
+
+ }
+
   submitButton() {
   const questionArea = document.getElementsByClassName('questionContainer')[0];
   questionArea.remove();
@@ -105,6 +110,26 @@ export class DisplayQuizComponent implements OnInit {
   this.unhideSubmitButton();
     }
   }
+
+  //previous button
+  // previousQuestion() {
+  //   if ( this.x = 1 ) {
+  //     this.unhidePreviousButton();
+  //   }
+
+  //   this.userAnswers.pop;
+  //   // console.log(this.userAnswers);
+  //   this.x = this.x - 1;
+  //   if ( this.x < this.quiz.questions.length) {
+  //   this.currentQuestion = this.quiz.questions[this.x].prompt;
+  //   this.currentChoices = this.quiz.questions[this.x].choices;
+  // }
+  // //   else {
+  // // this.unhideSubmitButton();
+  // //   }
+  // }
+
+
 }
 
 

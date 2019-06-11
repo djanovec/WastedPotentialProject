@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'quiz_form', component: QuizFormComponent },
   { path: 'quiz_guard', component: QuizGuardComponent },
-  
+  { path: 'take_quiz',  component: DisplayQuizComponent}
 ]
 
 @NgModule({

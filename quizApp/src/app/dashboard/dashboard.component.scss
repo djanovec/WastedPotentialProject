@@ -9,13 +9,26 @@ table {
 
   .tableHeader{
     font-size: 20px;
-     text-align: center;
+    text-align: center;
   
   }
 
   .center{
     margin: auto;
-    text-align: center;
+    justify-content: center;
 }
-  
 
+.fontSize{
+  font-size: 24px;
+ 
+  
+}
+
+*{
+  text-align: center;
+}
+
+.matCard{
+  margin: auto;
+  width: 60%;
+}

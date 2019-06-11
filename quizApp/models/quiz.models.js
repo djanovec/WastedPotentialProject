@@ -59,7 +59,8 @@ async function getScore(req, res) {
                 }
                 pool.query('INSERT INTO "userAnswers" (answers, "userId", "quizId", datestamp, score) VALUES($1, $2, $3, $4, $5)', [userAnswers, userId, quizId, datestamp, score], (err, postRes) => {
                     if(postRes){
-                        res.status(201).send("answer and score saved");
+                        postRes['score'] = score
+                        res.status(201).send(postRes);
                     } else {
                         console.log('Error2: ' + err)
                     }

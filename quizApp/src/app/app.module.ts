@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -37,9 +36,9 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { DisplayQuizComponent } from './display-quiz/display-quiz.component';
 import { QuizFormComponent } from './quiz-form/quiz-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuizGuardComponent} from './quiz-guard/quiz-guard.component';
 import { HeaderComponent } from './header/header.component';
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuizResultsComponent } from './quiz-results/quiz-results.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -98,6 +97,8 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

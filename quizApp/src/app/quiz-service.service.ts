@@ -6,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class QuizServiceService {
 
-  constructor(private http: HttpClient) { }
 // getQuiz(){
 //   this.http.get();
 

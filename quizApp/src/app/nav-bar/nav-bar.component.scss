@@ -1,16 +1,18 @@
-.mblue{
-    background-color: #0e2340;
-    justify-content: center;
-}
-.mfont{
+.header{
     font-family: 'Montserrat', sans-serif;
-}
-
-.white{
+    background-color: #0e2340;
     color: white;
-    text-align: center;
+    padding: 50px 10px 50px 10px;
+    display: flex;
+    margin-bottom: 8px;
 }
 
-#justifyRight {
-    justify-content: right;
+.fill-space{
+    flex: 1 1 auto;
+    height: 1px;
+}
+
+#hiddenButton{
+    width: 55.8px;
+    padding: 16px;
 }

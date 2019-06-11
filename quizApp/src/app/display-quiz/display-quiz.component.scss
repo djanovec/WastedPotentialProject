@@ -10,9 +10,18 @@
 .morange{
   background-color: #ee7623;
 }
-
-*{
-  font-family: 'Montserrat', sans-serif;
+.questionContainer{
+  margin:auto;
+  width:60%;
+}
+.questionText{
+  font-weight: 600;
+  font-size: 18px;
+  font-size-adjust: inherit;
+}
+.mat-card{
+  // margin:auto;
+  // width:70%;
 }
 
 .center{
@@ -20,12 +29,35 @@
 }
 .quizTitle{
     text-align: center;
-    font-weight: 600;
+    margin: auto;
+    display: clear; 
+  
 }
 #searchsubmit
 {    
     visibility: hidden;
 }
+#thankYou
+{    
+    visibility: hidden;
+}
 #visible {
   visibility: visible;
+}
+#hidden {
+  visibility: hidden;
+}
+
+.flex{
+  display: flex;
+  flex-flow: row nowrap;
+}
+.width30{
+  width: 30%;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+.width70{
+  width: 70%;
+  margin-top: 5px;
 }

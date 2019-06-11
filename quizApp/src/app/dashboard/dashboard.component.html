@@ -1,8 +1,36 @@
-<mat-form-field>
-  <mat-label>Select Quiz</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let quiz of quizzes" [value]="quiz.id">
-      {{quiz.title}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<app-nav-bar></app-nav-bar>
+  <mat-card class="matCard">
+    <mat-card-header class="center">
+      <mat-card-title class="fontSize">Please Select A Quiz</mat-card-title>
+    </mat-card-header >
+  <mat-form-field >
+    <mat-label>Select Quiz</mat-label>
+    <mat-select  >
+      <mat-option  *ngFor="let quiz of quizzes" [value]="quiz.id">
+        {{quiz.title}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <table mat-table>
+     
+  <ng-container matColumnDef="name">
+    <th  class="tableHeader" mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell >  </td>
+  </ng-container>
+
+  <ng-container class="tableColumn" matColumnDef="score">
+    <th  class="tableHeader" mat-header-cell *matHeaderCellDef>Score</th>
+    <td mat-cell >  </td>
+  </ng-container>
+
+  <ng-container class="tableColumn" matColumnDef="date">
+    <th  class="tableHeader" mat-header-cell *matHeaderCellDef>Date</th>
+    <td mat-cell > </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+</mat-card>

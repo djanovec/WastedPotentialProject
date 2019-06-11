@@ -37,9 +37,17 @@
 {    
     visibility: hidden;
 }
+#thankYou
+{    
+    visibility: hidden;
+}
 #visible {
   visibility: visible;
 }
+#hidden {
+  visibility: hidden;
+}
+
 .flex{
   display: flex;
   flex-flow: row nowrap;

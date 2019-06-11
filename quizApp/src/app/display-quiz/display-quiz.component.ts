@@ -81,16 +81,15 @@ export class DisplayQuizComponent implements OnInit {
 
   }
 
-  // createSubmitButton() {
-  //   const btn = document.createElement('BUTTON');
-  //   btn.innerHTML = 'submit';
-  //   btn.className = 'mat-raised-button' + 'mat-button';
-  //   document.getElementsByClassName('mat-card')[1].appendChild(btn);
-  // }
+  unhideSubmitButton() {
+     document.getElementById('searchsubmit').id = 'visible';
 
-  unhideButton() {
-      const submitBt = document.getElementById('searchsubmit').id = 'visible';
+  }
 
+  submitButton() {
+  const questionArea = document.getElementsByClassName('questionContainer')[0];
+  questionArea.remove();
+  document.getElementById('thankYou').id = 'visible';
   }
 
   // function that activates on click of "next button." Changes the question.
@@ -102,8 +101,8 @@ export class DisplayQuizComponent implements OnInit {
     this.currentQuestion = this.quiz.questions[this.x].prompt;
     this.currentChoices = this.quiz.questions[this.x].choices;
   }
-  else {
-  this.unhideButton();
+    else {
+  this.unhideSubmitButton();
     }
   }
 }

@@ -13,7 +13,4 @@ export class QuizServiceService {
   getStudentsByQuizId(id){
     return this.http.get("/api/:id")
   }
-
-  constructor(private http: HttpClient) { }
 }
-

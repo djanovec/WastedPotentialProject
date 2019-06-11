@@ -98,7 +98,6 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-  
   ],
   providers: [],
   bootstrap: [AppComponent]

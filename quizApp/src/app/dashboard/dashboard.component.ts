@@ -7,7 +7,9 @@ import { QuizServiceService } from '../quiz-service.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
+  quiz = {
+    title: "test"
+  }
   constructor(private quizService: QuizServiceService) { }
 
   ngOnInit() {

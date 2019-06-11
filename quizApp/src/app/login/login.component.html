@@ -17,6 +17,6 @@
   </mat-card-content>
   <mat-card-actions class="center">
     <button mat-raised-button (click)="login()" color="primary">LOGIN</button>
-    <button mat-raised-button (click)="register()" color="accent">REGISTER</button>
+    <a class="navLink" [routerLink]="[ '/register' ]" routerLinkActive="active"><button mat-raised-button (click)="register()" color="accent">REGISTER</button></a>
   </mat-card-actions>
 </mat-card>

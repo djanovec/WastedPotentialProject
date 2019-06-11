@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -37,15 +37,29 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { DisplayQuizComponent } from './display-quiz/display-quiz.component';
 import { QuizFormComponent } from './quiz-form/quiz-form.component';
-import { FormsModule } from '@angular/forms';
+import { QuizGuardComponent} from './quiz-guard/quiz-guard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { QuizResultsComponent } from './quiz-results/quiz-results.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterFormComponent } from './register-form/register-form.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     DisplayQuizComponent,
-    QuizFormComponent
+    QuizFormComponent,
+    DashboardComponent,
+    QuizResultsComponent,
+    NavBarComponent,
+    LoginComponent,
+    RegisterFormComponent,
+    QuizGuardComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -81,8 +95,7 @@ import { FormsModule } from '@angular/forms';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    FormsModule
-
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

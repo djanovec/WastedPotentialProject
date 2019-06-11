@@ -1,7 +1,10 @@
-<mat-toolbar class="mblue">
-    
-  <img src="./assets/images/quizWhipSmall.png" alt="Quiz Whip Logo" class="headerLogo">
-  <button class ="white" id="justifyRight" mat-button [matMenuTriggerFor]="options">Options</button>
+<mat-toolbar class="header">
+  
+  <img src="./assets/images/quizWhipSmall.png" alt="Quiz Whip Logo" class="">
+  <span flex></span>
+
+  <button class ="right" mat-button [matMenuTriggerFor]="options">Options</button>
+
   <mat-menu class="white" #options="matMenu">
       <button mat-menu-item><a class="navLink" [routerLink]="[ '/login' ]" routerLinkActive="active">Login</a></button>
       <button mat-menu-item><a class="navLink" [routerLink]="[ '/register' ]" routerLinkActive="active">Register</a></button>

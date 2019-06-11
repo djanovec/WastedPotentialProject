@@ -1,16 +1,17 @@
-.mblue{
-    background-color: #0e2340;
-    justify-content: center;
-}
-.mfont{
+.header{
     font-family: 'Montserrat', sans-serif;
-}
-
-.white{
+    background-color: #0e2340;
     color: white;
-    text-align: center;
+    padding: 50px 10px 50px 10px;
+    display: flex
+    // justify-content: center;
 }
 
-#justifyRight {
-    justify-content: right;
-}
+
+// .center{
+//     : left;
+// }
+
+// .right {
+//     float: right;
+// }

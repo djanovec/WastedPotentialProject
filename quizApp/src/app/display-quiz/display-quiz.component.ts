@@ -1,27 +1,30 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { GetQuestionsService } from 'src/app/get-questions.service';
+import { QuizServiceService} from '../services/quiz-service.service';
 import { FormControl, FormGroup, ControlValueAccessor } from '@angular/forms';
 import { MatRadioChange, MatButton} from '@angular/material';
 
 // Object Interface for data
 export interface Quiz {
-  title: string;
-  description: string;
-  questions: [
+  title?: string;
+  description?: string;
+  questions?: [
     {
-      prompt: string,
-      choices: [string, string, string, string],
-      answer: string
+      prompt?: string,
+      choices?: [string, string, string, string],
+      answer?: string,
+      correct?: number
     },
     {
-      prompt: string,
-      choices: [string, string, string, string],
-      answer: string
+      prompt?: string,
+      choices?: [string, string, string, string],
+      answer?: string,
+      correct?: number
     },
     {
-      prompt: string,
-      choices: [string, string, string, string],
-      answer: string
+      prompt?: string,
+      choices?: [string, string, string, string],
+      answer?: string,
+      correct?: number
     }];
 }
 
@@ -38,8 +41,12 @@ export class DisplayQuizComponent implements OnInit {
   matButton: MatButton;
   selectedRadio: string;
   userAnswers: any[] = [];
+token: 1234;
+testQuiz: Quiz;
 
-  constructor(private questionsService: GetQuestionsService) { }
+  constructor(private questionService: QuizServiceService) { }
+
+
 
   // hard coded json for testing
   quiz: Quiz = {
@@ -73,6 +80,12 @@ export class DisplayQuizComponent implements OnInit {
   currentChoices = this.quiz.questions[this.x].choices;
 
   ngOnInit() {
+    this.questionService.getQuizByToken(this.token).subscribe( res =>{
+      console.log(res);
+      this.testQuiz = res;
+     });
+
+
   }
   // identifying which radio button is selected
   onSelectionChange(currentChoice) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
-import { QuizServiceService } from '../quiz-service.service';
+import {QuizServiceService} from '../services/quiz-service.service';
 import { Quiz } from './Models/quiz.model';
 
 @Component({

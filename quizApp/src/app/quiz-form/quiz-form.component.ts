@@ -15,13 +15,12 @@ export class QuizFormComponent implements OnInit {
     quizInstructions: "",
     quizQuestions: "",
     correctAnswers: "",
-    
+   
 
      }
-  
 
+     valueList: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
   constructor(private quizService: QuizServiceService ) { }
-
 
 questions: Array<Object> = [
   {
@@ -67,13 +66,10 @@ types: string [] = ["multi"]
     // if(this.quizForm.valid){
     this.quizService['this.quiz'].subscribe(res => console.log(res))
   // }
-  
-  
-   
+
 }
 
 ngOnInit() {
-  
 
 }
 }

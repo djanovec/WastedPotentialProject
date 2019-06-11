@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class QuizServiceService {
 
+// getQuiz(){
+//   this.http.get();
 
   getStudentsByQuizId(id){
     return this.http.get("/api/:id")
@@ -13,3 +15,4 @@ export class QuizServiceService {
 
   constructor(private http: HttpClient) { }
 }
+

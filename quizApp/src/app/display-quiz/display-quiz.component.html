@@ -1,5 +1,22 @@
-<div *ngIf="questions">
-  <div *ngFor="let question of Questions">
-      <p>{{question}}</p>
-  </div>
-</div>
+<form #questionForm="ngForm">
+<mat-card>
+<h3 class="center quizTitle">{{quiz.title}}</h3>
+<mat-card-title> {{currentQuestion}}</mat-card-title>
+
+<mat-radio-group name="question" aria-label="Select an option" *ngFor="let currentChoice of currentChoices; let i = index">
+  <mat-radio-button  value="i" (change)="onSelectionChange(currentChoice)" >{{currentChoice}}</mat-radio-button>
+</mat-radio-group>
+<br>
+<button mat-raised-button (click)="nextQuestion()" mat-button> Next Question</button>
+
+
+
+</mat-card>
+</form>
+
+<mat-card>
+  <mat-card-title> Your answers:</mat-card-title>
+  <ol><mat-card-subtitle *ngFor="let n = index; let userAnswer of userAnswers">
+  <li><strong>Question:</strong> {{quiz.questions[n].prompt}}  <strong>  You chose:</strong> {{userAnswer}}</li> </mat-card-subtitle></ol>
+</mat-card>
+<button mat-raised-button  id="searchsubmit" mat-button> Submit </button>

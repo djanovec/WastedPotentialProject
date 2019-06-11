@@ -7,12 +7,11 @@ import { HttpClient } from '@angular/common/http';
 export class QuizServiceService {
 
 // getQuiz(){
-//   this.http.get();
+//   this.http.get();\
+
+constructor(private http: HttpClient) {}
 
   getStudentsByQuizId(id){
     return this.http.get("/api/:id")
   }
-
-  constructor(private http: HttpClient) { }
 }
-

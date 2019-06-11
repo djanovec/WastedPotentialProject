@@ -23,6 +23,6 @@ export class UserServiceService {
     this.isLoggedIn.next(true);
   }
   logout(){
-    this.isLoggedIn.next(false);
+    this.isLoggedIn.next(false); 
   }
 }

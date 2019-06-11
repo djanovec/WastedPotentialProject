@@ -32,9 +32,10 @@ const bcrypt = require('bcrypt');
 //     ) a on a.questionId = q.id
 // ) q on q.quizId = quiz.Id;
 function getQuiz(req, res) {
-    pool.query('SELECT quizzes.questions FROM quizzes WHERE quizzes.token = $1', [req.body.token], (err, result) => {
+    pool.query('SELECT questions, title, description, instructions FROM quizzes WHERE quizzes.token = $1', [req.body.token], (err, result) => {
         if (result) {
-            res.status(201).send(result)
+            quizInfo = result.rows[0];
+            res.status(201).send(quizInfo)
         } else if (err) {
             console.log("ERROR: " + err);
         }

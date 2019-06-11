@@ -1,9 +1,14 @@
-<mat-toolbar class="mblue">
-    
-  <img src="./assets/images/quizWhipSmall.png" alt="Quiz Whip Logo" class="headerLogo">
-  <button class ="white" id="justifyRight" mat-button [matMenuTriggerFor]="options">Options</button>
+<mat-toolbar class="header">
+  
+  <button mat-button id="hiddenButton"></button>
+  <span class="fill-space"></span>
+  <img src="./assets/images/quizWhipSemiBold300.png" alt="Quiz Whip Logo" class="center">
+  <span class="fill-space"></span>
+
+  <button mat-button [matMenuTriggerFor]="options" id="optionsButton">Options</button>
+
   <mat-menu class="white" #options="matMenu">
-      <button mat-menu-item><a class="navLink" [routerLink]="[ '/login' ]" routerLinkActive="active">Login</a></button>
-      <button mat-menu-item><a class="navLink" [routerLink]="[ '/register' ]" routerLinkActive="active">Register</a></button>
-    </mat-menu>
+    <button mat-menu-item><a class="navLink" [routerLink]="[ '/login' ]" routerLinkActive="active">Login</a></button>
+    <button mat-menu-item><a class="navLink" [routerLink]="[ '/register' ]" routerLinkActive="active">Register</a></button>
+  </mat-menu>
 </mat-toolbar>

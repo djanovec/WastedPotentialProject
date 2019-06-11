@@ -19,7 +19,7 @@ function createUser(req, res){
         pool.query("INSERT INTO users (email, password, firstName, lastName, isAdmin) VALUES($1,$2, $3, $4, $5)", [email, passwordSend, firstName, lastName, isAdmin], (err, result)=>{
             if(!err){
                 console.log(result);
-                return res.send({user: {email: req.body.email, id: result.insertId}});
+                return res.send({email: req.body.email});
             }
             console.log(err);
             res.status(500).send({error: "SOMETHING BROKE"})

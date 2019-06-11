@@ -32,9 +32,10 @@ const bcrypt = require('bcrypt');
 //     ) a on a.questionId = q.id
 // ) q on q.quizId = quiz.Id;
 function getQuiz(req, res) {
-    pool.query('SELECT quizzes.questions FROM quizzes WHERE quizzes.token = $1', [req.body.token], (err, result) => {
+    pool.query('SELECT questions, title, description, instructions FROM quizzes WHERE quizzes.token = $1', [req.body.token], (err, result) => {
         if (result) {
-            res.status(201).send(result)
+            quizInfo = result.rows[0];
+            res.status(201).send(quizInfo)
         } else if (err) {
             console.log("ERROR: " + err);
         }
@@ -84,7 +85,20 @@ function postQuiz(req, res) {
         res.status(201).send(result);
     })
 }
-
+function getScoresAdmin(req,res){
+    quizId = req.body.quizId;
+    pool.query('SELECT score, "userId" FROM "userAnswers" WHERE "quizId" = $1', [quizId], (err, result)=>{
+        if(err){
+            console.log("Error: " + err)
+        } else{
+            pool.query('SELECT token FROM quizzes where id = $1', [quizId], (err, token)=>{
+                result['token'] = token.rows[0].token;
+                res.status(201).send(result)
+            })
+        }
+    })
+}
+module.exports.getScoresAdmin = getScoresAdmin;
 module.exports.postQuiz = postQuiz;
 module.exports.getScore = getScore;
 module.exports.getQuiz = getQuiz;

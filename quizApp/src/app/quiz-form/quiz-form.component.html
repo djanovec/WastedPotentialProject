@@ -17,28 +17,26 @@
         <mat-form-field class="width">
           <mat-label>Description</mat-label>
 
-          <input matInput name="quizDescription" type="text" [(ngModel)]="quiz.quizDescription"
-            #quizDescription="ngModel">
+          <textarea matInput name="quizDescription" type="textarea" [(ngModel)]="description"> </textarea>
         </mat-form-field>
       </div>
 
       <div class="center">
         <mat-form-field class="width">
           <mat-label>Instructions</mat-label>
-          <input matInput name="quizInstructions" type="text" [(ngModel)]="quiz.quizInstructions"
-            #quizInstructions="ngModel">
+          <textarea matInput name="quizInstructions" type="textarea" [(ngModel)]="instructions"></textarea>
         </mat-form-field>
       </div>
 
-      
-      <table *ngFor="let question of questions; let i = index">
-        
+      <table class="mat-elevation-z8" *ngFor="let question of questions; let i = index">
+        <tr><mat-card-title>Question #{{valueList[i]}}</mat-card-title></tr>
         <tr>
           <td><button mat-raised-button color="primary" (click)=removeQuestion(question)>Remove Question</button></td>
           <td>
             <mat-form-field>
+             
               <mat-label>
-                Question Type
+                  Question Type
               </mat-label>
               <mat-select>
                 <mat-option *ngFor="let type of types" [value]="type">{{type}}
@@ -49,8 +47,9 @@
           </td>
           <td>
             <mat-form-field>
-              <input matInput placeholder="Quiz question" name="quizQuestions" [(ngModel)]="quiz.quizQuestions"
-                #quizQuestions="ngModel">
+              <input matInput placeholder="Quiz question">
+
+
             </mat-form-field>
           </td>
           <div>
@@ -63,14 +62,16 @@
           
           </div>
           <td>
-             
-            <table *ngFor="let choice of question.choices">
+          
+              <table *ngFor="let choice of question.choices;let i = index"> 
                
               <tr>
                   <mat-radio-group>
                 <button mat-raised-button color="primary" (click)=removeChoice(choice,question)>Remove Choice</button>
 
-                <input matInput placeholder="Insert Multiple Choice">
+ 
+                <mat-radio-button [value]="i"><input matInput placeholder="Insert Multiple Choice">
+                  </mat-radio-button>
                 
                 <mat-radio-button color="accent" [name]=question [value]=choice>Correct Answer</mat-radio-button>
               </mat-radio-group>
@@ -84,10 +85,15 @@
         </tr>
         <button mat-raised-button color="primary" (click)=addQuestion()>Add Question</button>
       </table>
- 
-      
-    
+  
+      </td>
+    </mat-radio-group>
+      </tr>
+      </table>
+
     </mat-card-content>
+    <button mat-raised-button (click)=addQuestion() type="submit">Add New Question</button>
+
     <mat-card-actions>
       <button mat-raised-button color="accent" type="submit" (ngSubmit)="quizFormSubmit(quizForm.value)">Submit</button>
     </mat-card-actions>
@@ -96,3 +102,4 @@
   </mat-card>
 
 </form>
+

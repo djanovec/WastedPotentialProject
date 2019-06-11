@@ -15,6 +15,9 @@ router.get('/getQuizResultsByQuizId', (req, res)=>{
 router.post('/postAnswersByQuizId', (req, res)=>{
     quizAPI.postAnswers(req, res);
 })
+router.post('/getScore', (req, res)=>{
+    quizAPI.getScore(req, res);
+})
 router.get('/getAllUserScoresByQuizId', (req, res) => {
     quizAPI.getResults(req, res);
 })

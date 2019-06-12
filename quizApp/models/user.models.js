@@ -27,7 +27,11 @@ function login(req, res){
     pool.query('SELECT * FROM users WHERE email = $1', [req.body.email], (err, result) =>{ 
         if(result[0]){
             if(bcrypt.compareSync(req.body.password, result.rows[0].password)){
-                return res.status(201).send({logged: true});
+                if(result.rows[0].isAdmin == true){
+                    result['admin'] == true;
+                }
+                result['loggedIn'] == true;
+                return res.status(201).send(result);
             } else {
                 return res.send({error: "Invalid Username or Password"});
             }

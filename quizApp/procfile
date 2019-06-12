@@ -1,0 +1,2 @@
+heroku: ng build --prod
+web: node index.js

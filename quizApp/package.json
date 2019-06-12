@@ -8,8 +8,8 @@
     "backend": "nodemon server",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "heroku-postbuild": "ng build -prod"
+    "e2e": "ng e2e"
+    // "heroku-postbuild": "ng build -prod"
   },
   "engines": {
     "node": "10.15.3",

@@ -18,10 +18,8 @@ export class LoginComponent implements OnInit {
       "password": this.password
     }).subscribe(res => {
       if (res['error']) {
-        this.error = res['error'];
-        return
-      } else {
-        console.log(res)
+        return this.error = res['error'];
+      } else if(res['logged']) {
         this.router.navigate(['/take_quiz'])
       }
       this.userServ.userLogin();

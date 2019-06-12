@@ -31,13 +31,14 @@ const bcrypt = require('bcrypt');
 //     from answer a
 //     ) a on a.questionId = q.id
 // ) q on q.quizId = quiz.Id;
-function getQuiz(req, res) {
-    pool.query('SELECT questions, title, description, instructions FROM quizzes WHERE quizzes.token = $1', [req.body.token], (err, result) => {
+function getQuiz(req, res, token) {
+    pool.query('SELECT questions, title, description, instructions FROM quizzes WHERE quizzes.token = $1', [token], (err, result) => {
         if (result) {
             quizInfo = result.rows[0];
             res.status(201).send(quizInfo)
         } else if (err) {
             console.log("ERROR: " + err);
+            res.send(err);
         }
     })
 }
@@ -45,10 +46,10 @@ async function getScore(req, res) {
     try {
         userAnswers = req.body.answers;
         userId = req.body.userId;
-        quizId = req.body.quizId
+        quizId = req.body.token
         datestamp = new Date();
         score = 0;
-        await pool.query('SELECT quizzes.questions FROM quizzes where quizzes.id = $1', [quizId], (err, result) => {
+        await pool.query('SELECT quizzes.questions FROM quizzes where quizzes.token = $1', [quizId], (err, result) => {
             if (err) {
                 console.log('Error1: ' + err);
             } else {
@@ -85,8 +86,7 @@ function postQuiz(req, res) {
         res.status(201).send(result);
     })
 }
-function getScoresAdmin(req,res){
-    quizId = req.body.quizId;
+function getScoresAdmin(req,res,quizId){
     pool.query('SELECT score, "userId" FROM "userAnswers" WHERE "quizId" = $1', [quizId], (err, result)=>{
         if(err){
             console.log("Error: " + err)
@@ -98,11 +98,25 @@ function getScoresAdmin(req,res){
         }
     })
 }
+
+function getQuizzesByAdmin(req,res,admin){
+    pool.query('SELECT title, token FROM quizzes WHERE "creatorId" = $1', [admin], (err, result)=>{
+        if(err){
+            console.log("Error: "+err);
+            res.send(err);
+        }
+        else {
+            res.status(201).send(result);
+        }
+    })
+}
+
+
 module.exports.getScoresAdmin = getScoresAdmin;
 module.exports.postQuiz = postQuiz;
 module.exports.getScore = getScore;
 module.exports.getQuiz = getQuiz;
-
+module.exports.getQuizzesByAdmin = getQuizzesByAdmin
 // function getScore(req, res) {
 //     userAnswers = req.body.answers;
 //     score = 0;

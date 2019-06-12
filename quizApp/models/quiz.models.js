@@ -100,7 +100,7 @@ function getScoresAdmin(req,res,quizId){
 }
 
 function getQuizzesByAdmin(req,res,admin){
-    pool.query('SELECT title, token FROM quizzes WHERE "creatorId" = $1', [admin], (err, result)=>{
+    pool.query('SELECT title, id FROM quizzes WHERE "creatorId" = $1', [admin], (err, result)=>{
         if(err){
             console.log("Error: "+err);
             res.send(err);

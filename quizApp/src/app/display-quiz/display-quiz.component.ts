@@ -84,37 +84,36 @@ export class DisplayQuizComponent implements OnInit {
 
   }
 
-  // unhidePreviousButton() {
-  //   document.getElementById('previousB').id = 'visible2';
-  //   var executed = false;
-  //   return function () {
-  //     if (!executed) {
-  //       executed = true;
-  //     }
-  //   };
+  unhidePreviousButton() {
+    document.getElementById('previousB').id = 'visible2';
+  }
 
-  // }
+  hidePreviousButton() {
+    document.getElementById('previousB').id = 'hidden2';
+  }
 
-
-
-
+  hideNextButton() {
+    document.getElementById('nextBt').id = 'hidden';
+  }
 
   // function that activates on click of "next button." Changes the question.
   nextQuestion() {
-    // this.unhidePreviousButton();
     this.userAnswers.push(this.selectedRadio);
     console.log(this.userAnswers);
     this.x = this.x + 1;
-
     if (this.x < this.quiz.questions.length) {
       this.currentQuestion = this.quiz.questions[this.x].prompt;
       this.currentChoices = this.quiz.questions[this.x].choices;
       this.correctAnswer = this.quiz.questions[this.x].correct;
     }
-    else {
+    if (this.x === 1) {
+      this.unhidePreviousButton();
+    }
+    if (this.x === this.quiz.questions.length) {
       this.unhideSubmitButton();
     }
   }
+
 
   // previous button
   previousQuestion() {
@@ -132,6 +131,15 @@ export class DisplayQuizComponent implements OnInit {
     document.getElementById('thankYou').id = 'visible';
     for (let z = 0; z < this.userAnswers.length; z++) {
       const correctAnswer = document.getElementById('hidden2').id = 'visible';
+    }
+  }
+
+  onButtonChange() {
+    if (this.currentQuestion.length === this.currentQuestion.length ) {
+      this.hideNextButton();
+    }
+    if (this.currentQuestion.length === 0 ) {
+      this.hidePreviousButton();
     }
   }
 }

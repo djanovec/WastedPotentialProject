@@ -9,18 +9,13 @@ router.get('/getQuizById', (req, res)=>{
 router.post('/postQuiz', (req, res)=>{
     quizAPI.postQuiz(req, res);
 })
-router.get('/getQuizResultsByQuizId', (req, res)=>{
-    quizAPI.getQuizResults(req, res);
-})
-router.post('/postAnswersByQuizId', (req, res)=>{
-    quizAPI.postAnswers(req, res);
+router.get('/getScoresAdmin', (req, res)=>{
+    quizAPI.getScoresAdmin(req, res);
 })
 router.post('/getScore', (req, res)=>{
     quizAPI.getScore(req, res);
 })
-router.get('/getAllUserScoresByQuizId', (req, res) => {
-    quizAPI.getResults(req, res);
-})
+
 // router.get('/getStudentsByQuizID/:id', (req, res)=>{
 //     quizAPI.getStudentsByQuizId(req, res);
 // })

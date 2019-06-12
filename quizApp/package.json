@@ -3,15 +3,23 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "node server.js",
+    "build": "ng build --prod",
     "backend": "nodemon server",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "git subtree push --prefix quizApp heroku master"
+  },
+  "engines": {
+    "node": "6.11.1",
+    "npm": "3.10.9"
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-angular": "~0.800.0",
+    "@angular/cli": "~8.0.2",
+    "@angular/compiler-cli": "~8.0.0",
     "@angular/animations": "^8.0.0",
     "@angular/cdk": "^8.0.0",
     "@angular/common": "~8.0.0",
@@ -33,7 +41,8 @@
     "pg": "^7.11.0",
     "rxjs": "~6.5.2",
     "tslib": "^1.9.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "typescript": "~3.4.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.800.0",

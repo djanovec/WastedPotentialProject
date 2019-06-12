@@ -25,9 +25,9 @@ function createUser(req, res){
         })
     })    
 }
-function login(req, res, user){
+function login(req, res){
     console.log("hit");
-    pool.query('SELECT * FROM users WHERE email = $1', [user], (err, result) =>{ 
+    pool.query('SELECT * FROM users WHERE email = $1', [req.body.email], (err, result) =>{ 
         if(result[0]){
             if(bcrypt.compareSync(req.body.password, result[0].password)){
                 return res.status(201).send("logged in");

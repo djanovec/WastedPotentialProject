@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { QuizServiceService} from '../services/quiz-service.service';
 import { FormControl, FormGroup, ControlValueAccessor } from '@angular/forms';
 import { MatRadioChange, MatButton} from '@angular/material';
+import { Observable } from 'rxjs';
 
 // Object Interface for data
 export interface Quiz {
@@ -28,6 +29,35 @@ export interface Quiz {
     }];
 }
 
+
+export interface QuizJSON {
+    questions: [
+        {
+            prompt: string,
+            choices: [
+               string, string, string, string
+            ],
+            correct: string
+        },
+        {
+          prompt: string,
+          choices: [
+             string, string, string, string
+          ],
+          correct: string
+      },
+      {
+        prompt: string,
+        choices: [
+           string, string, string, string
+        ],
+        correct: string
+    }];
+    title: string,
+    description: string,
+    instructions: string,
+}
+
 @Component({
   selector: 'app-display-quiz',
   templateUrl: './display-quiz.component.html',
@@ -36,13 +66,14 @@ export interface Quiz {
 
 
 export class DisplayQuizComponent implements OnInit {
+  data;
   formControl = new FormControl('');
   x = 0;
   matButton: MatButton;
   selectedRadio: string;
   userAnswers: any[] = [];
-token: 1234;
-testQuiz: Quiz;
+ token: string = '1234';
+testQuiz: QuizJSON;
 
   constructor(private questionService: QuizServiceService) { }
 
@@ -80,9 +111,13 @@ testQuiz: Quiz;
   currentChoices = this.quiz.questions[this.x].choices;
 
   ngOnInit() {
-    this.questionService.getQuizByToken(this.token).subscribe( res =>{
+    this.questionService.getQuizByToken().subscribe( res => {
       console.log(res);
-      this.testQuiz = res;
+      // this.testQuiz = res['questions'];
+      // console.log(this.testQuiz);
+      // this.testQuiz = {question.res;
+      // console.log(this.testQuiz);
+      // console.log(this.testQuiz.questions)
      });
 
 

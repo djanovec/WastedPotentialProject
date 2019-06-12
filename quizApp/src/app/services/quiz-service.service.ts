@@ -2,11 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
-export class QuizServiceService {
 
+export class QuizServiceService {
+ token: {};
+
+  
 // getQuiz(){
 //   this.http.get();\
 
@@ -20,9 +25,13 @@ constructor(private http: HttpClient) {}
   return this.http.get("quizzes/postQuiz")
 }
 
-getQuizByToken(token){
-  return this.http.post("quizzes/getQuizById", token);
+public getQuizByToken(){
+  return this.http.get("/quizzes/getQuizById");
 }
+
+// getAllData(apiItem: String): any {
+//   return this.http.get(this.baseURL+apiItem, {responseType: 'json'}); 
+//   }
   getQuizResultsByQuizId(){
     return this.http.post("quizzes/getQuizResultsByQuizId", Observable);
   }

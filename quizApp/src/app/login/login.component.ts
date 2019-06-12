@@ -25,7 +25,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/take_quiz'])
       }
       this.userServ.userLogin();
-    })
+console.log(this.email);  
+  }) 
 }
   ngOnInit() {
   }

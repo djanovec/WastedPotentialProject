@@ -3,7 +3,6 @@ const pool = require("../connections");
 const bcrypt = require('bcrypt');
 
 function createUser(req, res){
-    console.log("hit");
     pool.query("SELECT * FROM users WHERE email = $1", 
     [req.body.email], (err, queryReturn)=>{
         if(queryReturn[0]){
@@ -16,7 +15,7 @@ function createUser(req, res){
         let firstName = req.body.firstName;
         let lastName = req.body.lastName;
         let isAdmin = false;
-        pool.query("INSERT INTO users (email, password, firstName, lastName, isAdmin) VALUES($1,$2, $3, $4, $5)", [email, passwordSend, firstName, lastName, isAdmin], (err, result)=>{
+        pool.query('INSERT INTO users (email, password, "firstName", "lastName", "isAdmin") VALUES($1,$2, $3, $4, $5)', [email, passwordSend, firstName, lastName, isAdmin], (err, result)=>{
             if(!err){
                 console.log(result);
                 return res.send({email: req.body.email});
@@ -27,11 +26,11 @@ function createUser(req, res){
     })    
 }
 function login(req, res){
+    console.log("hit");
     pool.query('SELECT * FROM users WHERE email = $1', [req.body.email], (err, result) =>{ 
-    console.log(result, req.body)
         if(result[0]){
             if(bcrypt.compareSync(req.body.password, result[0].password)){
-                return res.send(result)
+                return res.status(201).send("logged in");
             } else {
                 return res.send({error: "Invalid Username or Password"});
             }

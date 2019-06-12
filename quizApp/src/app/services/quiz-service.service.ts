@@ -21,8 +21,8 @@ constructor(private http: HttpClient) {}
     return this.http.get("/api/:id")
   }
 
-  postQuiz() {
-  return this.http.get("quizzes/postQuiz")
+  postQuiz(newQuiz) {
+  return this.http.post("/quizzes/postQuiz", newQuiz)
 }
 
 getQuizByToken(token) {

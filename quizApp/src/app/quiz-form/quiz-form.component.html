@@ -59,11 +59,7 @@
             </td>
             <td><button mat-raised-button color="primary" (click)=removeQuestion(question)>Remove Question</button></td>
             <br>
-            <div>
-              <td>
-                <button mat-raised-button color="primary" (click)=addChoice(question)>Add Choices</button>
-              </td>
-            </div>
+            
 
             <!-- Future functionality to allow different quiz types -->
             <!-- <td>
@@ -92,7 +88,11 @@
                   <!-- [name]={{question}} -->
                   <button mat-raised-button color="primary" (click)=removeChoice(choice,question)>Remove Choice</button>
                 </tr>
-
+                <div>
+                    <td>
+                      <button mat-raised-button color="primary" (click)=addChoice(question)>Add Choices</button>
+                    </td>
+                  </div>
               </table>
 
             </td>

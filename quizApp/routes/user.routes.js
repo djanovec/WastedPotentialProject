@@ -6,9 +6,9 @@ router.post('/create', (req, res)=>{
     userAPI.createUser(req, res);
 })
 
-router.post('/login', (req, res)=>{
+router.get('/login/:user', (req, res)=>{
     console.log('hit route');
-    userAPI.login(req, res);
+    userAPI.login(req, res, req.params.user);
 })
 
 router.delete('/delete', (req, res)=>{

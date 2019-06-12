@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../../app/services/user-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-form',
@@ -12,7 +13,7 @@ export class RegisterFormComponent implements OnInit {
   firstName: String = "";
   lastName: String = "";
   error;
-  constructor(private userServ: UserServiceService) { }
+  constructor(private userServ: UserServiceService, private router: Router) { }
   signup() {
       this.userServ.signup({
         "email": this.email,
@@ -21,8 +22,9 @@ export class RegisterFormComponent implements OnInit {
         "lastName": this.lastName
       }).subscribe(res => {
         if (res['error']) {
-          this.error = res['error'];
-          return
+          return this.error = res['error'];
+        } else {
+          this.router.navigate(['/take_quiz'])
         }
         this.userServ.userLogin();
       })

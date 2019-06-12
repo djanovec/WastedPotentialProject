@@ -115,7 +115,7 @@ export class DisplayQuizComponent implements OnInit {
     if (this.x === 1) {
       this.unhidePreviousButton();
     }
-    else {
+    if (this.x === this.quiz.questions.length) {
       this.unhideSubmitButton();
     }
   }

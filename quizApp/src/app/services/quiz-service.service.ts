@@ -25,8 +25,8 @@ constructor(private http: HttpClient) {}
   return this.http.get("quizzes/postQuiz")
 }
 
-public getQuizByToken(){
-  return this.http.get("/quizzes/getQuizById");
+getQuizByToken(token){
+  return this.http.get("/quizzes/getQuizById/" + token);
 }
 
 // getAllData(apiItem: String): any {

@@ -38,7 +38,7 @@ function getQuiz(req, res, token) {
             res.status(201).send(quizInfo)
         } else if (err) {
             console.log("ERROR: " + err);
-            res.send(err);
+            res.send({error: err});
         }
     })
 }
@@ -51,7 +51,7 @@ async function getScore(req, res) {
         score = 0;
         await pool.query('SELECT quizzes.questions FROM quizzes where quizzes.token = $1', [quizId], (err, result) => {
             if (err) {
-                console.log('Error1: ' + err);
+                res.send({error: err})
             } else {
                 for (var i = 0; i < userAnswers.length; i++) {
                     let correctAnswers = result.rows[0].questions[i].correct;
@@ -64,13 +64,13 @@ async function getScore(req, res) {
                         postRes['score'] = score
                         res.status(201).send(postRes);
                     } else {
-                        console.log('Error2: ' + err)
+                        res.send({error: err})
                     }
                 })
             }
         })
     } catch (err) {
-        console.log('Error3: ' + err);
+        res.send({error: err})
     }
 }
 function postQuiz(req, res) {
@@ -82,14 +82,18 @@ function postQuiz(req, res) {
     creatorId = req.body.creatorId;
     questions = JSON.stringify(req.body.questions);
     pool.query('INSERT INTO "quizzes" (title, description, instructions, "creatorId", questions, token) VALUES($1, $2, $3, $4, $5, $6)', [title, description, instructions, creatorId, questions, token], (err, result) => {
+        if(err){
+            res.send({error: err})
+        } else {
         result['token'] = token;
         res.status(201).send(result);
+        }
     })
 }
 function getScoresAdmin(req,res,quizId){
     pool.query('SELECT score, "userId" FROM "userAnswers" WHERE "quizId" = $1', [quizId], (err, result)=>{
         if(err){
-            console.log("Error: " + err)
+            res.send({error: err})
         } else{
             pool.query('SELECT token FROM quizzes where id = $1', [quizId], (err, token)=>{
                 result['token'] = token.rows[0];
@@ -102,8 +106,7 @@ function getScoresAdmin(req,res,quizId){
 function getQuizzesByAdmin(req,res,admin){
     pool.query('SELECT title, id FROM quizzes WHERE "creatorId" = $1', [admin], (err, result)=>{
         if(err){
-            console.log("Error: "+err);
-            res.send(err);
+            res.send({error: err});
         }
         else {
             res.status(201).send(result);

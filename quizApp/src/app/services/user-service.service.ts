@@ -7,7 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserServiceService {
   isLoggedIn = new BehaviorSubject<boolean>(false);
-  isSignedUp = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient) { }
   signup(loginData) {
     return this.http.post('/users/create', loginData)

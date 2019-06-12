@@ -4,16 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "build": "ng build --prod",
+    "build": "ng build",
     "backend": "nodemon server",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "deploy": "git subtree push --prefix quizApp heroku master"
-  },
-  "engines": {
-    "node": "6.11.1",
-    "npm": "3.10.9"
   },
   "private": true,
   "dependencies": {

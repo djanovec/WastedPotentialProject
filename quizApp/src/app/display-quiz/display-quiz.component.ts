@@ -74,10 +74,10 @@ export class DisplayQuizComponent implements OnInit {
   }
 
   // identifying which radio button is selected
-  // onSelectionChange(currentChoice) {
-  //   this.selectedRadio = currentChoice;
-  //   console.log(this.selectedRadio);
-  // }
+  onSelectionChange(currentChoice) {
+    this.selectedRadio = currentChoice;
+    console.log(this.selectedRadio);
+  }
 
   unhideSubmitButton() {
     document.getElementById('searchsubmit').id = 'visible';

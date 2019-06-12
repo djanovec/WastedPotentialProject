@@ -46,3 +46,23 @@ getAllUserQuizScores(){
 }
 
 }
+export interface Quiz {
+  title?: string;
+  description?: string;
+  questions?: [
+    {
+      prompt: string,
+      choices: [string, string, string, string],
+      correct: string
+    },
+    {
+      prompt: string,
+      choices: [string, string, string, string],
+      correct: string
+    },
+    {
+      prompt: string,
+      choices: [string, string, string, string],
+      correct: string
+    }];
+}

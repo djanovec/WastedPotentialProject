@@ -1,58 +1,13 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { QuizServiceService} from '../services/quiz-service.service';
+import { QuizServiceService, Quiz } from '../services/quiz-service.service';
 import { FormControl, FormGroup, ControlValueAccessor } from '@angular/forms';
 import { MatRadioChange, MatButton } from '@angular/material';
+import { Observable } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 // Object Interface for data
-export interface Quiz {
-  title?: string;
-  description?: string;
-  questions?: [
-    {
-      prompt: string,
-      choices: [string, string, string, string],
-      correct: string
-    },
-    {
-      prompt: string,
-      choices: [string, string, string, string],
-      correct: string
-    },
-    {
-      prompt: string,
-      choices: [string, string, string, string],
-      correct: string
-    }];
-}
 
 
-export interface QuizJSON {
-    questions: [
-        {
-            prompt: string,
-            choices: [
-               string, string, string, string
-            ],
-            correct: string
-        },
-        {
-          prompt: string,
-          choices: [
-             string, string, string, string
-          ],
-          correct: string
-      },
-      {
-        prompt: string,
-        choices: [
-           string, string, string, string
-        ],
-        correct: string
-    }];
-    title: string,
-    description: string,
-    instructions: string,
-}
 
 @Component({
   selector: 'app-display-quiz',
@@ -67,15 +22,19 @@ export class DisplayQuizComponent implements OnInit {
   matButton: MatButton;
   selectedRadio: string;
   userAnswers: any[] = [];
- token: string = '1234';
-testQuiz: QuizJSON;
+  token: string = '1234';
+  quiz: Quiz;
+  currentQuestion;
+  currentChoices;
+  correctAnswer;
+
 
   constructor(private questionService: QuizServiceService) { }
 
 
 
   // hard coded json for testing
-  quiz: Quiz = {
+  quizTestData: Quiz = {
     title: 'HTML Quiz',
     description: 'This is a quiz here',
     questions: [
@@ -100,32 +59,25 @@ testQuiz: QuizJSON;
 
   // isolating the page question
 
-  currentQuestion = this.quiz.questions[this.x].prompt;
 
-  // insolating the page choices
-  currentChoices = this.quiz.questions[this.x].choices;
 
   ngOnInit() {
-    this.questionService.getQuizByToken().subscribe( res => {
-      console.log(res);
-      // this.testQuiz = res['questions'];
-      // console.log(this.testQuiz);
-      // this.testQuiz = {question.res;
-      // console.log(this.testQuiz);
-      // console.log(this.testQuiz.questions)
-     });
 
-
+    this.questionService.getQuizByToken(this.token).subscribe((res: any) => {
+      this.quiz = res;
+      this.currentQuestion = this.quiz.questions[this.x].prompt;
+      this.currentChoices = this.quiz.questions[this.x].choices;
+      this.correctAnswer = this.quiz.questions[this.x].correct;
+      console.log(this.quiz);
+      ;
+    });
   }
-  correctAnswer = this.quiz.questions[this.x].correct;
-
-  // ngOnInit() { }
 
   // identifying which radio button is selected
-  onSelectionChange(currentChoice) {
-    this.selectedRadio = currentChoice;
-    console.log(this.selectedRadio);
-  }
+  // onSelectionChange(currentChoice) {
+  //   this.selectedRadio = currentChoice;
+  //   console.log(this.selectedRadio);
+  // }
 
   unhideSubmitButton() {
     document.getElementById('searchsubmit').id = 'visible';

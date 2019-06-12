@@ -5,8 +5,9 @@ const bcrypt = require('bcrypt');
 function createUser(req, res){
     pool.query("SELECT email FROM users WHERE email = $1", 
     [req.body.email], (err, queryReturn)=>{
-        if(queryReturn){
-            return res.send({error: "USERNAME ALREADY EXISTS"})
+        console.log(queryReturn.rows[0]);
+        if(queryReturn.rows[0]){
+            return res.send({error: "EMAIL ALREADY EXISTS"})
         }
         let password = req.body.password;
         let passwordSend = bcrypt.hashSync(password, 5);

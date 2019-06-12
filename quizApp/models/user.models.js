@@ -3,40 +3,37 @@ const pool = require("../connections");
 const bcrypt = require('bcrypt');
 
 function createUser(req, res){
-    console.log("hit");
-    pool.query("SELECT * FROM users WHERE email = $1", 
+    pool.query("SELECT email FROM users WHERE email = $1", 
     [req.body.email], (err, queryReturn)=>{
-        if(queryReturn[0]){
-            return res.send("USERNAME ALREADY EXISTS")
+        console.log(queryReturn.rows[0]);
+        if(queryReturn.rows[0]){
+            return res.send({error: "EMAIL ALREADY EXISTS"})
         }
         let password = req.body.password;
-        console.log(password);
         let passwordSend = bcrypt.hashSync(password, 5);
         let email = req.body.email;
         let firstName = req.body.firstName;
         let lastName = req.body.lastName;
         let isAdmin = false;
-        pool.query("INSERT INTO users (email, password, firstName, lastName, isAdmin) VALUES($1,$2, $3, $4, $5)", [email, passwordSend, firstName, lastName, isAdmin], (err, result)=>{
+        pool.query('INSERT INTO users (email, password, "firstName", "lastName", "isAdmin") VALUES($1,$2, $3, $4, $5)', [email, passwordSend, firstName, lastName, isAdmin], (err, result)=>{
             if(!err){
-                console.log(result);
                 return res.send({email: req.body.email});
             }
-            console.log(err);
             res.status(500).send({error: "SOMETHING BROKE"})
         })
     })    
 }
 function login(req, res){
     pool.query('SELECT * FROM users WHERE email = $1', [req.body.email], (err, result) =>{ 
-    console.log(result, req.body)
         if(result[0]){
-            if(bcrypt.compareSync(req.body.password, result[0].password)){
-                return res.send(result)
+            if(bcrypt.compareSync(req.body.password, result.rows[0].password)){
+                return res.status(201).send({logged: true});
             } else {
                 return res.send({error: "Invalid Username or Password"});
             }
+        } else {
+            res.send({error: "Invalid Username or Password"})
         }
-        res.send({error: "Invalid Username or Password"})
     })
 }
 

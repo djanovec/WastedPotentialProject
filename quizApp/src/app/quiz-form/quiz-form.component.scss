@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600&display=swap');
+
 .matCard{
   margin: auto;
   width: 60%;
@@ -9,6 +11,7 @@
   
 .center{
   text-align: center;
+  justify-content: center;
   
 }
 
@@ -30,4 +33,26 @@
 table {
   width: 100%;
   margin: 10px;
+}
+
+.flex{
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.width30{
+  width: 30%;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.width70{
+  width: 70%;
+  margin-top: 5px;
+}
+
+.questionText{
+  font-weight: 600;
+  font-size: 18px;
+  font-size-adjust: inherit;
 }

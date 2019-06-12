@@ -38,7 +38,7 @@
 <mat-card class="matCard">
   <table class="mat-elevation-z8" *ngFor="let question of questions; let i = index">
     <tr>
-      <mat-card-title>Question #{{valueList[i]}}</mat-card-title>
+      <mat-card-title>Question #{{i+1}}</mat-card-title>
     </tr>
     <tr>
       <mat-radio-group [(ngModel)]="questions">

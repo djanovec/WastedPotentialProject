@@ -32,3 +32,19 @@ table {
   width: 100%;
   margin: 10px;
 }
+
+.flex{
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.width30{
+  width: 30%;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.width70{
+  width: 70%;
+  margin-top: 5px;
+}

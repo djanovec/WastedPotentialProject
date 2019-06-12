@@ -1,41 +1,46 @@
 <app-nav-bar></app-nav-bar>
 <form #quizForm="ngForm">
-  <mat-card class="matCard">
-    <mat-card-header class="center">
-      <mat-card-title class="titleFont">Whip Up A Quiz</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <!-- Quiz Name/Title -->
-      <div class="center">
-        <mat-form-field class="width">
-          <mat-label>Title</mat-label>
-          <input matInput name="quizTitle" type="text" [(ngModel)]="quiz.quizTitle" #quizTitle="ngModel">
-        </mat-form-field>
-      </div>
-      <!-- Quiz Descritpion -->
-      <div class="center">
-        <mat-form-field class="width">
-          <mat-label>Description</mat-label>
+  <div class="flex">
 
-          <textarea matInput name="quizDescription" type="textarea" [(ngModel)]="description"> </textarea>
-        </mat-form-field>
-      </div>
-      <!-- Quiz Instructions -->
-      <div class="center">
-        <mat-form-field class="width">
-          <mat-label>Instructions</mat-label>
-          <textarea matInput name="quizInstructions" type="textarea" [(ngModel)]="instructions"></textarea>
-        </mat-form-field>
-      </div>
+    <mat-card class="width30 matCard">
+      
+            <mat-card-header class="center">
+              <mat-card-title class="titleFont">Whip Up A Quiz</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <!-- Quiz Name/Title -->
+              <div class="center">
+                <mat-form-field class="width">
+                  <mat-label>Title</mat-label>
+                  <input matInput name="quizTitle" type="text" [(ngModel)]="quiz.quizTitle" #quizTitle="ngModel">
+                </mat-form-field>
+              </div>
+              <!-- Quiz Descritpion -->
+              <div class="center">
+                <mat-form-field class="width">
+                  <mat-label>Description</mat-label>
+        
+                  <textarea matInput name="quizDescription" type="textarea" [(ngModel)]="description"> </textarea>
+                </mat-form-field>
+              </div>
+              <!-- Quiz Instructions -->
+              <div class="center">
+                <mat-form-field class="width">
+                  <mat-label>Instructions</mat-label>
+                  <textarea matInput name="quizInstructions" type="textarea" [(ngModel)]="instructions"></textarea>
+                </mat-form-field>
+              </div>
+        
+        
+            </mat-card-content>
+      
+      </mat-card>
+    
 
-
-    </mat-card-content>
-
-  </mat-card>
-</form>
 
 <!-- Create and Add Questions -->
-<mat-card class="matCard">
+<mat-card class="width70 matCard">
+  
   <table class="mat-elevation-z8" *ngFor="let question of questions; let i = index">
     <tr>
       <mat-card-title>Question #{{i+1}}</mat-card-title>
@@ -98,3 +103,5 @@
 
 
 </mat-card>
+</div>
+</form>

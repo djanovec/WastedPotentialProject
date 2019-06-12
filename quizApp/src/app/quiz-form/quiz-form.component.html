@@ -3,68 +3,70 @@
   <div class="flex">
 
     <mat-card class="width30 matCard">
-      
-            <mat-card-header class="center">
-              <mat-card-title class="titleFont">Whip Up A Quiz</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <!-- Quiz Name/Title -->
-              <div class="center">
-                <mat-form-field class="width">
-                  <mat-label>Title</mat-label>
-                  <input matInput name="quizTitle" type="text" [(ngModel)]="quiz.quizTitle" #quizTitle="ngModel">
-                </mat-form-field>
-              </div>
-              <!-- Quiz Descritpion -->
-              <div class="center">
-                <mat-form-field class="width">
-                  <mat-label>Description</mat-label>
-        
-                  <textarea matInput name="quizDescription" type="textarea" [(ngModel)]="description"> </textarea>
-                </mat-form-field>
-              </div>
-              <!-- Quiz Instructions -->
-              <div class="center">
-                <mat-form-field class="width">
-                  <mat-label>Instructions</mat-label>
-                  <textarea matInput name="quizInstructions" type="textarea" [(ngModel)]="instructions"></textarea>
-                </mat-form-field>
-              </div>
-              <mat-card-actions class="center">
-                  <button mat-raised-button color="accent" type="submit" (ngSubmit)="quizFormSubmit(quizForm.value)">Create Quiz</button>
-                </mat-card-actions>
-            </mat-card-content>
-      
-      </mat-card>
-    
 
-
-<!-- Create and Add Questions -->
-<mat-card class="width70 matCard">
-  
-  <table class="mat-elevation-z8" *ngFor="let question of questions; let i = index">
-    <tr>
-      <mat-card-title>Question #{{i+1}}</mat-card-title>
-    </tr>
-    <tr>
-      <mat-radio-group [(ngModel)]="questions">
-        
-        
-        <td>
-          <mat-form-field>
-            <input matInput placeholder="Quiz question">
+      <mat-card-header class="center">
+        <mat-card-title class="titleFont">Whip Up A Quiz</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <!-- Quiz Name/Title -->
+        <div class="center">
+          <mat-form-field class="width">
+            <mat-label>Title</mat-label>
+            <input matInput name="quizTitle" type="text" [(ngModel)]="quiz.quizTitle" #quizTitle="ngModel">
           </mat-form-field>
-        </td>
-        <td><button mat-raised-button color="primary" (click)=removeQuestion(question)>Remove Question</button></td>
-        <br>
-        <div>
-          <td>
-            <button mat-raised-button color="primary" (click)=addChoice(question)>Add Choices</button>
-          </td>
         </div>
+        <!-- Quiz Descritpion -->
+        <div class="center">
+          <mat-form-field class="width">
+            <mat-label>Description</mat-label>
 
-        <!-- Future functionality to allow different quiz types -->
-        <!-- <td>
+            <textarea matInput name="quizDescription" type="textarea" [(ngModel)]="description"> </textarea>
+          </mat-form-field>
+        </div>
+        <!-- Quiz Instructions -->
+        <div class="center">
+          <mat-form-field class="width">
+            <mat-label>Instructions</mat-label>
+            <textarea matInput name="quizInstructions" type="textarea" [(ngModel)]="instructions"></textarea>
+          </mat-form-field>
+        </div>
+        <mat-card-actions class="center">
+          <button mat-raised-button color="accent" type="submit" (ngSubmit)="quizFormSubmit(quizForm.value)">Create
+            Quiz</button>
+        </mat-card-actions>
+      </mat-card-content>
+
+    </mat-card>
+
+
+
+    <!-- Create and Add Questions -->
+    <mat-card class="width70 matCard">
+
+      <table class="mat-elevation-z8" *ngFor="let question of questions; let i = index">
+        <tr>
+          <mat-card-title>Question #{{i+1}}</mat-card-title>
+        </tr>
+        <tr>
+          <mat-radio-group [(ngModel)]="questions">
+
+
+            <td>
+              <mat-form-field class="questionText" appearance="fill">
+                <mat-label>Insert Question Here</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </td>
+            <td><button mat-raised-button color="primary" (click)=removeQuestion(question)>Remove Question</button></td>
+            <br>
+            <div>
+              <td>
+                <button mat-raised-button color="primary" (click)=addChoice(question)>Add Choices</button>
+              </td>
+            </div>
+
+            <!-- Future functionality to allow different quiz types -->
+            <!-- <td>
           <mat-form-field>
             <mat-label>
               Question Type
@@ -77,36 +79,39 @@
           </mat-form-field>
         </td> -->
 
-        <td>
-          <table *ngFor="let choice of question.choices;let i = index">
-            <tr>
-              <button mat-raised-button color="primary" (click)=removeChoice(choice,question)>Remove Choice</button>
-              <mat-radio-button [value]="i">
-                <input matInput placeholder="Insert Multiple Choice">
-              </mat-radio-button>
+            <td>
+              <table *ngFor="let choice of question.choices;let i = index">
+                <tr>
+                  <mat-radio-button [value]="i">
+                    <mat-form-field class="questionText" appearance="fill">
 
-              <!-- [name]={{question}} -->
-            </tr>
+                      <input matInput placeholder="Insert Multiple Choice">
 
-          </table>
+                    </mat-form-field>
+                  </mat-radio-button>
+                  <!-- [name]={{question}} -->
+                  <button mat-raised-button color="primary" (click)=removeChoice(choice,question)>Remove Choice</button>
+                </tr>
 
-        </td>
+              </table>
 
-      </mat-radio-group>
-    </tr>
-  </table>
+            </td>
+
+          </mat-radio-group>
+        </tr>
+      </table>
 
 
 
 
-  <!-- Question creator
+      <!-- Question creator
      -->
-  <mat-card-actions>
-    <button mat-raised-button (click)=addQuestion() type="submit">Add New Question</button>
-  </mat-card-actions>
-  
+      <mat-card-actions>
+        <button mat-raised-button (click)=addQuestion() type="submit">Add New Question</button>
+      </mat-card-actions>
 
 
-</mat-card>
-</div>
+
+    </mat-card>
+  </div>
 </form>

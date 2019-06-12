@@ -8,15 +8,11 @@
     "backend": "nodemon server",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "heroku-postbuild": "ng build -prod"
-  },
-  "engines": {
-    "node": "10.15.3",
-    "npm": "6.9.0"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-angular": "~0.800.0",
     "@angular/cli": "~8.0.2",
     "@angular/compiler-cli": "~8.0.0",
     "@angular/animations": "^8.0.0",

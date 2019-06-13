@@ -4,7 +4,7 @@
     <mat-card-header class="center">
       <mat-card-title class="titleFont">Whip Up A Quiz</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
+<mat-card-content>
 
       <div class="center">
         <mat-form-field class="width">
@@ -34,51 +34,44 @@
         </tr>
         <tr>
           <mat-radio-group [(ngModel)]="questions">
-          <td><button mat-raised-button color="primary" (click)=removeQuestion(question)>Remove Question</button></td>
-          <td>
-            <mat-form-field>
+            <td><button mat-raised-button class="padding" color="primary" (click)=removeQuestion(question)>Remove Question</button></td>
+            <td>
+              <mat-form-field>
 
-              <mat-label>
-                Question Type
-              </mat-label>
-              <mat-select>
-                <mat-option *ngFor="let type of types" [value]="type">{{type}}
+                <mat-label>
+                  Question Type
+                </mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let type of types" [value]="type">{{type}}
 
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field>
-              <input matInput placeholder="Quiz question">
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+            <td>
+                
+              <mat-form-field>
+                <input matInput placeholder="Quiz question">
 
 
-            </mat-form-field>
-          </td>
-          <br>
-          <div>
+              </mat-form-field>
+             
+            </td>
+            <br>
+            <div>
 
+              <td>
+
+                <button mat-raised-button color="primary" (click)=addChoice(question)>Add Choices</button>
+
+              </td>
+
+            </div>
             <td>
 
-              <button mat-raised-button color="primary" (click)=addChoice(question)>Add Choices</button>
+              <table *ngFor="let choice of question.choices;let i = index">
 
-
-              
-            </td>
-
-          </div>
-          <td>
-
-            
-
-              
-                
-                 
-
-
-                <table *ngFor="let choice of question.choices;let i = index">
-
-                  <tr>
+                <tr>
                   <button mat-raised-button color="primary" (click)=removeChoice(choice,question)>Remove Choice</button>
 
 
@@ -86,11 +79,11 @@
                   </mat-radio-button>
 
                   <!-- [name]={{question}} -->
-              </tr>
+                </tr>
 
-            </table>
+              </table>
 
-          </td>
+            </td>
 
           </mat-radio-group>
         </tr>
@@ -98,11 +91,13 @@
     </mat-card-content>
     <button mat-raised-button (click)=addQuestion() type="submit">Add New Question</button>
 
-    <mat-card-actions>
-      <button mat-raised-button color="accent" type="submit" (ngSubmit)="quizFormSubmit(quizForm.value)">Submit</button>
-    </mat-card-actions>
-
+    
 
   </mat-card>
+
+  <mat-card-actions>
+      <button  mat-raised-button color="accent" type="submit" (ngSubmit)="quizFormSubmit(quizForm.value)">Submit</button>
+    </mat-card-actions>
+
 
 </form>

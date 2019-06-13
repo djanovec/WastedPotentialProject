@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { QuizServiceService } from '../quiz-service.service';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-quiz-guard',
@@ -7,7 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuizGuardComponent implements OnInit {
 
-  constructor() { }
+  token: string;
+
+  submit(){
+    this.quizService.getQuizByToken(this.token);
+    // Need to pass error back somehow
+  };
+
+  constructor(private quizService: QuizServiceService, private router: Router) { }
 
   ngOnInit() {
   }

@@ -11,15 +11,17 @@
 
     <div>
       <mat-form-field>
-        <mat-label>Enter Quiz Code</mat-label>
-        <input matInput type="text">
+        <mat-label>Quiz Code</mat-label>
+        <input matInput type="text" [(ngModel)]="token" name="token">
       </mat-form-field>
     </div>
   </mat-card-content>
 
   <mat-card-actions class="centerAlign">
-    <button color="primary" mat-raised-button type="submit">Submit</button>
+    <button color="primary" mat-raised-button type="submit" (click)=submit() name="submit">Submit</button>
   </mat-card-actions>
 
   </mat-card>
+  <div>{{error}}</div>
+
 </form>

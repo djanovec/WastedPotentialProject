@@ -43,19 +43,24 @@
     <!-- Create and Add Questions -->
     <mat-card class="width70 matCard">
 
-      <table class="mat-elevation-z8" *ngFor="let question of questions; let i = index">
+
+
+      <table class="mat-elevation-z8"*ngFor="let question of question; let i = index"  >
         <tr>
           <mat-card-title>Question #{{i+1}}</mat-card-title>
         </tr>
         <tr>
-          <mat-radio-group [(ngModel)]="i">
             <td>
-              <mat-form-field class="questionText" appearance="fill">
+              <mat-form-field  class="questionText" appearance="fill">
                 <mat-label>Insert Question Here</mat-label>
-                <input matInput>
+                
+                <input name="question.prompt" [(ngModel)]="question.prompt" matInput>
               </mat-form-field>
             </td>
-            <td><button mat-raised-button color="primary" (click)=removeQuestion(question)>Remove Question</button></td>
+            {{question.prompt}}
+            <td>
+              <button mat-raised-button color="primary" (click)=removeQuestion(quizQuestion)>Remove Question</button>
+            </td>
             <br>
             
 
@@ -73,29 +78,24 @@
           </mat-form-field>
         </td> -->
 
-            <td>
-              <table *ngFor="let choice of question.choices;let i = index">
-                <tr>
+            <td *ngFor="let choice of questions.choices"> 
+               <mat-radio-group [(ngModel)]= choice>
                   <mat-radio-button [value]="i">
+                 
                     <mat-form-field class="questionText" appearance="fill">
-
                       <input matInput placeholder="Insert Multiple Choice">
-
                     </mat-form-field>
-                  </mat-radio-button>
-                  <!-- [name]={{question}} -->
+                  </mat-radio-button> </mat-radio-group>
                   <button mat-raised-button color="primary" (click)=removeChoice(choice,question)>Remove Choice</button>
-                </tr>
+
                 <div>
                     <td>
                       <button mat-raised-button color="primary" (click)=addChoice(question)>Add Choices</button>
                     </td>
                   </div>
-              </table>
-
             </td>
 
-          </mat-radio-group>
+       
         </tr>
       </table>
 

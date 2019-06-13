@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { QuizServiceService } from '../quiz-service.service';
-import { Quiz } from './Models/quiz.model';
+import { Quiz, Questions } from './Models/quiz.model';
 
 @Component({
   selector: 'app-quiz-form',
@@ -11,24 +11,25 @@ import { Quiz } from './Models/quiz.model';
 export class QuizFormComponent implements OnInit {
 
   constructor(private quizService: QuizServiceService ) { }
-questions: Array<Object> = [
-  {
-    type: "multi",
-    prompt: "",
-    choices: [""],
-    correct: "",
 
-  }
-]
 quiz: Quiz = {
   quizTitle: "",
   quizDescription: "",
   quizInstructions: "",
-  quizQuestions: this.questions,
+  quizQuestions: [{}],
   correctAnswers: "",
 
-   }
-types: string [] = ["multi"]
+   };
+   questions: Questions[] = [
+    {
+      type: "multi",
+      prompt: "",
+      choices: [""],
+      correct: "",
+  
+    }
+  ];
+// types: string [] = ["multi"]
 
  title = ""
  description = ""
@@ -45,7 +46,7 @@ types: string [] = ["multi"]
     choices: [""],
     correct: "",
 
-  })
+  });
  }
 
  removeChoice(val,arr){
@@ -66,6 +67,7 @@ types: string [] = ["multi"]
 // }
 
 quizFormSubmit(quiz) {
+  
   console.log(this.quiz);
   this.quizService.postQuiz(quiz).subscribe(res =>
     console.log(res)

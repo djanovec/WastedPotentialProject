@@ -53,8 +53,8 @@ export interface Quiz {
     type?: string;
     prompt?: string;
     choices?: Array<any>;
-    correct?: string;}
-  ]
+    correct?: string;},
+  ];
   instructions?: string;
 }
 

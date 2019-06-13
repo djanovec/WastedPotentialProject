@@ -58,9 +58,20 @@ types: string [] = ["multi"]
    x['choices'].push("")
 
  }
-   quizFormSubmit(quiz){
-    // if(this.quizForm.valid){
-    this.quizService.postQuiz(quiz).subscribe(res => console.log(res))
+//    quizFormSubmit(quiz){
+//     // if(this.quizForm.valid){
+//     this.quizService.postQuiz(quiz).subscribe(res => console.log(res))
+//   // }
+
+// }
+
+quizFormSubmit(quiz) {
+  console.log(this.quiz);
+  this.quizService.postQuiz(quiz).subscribe(res =>
+    console.log(res)
+  
+
+  );
   // }
 
 }

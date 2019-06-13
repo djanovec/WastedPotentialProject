@@ -12,7 +12,7 @@ export class QuizGuardComponent implements OnInit {
 
   token: string;
 
-  submit(){
+  submit() {
     this.quizService.getQuizByToken(this.token);
     // Need to pass error back somehow
   };
@@ -23,3 +23,4 @@ export class QuizGuardComponent implements OnInit {
   }
 
 }
+ 

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
-import { QuizServiceService } from '../quiz-service.service';
-import { Quiz } from './Models/quiz.model';
+import { FormBuilder, Validators, FormControl, FormGroup, NgForm } from '@angular/forms';
+import { QuizServiceService, Quiz, Questions } from '../services/quiz-service.service';
+import { Title } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-quiz-form',
@@ -9,67 +10,70 @@ import { Quiz } from './Models/quiz.model';
   styleUrls: ['./quiz-form.component.scss']
 })
 export class QuizFormComponent implements OnInit {
-    quiz: Quiz = {
-    quizTitle: "",
-    quizDescription: "",
-    quizInstructions: "",
-    quizQuestions: "",
-    correctAnswers: "",
-   
 
-     }
+  constructor(private quizService: QuizServiceService) { }
+  public quiz: Quiz = {
+    title: '',
+    description: '',
+    // instructions: '',
+    questions: [{}]
+  };
+  questions: Questions[] =[
+    {
+      type: "multi",
+      prompt: "",
+      choices: [""],
+      correct: "",
 
-  constructor(private quizService: QuizServiceService ) { }
+    }];
 
-questions: Array<Object> = [
-  {
-    type: "multi",
-    prompt: "",
-    choices: [""],
-    correct: "",
-
+  removeQuestion(val) {
+    this.quiz.questions.splice(this.quiz.questions.indexOf(val), 1);
   }
-]
 
-types: string [] = ["multi"]
+  addQuestion() {
+    this.quiz.questions.push({
+      type: "multi",
+      prompt: "",
+      choices: [""],
+      correct: "",
 
- title = ""
- description = ""
- instructions = ""
+    });
+  }
 
- removeQuestion(val){
-   this.questions.splice(this.questions.indexOf(val),1)
- }
+  // addChoice(i) {
+  //   this.questions[i].choices.push;
+  //   // this.quiz.questions
 
- addQuestion(){
-   this.questions.push({
-    type: "multi",
-    prompt: "",
-    choices: [""],
-    correct: "",
-
-  })
- }
-
- removeChoice(val,arr){
-   let x = this.questions[this.questions.indexOf(arr)];
-   x[`choices`].splice(x[`choices`].indexOf(val),1)
- }
-
- addChoice(val){
-   let x = this.questions[this.questions.indexOf(val)]
-   x['choices'].push("")
-
- }
-   quizFormSubmit(){
-    // if(this.quizForm.valid){
-    this.quizService['this.quiz'].subscribe(res => console.log(res))
-    console.log(this.questions);
   // }
 
-}
+  // addChoice(nextChoice) {
+  //   let x = this.quiz.questions.indexOf(nextChoice);
+  //   this.quiz.questions['this.quiz.questions[].choices'].push(i);
+  //   console.log(this.quiz.questions);
+  //   // this.quiz.questions
 
-ngOnInit() {
+  // }
+  removeChoice(val, arr) {
+    let x = this.quiz.questions.indexOf(arr);
+    this.quiz.questions['this.quiz.questions'].choices.splice(x).indexOf(val, 1);
+  }
 
-}
+ 
+
+  quizFormSubmit(quiz) {
+    console.log(this.quiz);
+    this.quizService.postQuiz(quiz).subscribe(res =>
+      console.log(res)
+    
+
+    );
+    // }
+
+  }
+
+  ngOnInit() {
+
+
+  }
 }

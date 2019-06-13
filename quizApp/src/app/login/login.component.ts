@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/quiz_guard'])
       }
       this.userServ.userLogin();
-    })
+console.log(this.email);  
+  }) 
 }
   ngOnInit() {
   }

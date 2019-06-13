@@ -1,37 +1,43 @@
-<form (ngSubmit)="quizFormSubmit">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Quiz Whip Form</mat-card-title>
+<app-nav-bar></app-nav-bar>
+<form #quizForm="ngForm">
+  <mat-card class="matCard">
+    <mat-card-header class="center">
+      <mat-card-title class="titleFont">Whip Up A Quiz</mat-card-title>
     </mat-card-header>
     <mat-card-content>
 
-      <div>
-        <mat-form-field>
+      <div class="center">
+        <mat-form-field class="width">
           <mat-label>Title</mat-label>
-          <input matInput name="quizTitle" type="text" [(ngModel)]="title">
+          <input matInput name="quizTitle" type="text" [(ngModel)]="quiz.quizTitle" #quizTitle="ngModel">
         </mat-form-field>
       </div>
 
-      <div>
-        <mat-form-field>
+      <div class="center">
+        <mat-form-field class="width">
           <mat-label>Description</mat-label>
 
-          <input matInput name="quizDescription" type="text" [(ngModel)]="description">
+          <textarea matInput name="quizDescription" type="textarea" [(ngModel)]="description"> </textarea>
         </mat-form-field>
       </div>
 
-      <div>
-        <mat-form-field>
+      <div class="center">
+        <mat-form-field class="width">
           <mat-label>Instructions</mat-label>
-          <input matInput name="quizInstructions" type="text" [(ngModel)]="instructions">
+          <textarea matInput name="quizInstructions" type="textarea" [(ngModel)]="instructions"></textarea>
         </mat-form-field>
       </div>
 
-      <table *ngFor="let question of questions">
+      <table class="mat-elevation-z8" *ngFor="let question of questions; let i = index">
         <tr>
-          <td><button mat-raised-button (click)=removeQuestion(question)>Remove</button></td>
+          <mat-card-title>Question #{{valueList[i]}}</mat-card-title>
+        </tr>
+        <tr>
+          <mat-radio-group [(ngModel)]="questions">
+          <td><button mat-raised-button color="primary" (click)=removeQuestion(question)>Remove Question</button></td>
           <td>
             <mat-form-field>
+
               <mat-label>
                 Question Type
               </mat-label>
@@ -49,26 +55,51 @@
 
             </mat-form-field>
           </td>
-          <td> <button mat-raised-button (click)=addChoice(question)>Add Choices</button></td>
+          <br>
+          <div>
+
+            <td>
+
+              <button mat-raised-button color="primary" (click)=addChoice(question)>Add Choices</button>
+
+
+              
+            </td>
+
+          </div>
           <td>
 
-            <table *ngFor="let choice of question.choices">
-              <tr>
-                <button mat-raised-button (click)=removeChoice(choice,question)>Remove</button>
+            
 
-                <input matInput placeholder="Insert Multiple Choice">
+              
+                
+                 
+
+
+                <table *ngFor="let choice of question.choices;let i = index">
+
+                  <tr>
+                  <button mat-raised-button color="primary" (click)=removeChoice(choice,question)>Remove Choice</button>
+
+
+                  <mat-radio-button [value]="i"><input matInput placeholder="Insert Multiple Choice">
+                  </mat-radio-button>
+
+                  <!-- [name]={{question}} -->
               </tr>
 
             </table>
+
           </td>
+
+          </mat-radio-group>
         </tr>
       </table>
-
     </mat-card-content>
-    <button mat-raised-button (click)=addQuestion() type="submit">Add</button>
+    <button mat-raised-button (click)=addQuestion() type="submit">Add New Question</button>
 
     <mat-card-actions>
-      <button mat-raised-button type="submit">Submit</button>
+      <button mat-raised-button color="accent" type="submit" (ngSubmit)="quizFormSubmit(quizForm.value)">Submit</button>
     </mat-card-actions>
 
 

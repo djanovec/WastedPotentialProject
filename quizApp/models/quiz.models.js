@@ -1,126 +1,186 @@
 const pool = require("../connections")
-
+const bcrypt = require('bcrypt');
 // 01110111 01101000 01100001 01110100 00100000 01100001 00100000 01110111 01100001 01110011 01110100 01100101 00100000 01101111 01100110 00100000 01110100 01101001 01101101 01100101
-// async function getQuiz(req, res){
-//     try{
-//         const getRes = await Quizzes.find();
-//         console.log(getRes); 
-//         res.status(201).send(getRes);
-//     }catch(err){
-//         console.log('Error:' + ' ' + err);
-//     }
-// }
-// async function postQuiz(req, res) {
-//     try {
-//         const postReq = new Quizzes({
-//             hash: 'abc123',
-//             title: 'Super Cool Quiz',
-//             description: 'A quiz thats cool',
-//             instructions: 'take the damn quiz',
-//             questions: ['this is a question', 'also a question', 'oh look another question'],
+// for future cohorts, change this to pseudo tables from a json object column okay ty 
+// Possible solution for getQuiz function
+// select
+//     json_build_object(
+//         json_agg(
+//             json_build_object(
+//                 ‘title’, quiz.title,
+//                 ‘description’, quiz.description
+//             )
+//         ) quizzes
+//     )
+// from quiz
+// left join (
+//     select
+//         json_agg(
+//             json_build_object(
+//                 ‘prompt’, question.prompt
+//             )
+//         ) questions
+//     from question q
+//     left join (
+//     select
+//         json_agg(
+//             json_build_object(
+//                 ‘answer’, a.answer
+//             )           
+//         ) answers
+//     from answer a
+//     ) a on a.questionId = q.id
+// ) q on q.quizId = quiz.Id;
+function getQuiz(req, res, token) {
+    pool.query('SELECT questions, title, description, instructions FROM quizzes WHERE quizzes.token = $1', [token], (err, result) => {
+        if (result) {
+            quizInfo = result.rows[0];
+            res.status(201).send(quizInfo)
+        } else if (err) {
+            console.log("ERROR: " + err);
+            res.send({error: err});
+        }
+    })
+}
+async function getScore(req, res) {
+    try {
+        userAnswers = req.body.answers;
+        userId = req.body.userId;
+        quizId = req.body.token
+        datestamp = new Date();
+        score = 0;
+        await pool.query('SELECT quizzes.questions FROM quizzes where quizzes.token = $1', [quizId], (err, result) => {
+            if (err) {
+                res.send({error: err})
+            } else {
+                for (var i = 0; i < userAnswers.length; i++) {
+                    let correctAnswers = result.rows[0].questions[i].correct;
+                    if (userAnswers[i] == correctAnswers) {
+                        score++;
+                    }
+                }
+                pool.query('INSERT INTO "userAnswers" (answers, "userId", "quizId", datestamp, score) VALUES($1, $2, $3, $4, $5)', [userAnswers, userId, quizId, datestamp, score], (err, postRes) => {
+                    if(postRes){
+                        postRes['score'] = score
+                        res.status(201).send(postRes);
+                    } else {
+                        res.send({error: err})
+                    }
+                })
+            }
+        })
+    } catch (err) {
+        res.send({error: err})
+    }
+}
+function postQuiz(req, res) {
+    title = req.body.title;
+    rndNum = Math.floor(Math.random() * 10000000).toString();
+    token = bcrypt.hashSync(rndNum, 5);
+    description = req.body.description;
+    instructions = req.body.instructions;
+    creatorId = req.body.creatorId;
+    questions = JSON.stringify(req.body.questions);
+    pool.query('INSERT INTO "quizzes" (title, description, instructions, "creatorId", questions, token) VALUES($1, $2, $3, $4, $5, $6)', [title, description, instructions, creatorId, questions, token], (err, result) => {
+        if(err){
+            res.send({error: err})
+        } else {
+        result['token'] = token;
+        res.status(201).send(result);
+        }
+    })
+}
+function getScoresAdmin(req,res,quizId){
+    pool.query('SELECT score, "userId" FROM "userAnswers" WHERE "quizId" = $1', [quizId], (err, result)=>{
+        if(err){
+            res.send({error: err})
+        } else{
+            pool.query('SELECT token FROM quizzes where id = $1', [quizId], (err, token)=>{
+                result['token'] = token.rows[0];
+                res.status(201).send(result)
+            })
+        }
+    })
+}
+
+function getQuizzesByAdmin(req,res,admin){
+    pool.query('SELECT title, id FROM quizzes WHERE "creatorId" = $1', [admin], (err, result)=>{
+        if(err){
+            res.send({error: err});
+        }
+        else {
+            res.status(201).send(result);
+        }
+    })
+}
+
+
+module.exports.getScoresAdmin = getScoresAdmin;
+module.exports.postQuiz = postQuiz;
+module.exports.getScore = getScore;
+module.exports.getQuiz = getQuiz;
+module.exports.getQuizzesByAdmin = getQuizzesByAdmin
+// function getScore(req, res) {
+//     userAnswers = req.body.answers;
+//     score = 0;
+//     pool.query('INSERT INTO userAnswers (answers) VALUES($1)', [req.body.answers], (err, postRes) => {
+//     }).then(()=>{
+//         pool.query('SELECT quizzes.questions FROM quizzes where quizzes.token = $1', [req.body.token], (err, result) => {
+//         }).then(()=>{
+//             for(let i = 0; i < userAnswers.length; i++){
+//                 if(this.userAnswers[i] == result[i].questions.correct){
+//                     this.score++;
+//                 }
+//             }
+//             pool.query('INSERT INTO userAnswers (score) VALUES($1)', [score], (err, scoreRes)=>{
+//                 if(err){
+//                     console.log('Error: ' + err);
+//                 } else if(scoreRes){
+//                     res.status(201).send(score);
+//                 }
+//             })
 //         })
-//         var postRes = await postReq.save();
-//         console.log(postRes);
-//         res.status(201).send('Added quiz')
-//     } catch (err) {
-//         console.log('Error:' + ' ' + err);
-//     }
+//     }) 
 // }
-
-// async function postAnswers(req, res) {
+// async function getScore(req, res) {
+//     userAnswers = req.body.answers;
+//     userId = req.body.userId;
+//     quizId = req.body.quizId;
+//     var scoreId;
+//     // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+//     // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+//     // var dateTime = date+' '+time;
+//     datestamp = new Date();
+//     score = 0;
 //     try {
-//         var quizId
-//         const postAnswers = new Answers({
-//             _id: 'abc456',
-//             quizzes_id: 'abc123',
-//             user_id: 'user1',
-//             UserAnswers: [2,2],
-//             quizId = quizzes_id
-//         });
-//         var postRes = await postAnswers.save();
-//         console.log(getRes);
-//         res.status(201).send('Added Answers')
-
-//         // Fuction fires after answers have been posted
-//         console.log(quizId);
-//         getQuizAnswers()
-
-//     }
-//     catch (err) {
-//         console.log('Error:' + '' + err);
-//     }
-// }
-
-// async function getResults(){
-//     try {
-//         var query  = Quizzes.where({ _id: req.body.quizId });
-//         await query.findOne(function (err, quiz) {
-//         if (err) return handleError(err)
-//         if (quiz) {
-//         var answers  = Answers.where({ quizzes_id: req.body.quizId });
-//         await answers.findOne(function (err, answer){
-//             if (err) return handleError(err);
-//             if (answer) {
-//                 answer['quizResults'] = quiz
-//                 return res.status(201).send(answer) 
-//             } 
-//         })
-//     }
-// });
-//     } catch (err) {
-//         console.log('Error:' + '' + err);
-//     }
-// }
-
-// async function getStudentsByQuizID(){
-//     try {
-//         var query = Answers.where({quizzes_id: req.body.quizID});
-//         await query.find(function(err, answer) {
-//             if (err) return handleError(err);
-//             if (answer) {
-//                 var answers = Answers.where({ quizzes_id: req.body.quizID});
-//                 await answers.find(function (err, answer){
-//                     if (err) return handleError(err);
-//                     if (answers) {
-//                         answers['quiz'] = quiz
-//                         return res.status(201).send(answer)
+//         await pool.query('INSERT INTO "userAnswers" (answers, "userId", "quizId", datestamp) VALUES($1, $2, $3, $4) RETURNING id', [userAnswers, userId, quizId, datestamp], (err, postRes) => {
+//             if (err) {
+//                 console.log('Error1: ' + err);
+//             } else {
+//                 scoreId = postRes.rows[0].id;
+//                 console.log(scoreId);
+//                 pool.query('SELECT quizzes.questions FROM quizzes where quizzes.id = $1', [quizId], (err, result) => {
+//                     if (err) {
+//                         console.log('Error2: ' + err);
+//                     } else {
+//                         for (var i = 0; i < userAnswers.length; i++) {
+//                             let correctAnswers = result.rows[0].questions[i].correct;
+//                             if (userAnswers[i] == correctAnswers) {
+//                                 score++;
+//                             }
+//                         }
+//                         pool.query('INSERT INTO "userAnswers" (score) VALUES($1) where id = $2', [score, scoreId], (err, scoreRes) => {
+//                             if (err) {
+//                                 console.log('Error3: ' + err);
+//                             } else {
+//                                 res.send(score.toString());
+//                             }
+//                         })
 //                     }
 //                 })
 //             }
 //         })
-//     }
-//     catch (err) {
-//         console.log('Error: ' + err);
+//     } catch (err) {
+//         console.log('Error4: ' + err);
 //     }
 // }
-
-// module.exports.getQuiz = getQuiz;
-// module.exports.postQuiz = postQuiz;
-// module.exports.getQuizAnswers = getQuizAnswers;
-// module.exports.postAnswers = postAnswers;
-// module.exports.getResults = getResults;
-// module.exports.getStudentsByQuizID = getStudentsByQuizID;
-/* Model for the anwsers schema
-const answerSchema = new mongoose.Schema({
-    _id: {
-        type: String
-    },
-    quizzes_id: {
-        type: String
-    },
-    user_id: {
-        type: String
-    },
-    answers: {
-        type: Array
-    }
-});
-
-var query  = Quizzes.where({ _id: req.body.quizId });
-query.findOne(function (err, quiz) {
-  if (err) return handleError(err);
-  if (quiz) {
-    // doc may be null if no document matched
-  }
-});
-*/

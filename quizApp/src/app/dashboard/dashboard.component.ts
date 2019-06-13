@@ -8,6 +8,8 @@ import { QuizServiceService } from '../quiz-service.service';
 })
 export class DashboardComponent implements OnInit {
 
+  displayedColumns = ['name', 'score', 'date', ];
+
   constructor(private quizService: QuizServiceService) { }
 
   ngOnInit() {

@@ -1,5 +1,5 @@
 <app-nav-bar></app-nav-bar>
-<form #quizForm="ngForm">
+<form>
   <div class="flex">
 
     <mat-card class="width30 matCard">
@@ -31,7 +31,7 @@
           </mat-form-field>
         </div>
         <mat-card-actions class="center">
-          <button mat-raised-button color="accent" type="submit" (ngSubmit)="quizFormSubmit(quizForm.value)">Create
+          <button mat-raised-button color="accent" type="submit" (click)="quizFormSubmit()">Create
             Quiz</button>
         </mat-card-actions>
       </mat-card-content>

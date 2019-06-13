@@ -44,6 +44,11 @@
 #visible {
   visibility: visible;
 }
+#visible2 {
+  visibility: visible;
+}
+
+
 #hidden {
   visibility: hidden;
 }
@@ -53,11 +58,36 @@
   flex-flow: row nowrap;
 }
 .width30{
-  width: 30%;
+  width: 40%;
   margin-top: 5px;
   margin-left: 5px;
 }
 .width70{
-  width: 70%;
+  width: 60%;
   margin-top: 5px;
+}
+#previousB{
+  visibility: hidden;
+}
+
+.visible{
+  visibility: visible;
+}
+.correctAnswer{
+  visibility: hidden;
+}
+#visible3 {
+  visibility: visible;
+}
+
+#hidden2{
+  visibility:  hidden;
+}
+
+.hiddenClass{
+  visibility:  hidden;
+}
+
+#nextBt{
+  visibility: visible; 
 }

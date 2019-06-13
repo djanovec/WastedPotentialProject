@@ -4,7 +4,7 @@
   <div class="flex">
 
     <mat-card class="width70">
-      <mat-card-title class="center quizTitle">{{quiz.title}}</mat-card-title>
+      <mat-card-title class="center quizTitle">{{quiz?.title}}</mat-card-title>
       <br>
       <div class="questionContainer">
         <mat-card-subtitle class="questionText"> {{currentQuestion}}</mat-card-subtitle>
@@ -17,7 +17,8 @@
         </mat-radio-group>
         <br>
         <mat-card-actions>
-          <button color="primary" mat-raised-button (click)="nextQuestion()" mat-button> Next Question</button>
+            <button color="primary" mat-raised-button id="previousB"  (click)="previousQuestion()" mat-button> Previous Question</button>
+          <button color="primary" mat-raised-button id="nextBt" (click)="nextQuestion() " mat-button> Next Question</button>
           <button mat-raised-button color="accent" (click)="submitButton()" id="searchsubmit" mat-button>
             Submit</button>
         </mat-card-actions>
@@ -35,7 +36,9 @@
 
         <ol>
           <mat-card-subtitle *ngFor="let n = index; let userAnswer of userAnswers">
-            <li><strong>Question:</strong> {{quiz.questions[n].prompt}} <strong> <br>You chose:</strong> {{userAnswer}}
+            <li><strong>Question:</strong> {{quiz?.questions[n].prompt}}
+             <strong> <br>You chose:</strong> {{userAnswer}}
+            <span id="hidden2">  <strong> <br> Correct answer:</strong> {{quiz?.questions[n].correct}}</span>
             </li>
           </mat-card-subtitle>
         </ol>

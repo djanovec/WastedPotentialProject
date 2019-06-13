@@ -1,21 +1,14 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { GetQuestionsService } from 'src/app/get-questions.service';
+import { QuizServiceService, Quiz } from '../services/quiz-service.service';
 import { FormControl, FormGroup, ControlValueAccessor } from '@angular/forms';
 import { MatRadioChange, MatButton } from '@angular/material';
-import { QuizServiceService } from '../quiz-service.service';
+import { Observable } from 'rxjs';
+import { Title } from '@angular/platform-browser';
+import { getMatScrollStrategyAlreadyAttachedError } from '@angular/cdk/overlay/typings/scroll/scroll-strategy';
 
 // Object Interface for data
-export interface Quiz {
-  title: string;
-  description: string;
-  questions: Array<Question>
-}
 
-export interface Question {
-  prompt: string,
-  choices: Array<string>,
-  correct: string
-}
+
 
 @Component({
   selector: 'app-display-quiz',
@@ -25,47 +18,75 @@ export interface Question {
 
 
 export class DisplayQuizComponent implements OnInit {
-
   formControl = new FormControl('');
   x = 0;
   matButton: MatButton;
   selectedRadio: string;
   userAnswers: any[] = [];
+  token;
   quiz: Quiz = {
-    title: "",
-    description: "",
+    title: '',
+    description: '',
     questions: []
-  }
+  };
   currentQuestion;
   currentChoices;
   correctAnswer;
+  selectedAnswer;
+  userAnswerText: any[] = [];
+  userScore: any = {
+    score: ''
+  };
+  correctAnswerText;
 
-  constructor(private questionsService: GetQuestionsService, private quizService: QuizServiceService) { 
-    
-  }
+
+  constructor(private questionService: QuizServiceService) { }
 
 
 
+  // hard coded json for testing
+  // quizTestData: Quiz = {
+  //   title: 'HTML Quiz',
+  //   description: 'This is a quiz here',
+  //   questions: [
+  //     {
+  //       type: 'asfasf'
+  //       prompt: 'What does HTML Stand for?',
+  //       choices: ['Hyper Text Markup Language', 'Hyperlinks and Text Markup Language', 'Home Tool Markup Language', 'Make Text Made Language'],
+  //       correct: 'Hyper Text Markup Language'
+  //     },
+  //     {
+  //       prompt: 'Which character is used to indicate an end tag?',
+  //       choices: ['/', '^', '*', '<'],
+  //       correct: '/'
+  //     },
+  //     {
+  //       prompt: 'How can you make a numbered list?',
+  //       choices: ['<ul>', '<list>', '<nl>', '<ol>'],
+  //       correct: '<ol>'
+  //     }
+  //   ]
+  // };
 
- 
+
+  // isolating the page question
+
+
 
   ngOnInit() {
-    console.log(this.quizService.quiz);
-    this.quiz = this.quizService.quiz;
-     // isolating the page question
 
-  this.currentQuestion = this.quiz[`questions`][this.x].prompt;
-
-  // insolating the page choices
-  this.currentChoices = this.quiz[`questions`][this.x].choices;
-
-  this.correctAnswer = this.quiz[`questions`][this.x].correct;
-    
+      this.quiz = this.questionService.quiz;
+      this.currentQuestion = this.quiz.questions[this.x].prompt;
+      this.currentChoices = this.quiz.questions[this.x].choices;
+      this.correctAnswer = this.quiz.questions[this.x].correct;
+      console.log(this.quiz);
+    // });
   }
 
   // identifying which radio button is selected
-  onSelectionChange(currentChoice) {
-    this.selectedRadio = currentChoice;
+  onSelectionChange(currentChoice, i) {
+    this.selectedRadio = i;
+    this.selectedAnswer = currentChoice;
     console.log(this.selectedRadio);
   }
 
@@ -89,6 +110,7 @@ export class DisplayQuizComponent implements OnInit {
   // function that activates on click of "next button." Changes the question.
   nextQuestion() {
     this.userAnswers.push(this.selectedRadio);
+    this.userAnswerText.push(this.selectedAnswer);
     console.log(this.userAnswers);
     this.x = this.x + 1;
     if (this.x < this.quiz[`questions`].length) {
@@ -108,6 +130,7 @@ export class DisplayQuizComponent implements OnInit {
   // previous button
   previousQuestion() {
     this.userAnswers.pop();
+    this.userAnswerText.pop();
     console.log(this.userAnswers);
     this.x = this.userAnswers.length;
     this.currentQuestion = this.quiz[`questions`][this.x].prompt;
@@ -116,11 +139,13 @@ export class DisplayQuizComponent implements OnInit {
   }
 
   submitButton() {
+    this.getScore();
     const questionArea = document.getElementsByClassName('questionContainer')[0];
     questionArea.remove();
     document.getElementById('thankYou').id = 'visible';
     for (let z = 0; z < this.userAnswers.length; z++) {
       const correctAnswer = document.getElementById('hidden2').id = 'visible';
+    
     }
   }
 
@@ -132,4 +157,12 @@ export class DisplayQuizComponent implements OnInit {
       this.hidePreviousButton();
     }
   }
+  getScore() {
+  this.questionService.getUserQuizScores(this.userAnswers).subscribe(res =>{
+    console.log(res);
+    this.userScore = res;
+});
 }
+
+}
+

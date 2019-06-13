@@ -12,3 +12,4 @@ export class GetQuestionsService {
     return this.http.get("/api/getQuiz")
   }
 }
+ 

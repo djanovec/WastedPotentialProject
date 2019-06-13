@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { QuizServiceService } from './quiz-service.service';
+import { QuizServiceService } from './services/quiz-service.service';
 
 describe('QuizServiceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

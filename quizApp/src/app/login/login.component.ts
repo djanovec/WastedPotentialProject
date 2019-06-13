@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
       if (res['error']) {
         return this.error = res['error'];
       } else if(res['logged']) {
-        this.router.navigate(['/take_quiz'])
+        this.router.navigate(['/quiz_guard'])
       }
       this.userServ.userLogin();
 console.log(this.email);  

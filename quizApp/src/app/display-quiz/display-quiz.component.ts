@@ -102,15 +102,15 @@ export class DisplayQuizComponent implements OnInit {
     this.userAnswers.push(this.selectedRadio);
     console.log(this.userAnswers);
     this.x = this.x + 1;
-    if (this.x < this.quiz.questions.length) {
-      this.currentQuestion = this.quiz.questions[this.x].prompt;
-      this.currentChoices = this.quiz.questions[this.x].choices;
-      this.correctAnswer = this.quiz.questions[this.x].correct;
+    if (this.x < this.quiz[`questions`].length) {
+      this.currentQuestion = this.quiz[`questions`][this.x].prompt;
+      this.currentChoices = this.quiz[`questions`][this.x].choices;
+      this.correctAnswer = this.quiz[`questions`][this.x].correct;
     }
     if (this.x === 1) {
       this.unhidePreviousButton();
     }
-    if (this.x === this.quiz.questions.length) {
+    if (this.x === this.quiz[`questions`].length) {
       this.unhideSubmitButton();
     }
   }
@@ -121,9 +121,9 @@ export class DisplayQuizComponent implements OnInit {
     this.userAnswers.pop();
     console.log(this.userAnswers);
     this.x = this.userAnswers.length;
-    this.currentQuestion = this.quiz.questions[this.x].prompt;
-    this.currentChoices = this.quiz.questions[this.x].choices;
-    this.correctAnswer = this.quiz.questions[this.x].correct;
+    this.currentQuestion = this.quiz[`questions`][this.x].prompt;
+    this.currentChoices = this.quiz[`questions`][this.x].choices;
+    this.correctAnswer = this.quiz[`questions`][this.x].correct;
   }
 
   submitButton() {

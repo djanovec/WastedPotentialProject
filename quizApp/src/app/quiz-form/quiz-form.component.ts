@@ -59,7 +59,7 @@ return index;
    console.log(this.questions);
   }
 
-  addChoice(val) {
+  addChoice(val, choice) {
     console.log(this.questions[val]);
     this.questions[val]['choices'].push('');
 

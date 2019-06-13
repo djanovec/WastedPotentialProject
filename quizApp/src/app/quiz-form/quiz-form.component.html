@@ -81,24 +81,24 @@
                   <mat-radio-button [value]="i">
                     <mat-form-field class="questionText" appearance="fill">
 
-                      <input matInput placeholder="Insert Multiple Choice">
+                      <mat-label>Insert Multiple Choice</mat-label>
+                      <input matInput>
 
                     </mat-form-field>
                   </mat-radio-button>
                   <!-- [name]={{question}} -->
                   <button mat-raised-button color="primary" (click)=removeChoice(choice,question)>Remove Choice</button>
                 </tr>
-                <div>
-                    <td>
-                      <button mat-raised-button color="primary" (click)=addChoice(question)>Add Choices</button>
-                    </td>
-                  </div>
+                  
               </table>
 
             </td>
 
           </mat-radio-group>
         </tr>
+        <td>
+          <button mat-raised-button color="primary" (click)=addChoice(question)>Add Choices</button>
+        </td>
       </table>
 
 

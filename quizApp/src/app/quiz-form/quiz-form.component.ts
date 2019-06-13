@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
-import { QuizServiceService } from '../quiz-service.service';
-import { Quiz } from './Models/quiz.model';
+import { FormBuilder, Validators, FormControl, FormGroup, NgForm } from '@angular/forms';
+import { QuizServiceService, Quiz, Questions } from '../services/quiz-service.service';
+import { Title } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-quiz-form',

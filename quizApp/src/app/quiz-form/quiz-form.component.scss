@@ -24,7 +24,9 @@
   justify-content: center;
 }
 
-  
+.btnMargin {
+  margin: 1em;
+}
 
 .mat-form-field{
   margin-left: 10px;
@@ -59,5 +61,15 @@ table {
   font-weight: 600;
   font-size: 18px;
   font-size-adjust: inherit;
-  width: 240px;
+}
+
+#questionText{
+  min-width: 278px;
+  width: 938px;
+}
+
+#choiceText{
+  margin-right: 4px;
+  min-width: 240px;
+  width: 900px;
 }

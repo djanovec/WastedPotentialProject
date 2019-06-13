@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { GetQuestionsService } from 'src/app/get-questions.service';
 import { FormControl, FormGroup, ControlValueAccessor } from '@angular/forms';
 import { MatRadioChange, MatButton } from '@angular/material';
+import { QuizServiceService } from '../quiz-service.service';
 
 // Object Interface for data
 export interface Quiz {
@@ -39,11 +40,7 @@ export class DisplayQuizComponent implements OnInit {
   matButton: MatButton;
   selectedRadio: string;
   userAnswers: any[] = [];
-
-  constructor(private questionsService: GetQuestionsService) { }
-
-  // hard coded json for testing
-  quiz: Quiz = {
+  quiz: any = {
     title: 'HTML Quiz',
     description: 'This is a quiz here',
     questions: [
@@ -63,7 +60,13 @@ export class DisplayQuizComponent implements OnInit {
         correct: '<ol>'
       }
     ]
-  };
+};
+
+  constructor(private questionsService: GetQuestionsService, private quizService: QuizServiceService) { 
+    
+  }
+
+
 
 
   // isolating the page question
@@ -76,7 +79,7 @@ export class DisplayQuizComponent implements OnInit {
   correctAnswer = this.quiz.questions[this.x].correct;
 
   ngOnInit() {
-    
+    this.quizService.quiz.subscribe(quiz=>this.quiz=quiz);
   }
 
   // identifying which radio button is selected

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class QuizServiceService {
 
 constructor(private http: HttpClient, private router: Router) {}
 
-  quiz: any;
+  private savedQuiz = new BehaviorSubject('');
+  quiz = this.savedQuiz.asObservable();
   errorMsg: string;
 
   getQuizByToken(token){
@@ -30,4 +32,9 @@ constructor(private http: HttpClient, private router: Router) {}
   getStudentsByQuizId(id){
     return this.http.get("/api/:id")
   }
+
+  // defineQuiz(){
+  //   return this.quiz;
+  // }
+
 }

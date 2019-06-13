@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ControlValueAccessor } from '@angular/forms';
 import { MatRadioChange, MatButton } from '@angular/material';
 import { Observable } from 'rxjs';
 import { Title } from '@angular/platform-browser';
+import { getMatScrollStrategyAlreadyAttachedError } from '@angular/cdk/overlay/typings/scroll/scroll-strategy';
 
 // Object Interface for data
 
@@ -23,10 +24,18 @@ export class DisplayQuizComponent implements OnInit {
   selectedRadio: string;
   userAnswers: any[] = [];
   token;
-  quiz: Quiz;
+  quiz: Quiz = {
+    title: '',
+    description: '',
+    questions: []
+  };
   currentQuestion;
   currentChoices;
   correctAnswer;
+  selectedAnswer;
+  userAnswerText: any[] = [];
+  userScore;
+
 
 
   constructor(private questionService: QuizServiceService) { }
@@ -64,19 +73,18 @@ export class DisplayQuizComponent implements OnInit {
 
   ngOnInit() {
 
-    this.questionService.getQuizByToken(this.token).subscribe((res: any) => {
-      this.quiz = res;
+      this.quiz = this.questionService.quiz;
       this.currentQuestion = this.quiz.questions[this.x].prompt;
       this.currentChoices = this.quiz.questions[this.x].choices;
       this.correctAnswer = this.quiz.questions[this.x].correct;
       console.log(this.quiz);
-      ;
-    });
+    // });
   }
 
   // identifying which radio button is selected
-  onSelectionChange(currentChoice) {
-    this.selectedRadio = currentChoice;
+  onSelectionChange(currentChoice, i) {
+    this.selectedRadio = i;
+    this.selectedAnswer = currentChoice;
     console.log(this.selectedRadio);
   }
 
@@ -100,6 +108,7 @@ export class DisplayQuizComponent implements OnInit {
   // function that activates on click of "next button." Changes the question.
   nextQuestion() {
     this.userAnswers.push(this.selectedRadio);
+    this.userAnswerText.push(this.selectedAnswer);
     console.log(this.userAnswers);
     this.x = this.x + 1;
     if (this.x < this.quiz[`questions`].length) {
@@ -119,6 +128,7 @@ export class DisplayQuizComponent implements OnInit {
   // previous button
   previousQuestion() {
     this.userAnswers.pop();
+    this.userAnswerText.pop();
     console.log(this.userAnswers);
     this.x = this.userAnswers.length;
     this.currentQuestion = this.quiz[`questions`][this.x].prompt;
@@ -127,11 +137,13 @@ export class DisplayQuizComponent implements OnInit {
   }
 
   submitButton() {
+    this.getScore();
     const questionArea = document.getElementsByClassName('questionContainer')[0];
     questionArea.remove();
     document.getElementById('thankYou').id = 'visible';
     for (let z = 0; z < this.userAnswers.length; z++) {
       const correctAnswer = document.getElementById('hidden2').id = 'visible';
+    
     }
   }
 
@@ -143,5 +155,12 @@ export class DisplayQuizComponent implements OnInit {
       this.hidePreviousButton();
     }
   }
+  getScore() {
+  this.questionService.getUserQuizScores(this.userAnswers).subscribe(res =>{
+    console.log(res);
+    this.userScore = res;
+});
 }
- 
+
+}
+

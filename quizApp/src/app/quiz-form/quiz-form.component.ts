@@ -15,7 +15,7 @@ export class QuizFormComponent implements OnInit {
   public quiz: Quiz = {
     title: '',
     description: '',
-    instructions: '',
+    // instructions: '',
     questions: [{}]
   };
   questions: Questions[] =[

@@ -5,7 +5,7 @@
 
     <mat-card class="width70">
       
-      <mat-card-title class="center quizTitle">{{quiz.title}}</mat-card-title>
+      <mat-card-title class="center quizTitle">{{quiz?.title}}</mat-card-title>
       <br>
       <div class="questionContainer">
         <mat-card-subtitle class="questionText"> {{currentQuestion}}</mat-card-subtitle>
@@ -13,7 +13,7 @@
         <mat-radio-group name="question" aria-label="Select an option"
           *ngFor="let currentChoice of currentChoices; let i = index">
           <ol>
-            <mat-radio-button value="i" (change)="onSelectionChange(currentChoice)">{{currentChoice}}</mat-radio-button>
+            <mat-radio-button value="i" (change)="onSelectionChange(currentChoice, i)">{{currentChoice}}</mat-radio-button>
           </ol>
         </mat-radio-group>
         <br>
@@ -26,7 +26,7 @@
       </div>
       <div class="questionContainer" id="thankYou">
         <mat-card-subtitle class="questionText"> Thank you for taking the quiz!</mat-card-subtitle>
-        You received 100%!
+        You received {{userScore}}!
       </div>
     </mat-card>
 
@@ -37,8 +37,8 @@
 
         <ol>
           <mat-card-subtitle *ngFor="let n = index; let userAnswer of userAnswers">
-            <li><strong>Question:</strong> {{quiz.questions[n].prompt}}
-             <strong> <br>You chose:</strong> {{userAnswer}}
+            <li><strong>Question:</strong> {{quiz?.questions[n].prompt}}
+             <strong> <br>You chose:</strong> {{userAnswerText[n]}}
             <span id="hidden2">  <strong> <br> Correct answer:</strong> {{quiz?.questions[n].correct}}</span>
             </li>
           </mat-card-subtitle>

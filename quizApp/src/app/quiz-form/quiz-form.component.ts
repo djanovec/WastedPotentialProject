@@ -9,18 +9,8 @@ import { Quiz } from './Models/quiz.model';
   styleUrls: ['./quiz-form.component.scss']
 })
 export class QuizFormComponent implements OnInit {
-    quiz: Quiz = {
-    quizTitle: "",
-    quizDescription: "",
-    quizInstructions: "",
-    quizQuestions: "",
-    correctAnswers: "",
-   
-
-     }
 
   constructor(private quizService: QuizServiceService ) { }
-
 questions: Array<Object> = [
   {
     type: "multi",
@@ -30,7 +20,14 @@ questions: Array<Object> = [
 
   }
 ]
+quiz: Quiz = {
+  quizTitle: "",
+  quizDescription: "",
+  quizInstructions: "",
+  quizQuestions: this.questions,
+  correctAnswers: "",
 
+   }
 types: string [] = ["multi"]
 
  title = ""

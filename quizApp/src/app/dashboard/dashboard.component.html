@@ -6,9 +6,9 @@
   <mat-form-field >
     <mat-label>Select Quiz</mat-label>
     <mat-select  >
-      <!-- <mat-option  *ngFor="let quiz of quizzes" [value]="quiz.id">
-        {{quiz.title}}
-      </mat-option> -->
+      <mat-option  *ngFor="let quiz of quizzes" [value]="quiz.id">
+        <button (click)="getScores(quiz.id)"> {{quiz.title}}</button>
+      </mat-option>
     </mat-select>
   </mat-form-field>
 
@@ -16,17 +16,17 @@
      
   <ng-container matColumnDef="name">
     <th  class="tableHeader" mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell >  </td>
+    <td mat-cell *ngFor="let name of names">{{name}}</td>
   </ng-container>
 
   <ng-container class="tableColumn" matColumnDef="score">
     <th  class="tableHeader" mat-header-cell *matHeaderCellDef>Score</th>
-    <td mat-cell >  </td>
+    <td mat-cell *ngFor="let score of scores" >{{score}}</td>
   </ng-container>
 
   <ng-container class="tableColumn" matColumnDef="date">
     <th  class="tableHeader" mat-header-cell *matHeaderCellDef>Date</th>
-    <td mat-cell > </td>
+    <td mat-cell *ngFor="let date of dates" >{{date}}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

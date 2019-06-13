@@ -25,13 +25,11 @@ function createUser(req, res){
 }
 function login(req, res){
     pool.query('SELECT * FROM users WHERE email = $1', [req.body.email], (err, result) =>{ 
-        if(result[0]){
+        if(result){
+            console.log(result.rows[0].password);
             if(bcrypt.compareSync(req.body.password, result.rows[0].password)){
-                if(result.rows[0].isAdmin == true){
-                    result['admin'] == true;
-                }
-                result['loggedIn'] == true;
-                return res.status(201).send(result);
+                userInfo = {isAdmin: result.rows[0].isAdmin, id: result.rows[0].id}
+                return res.status(201).send(userInfo);
             } else {
                 return res.send({error: "Invalid Username or Password"});
             }
@@ -51,6 +49,7 @@ function deleteUser(req, res){
         }
     })
 }
+
 
 module.exports.deleteUser = deleteUser;
 module.exports.login = login;

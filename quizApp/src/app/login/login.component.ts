@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   email: String = "";
   password: String = "";
+  userId;
   error;
   constructor(private userServ: UserServiceService, private router: Router) { }
   login() {
@@ -17,14 +18,20 @@ export class LoginComponent implements OnInit {
       "email": this.email,
       "password": this.password
     }).subscribe(res => {
-      if(res['admin'] == true) {
+      console.log(res)
+      if(res['isAdmin'] == true) {
         this.userServ.userAdmin();
+        console.log("IS ADMIN!")
       }
       if (res['error']) {
+        console.log('ERROR!')
         return this.error = res['error'];
-      } else if (res['loggedIn']){
+      } else {
+        console.log(res);
+        this.userId = res['id'];
+        this.userServ.userId(this.userId);
         this.userServ.userLogin();
-        this.router.navigate(['/take_quiz'])
+        this.router.navigate(['/quiz_guard'])
       }
     })
 }

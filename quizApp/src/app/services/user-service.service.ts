@@ -9,6 +9,7 @@ export class UserServiceService {
   isLoggedIn = new BehaviorSubject<boolean>(false);
   isAdmin = new BehaviorSubject<boolean>(false);
   isLoggedOut = new BehaviorSubject<boolean>(true);
+  loggedInId = new BehaviorSubject<Number>(0);
   constructor(private http: HttpClient) { }
   signup(loginData) {
     return this.http.post('users/create', loginData)
@@ -30,5 +31,8 @@ export class UserServiceService {
   }
   userAdmin(){
     this.isAdmin.next(true);
+  }
+  userId(id){
+    this.loggedInId.next(id);
   }
 }

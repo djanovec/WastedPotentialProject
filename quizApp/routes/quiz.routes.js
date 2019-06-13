@@ -4,13 +4,13 @@ const quizAPI = require('../models/quiz.models')
 let pool = require('../connections.js')
 
 router.get('/getQuizById/:token', (req, res)=>{
-    quizAPI.getQuiz(req, res, req.params.token);
+    quizAPI.getQuiz(req, res);
 })
 router.post('/postQuiz', (req, res)=>{
     quizAPI.postQuiz(req, res);
 })
-router.get('/getScoresAdmin/:token', (req, res)=>{
-    quizAPI.getScoresAdmin(req, res, req.params.token);
+router.get('/getScoresAdmin/:quizid', (req, res)=>{
+    quizAPI.getScoresAdmin(req, res);
 })
 router.post('/getScore', (req, res)=>{
     quizAPI.getScore(req, res);

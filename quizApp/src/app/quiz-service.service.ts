@@ -12,6 +12,9 @@ export class QuizServiceService {
 constructor(private http: HttpClient) {}
 
   getStudentsByQuizId(id){
-    return this.http.get("/api/:id")
+    return this.http.get(`/quizzes/getScoresAdmin/${id}`)
+  }
+  getQuizByAdmin(creatorId){
+    return this.http.get(`/quizzes/getQuizzesByAdmin/${creatorId}`)
   }
 }

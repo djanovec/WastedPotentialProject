@@ -31,9 +31,11 @@ const bcrypt = require('bcrypt');
 //     from answer a
 //     ) a on a.questionId = q.id
 // ) q on q.quizId = quiz.Id;
-function getQuiz(req, res, token) {
-    pool.query('SELECT questions, title, description, instructions FROM quizzes WHERE quizzes.token = $1', [token], (err, result) => {
-        if (result) {
+function getQuiz(req, res) {
+    token = req.body.token;
+    pool.query('SELECT questions, title, description, instructions FROM quizzes WHERE token = $1', [token], (err, result) => {
+        if (result.rows[0]) {
+            console.log(result)
             quizInfo = result.rows[0];
             res.status(201).send(quizInfo)
         } else if (err) {
@@ -49,7 +51,7 @@ async function getScore(req, res) {
         quizId = req.body.token
         datestamp = new Date();
         score = 0;
-        await pool.query('SELECT quizzes.questions FROM quizzes where quizzes.token = $1', [quizId], (err, result) => {
+        await pool.query('SELECT quizzes.questions, quizzes.id FROM quizzes where quizzes.token = $1', [quizId], (err, result) => {
             if (err) {
                 res.send({error: err})
             } else {
@@ -59,9 +61,12 @@ async function getScore(req, res) {
                         score++;
                     }
                 }
-                pool.query('INSERT INTO "userAnswers" (answers, "userId", "quizId", datestamp, score) VALUES($1, $2, $3, $4, $5)', [userAnswers, userId, quizId, datestamp, score], (err, postRes) => {
+                theActualQuizId = result.rows[0].id;
+                answers = result.rows[0].questions;
+                pool.query('INSERT INTO "userAnswers" (answers, "userId", "quizId", datestamp, score) VALUES($1, $2, $3, $4, $5)', [userAnswers, userId, theActualQuizId, datestamp, score], (err, postRes) => {
                     if(postRes){
-                        postRes['score'] = score
+                        postRes['score'] = score;
+                        postRes['questions'] = answers;
                         res.status(201).send(postRes);
                     } else {
                         res.send({error: err})
@@ -90,14 +95,16 @@ function postQuiz(req, res) {
         }
     })
 }
-function getScoresAdmin(req,res,quizId){
-    pool.query('SELECT score, "userId" FROM "userAnswers" WHERE "quizId" = $1', [quizId], (err, result)=>{
+function getScoresAdmin(req,res){
+    quizId = req.params.quizid;
+    console.log(quizId);
+    pool.query('SELECT score, users.email , datestamp FROM "userAnswers" INNER JOIN users on "userAnswers"."userId" = users.id WHERE "quizId" = $1', [quizId], (err, result)=>{
         if(err){
             res.send({error: err})
-        } else{
-            pool.query('SELECT token FROM quizzes where id = $1', [quizId], (err, token)=>{
+        } else {
+            pool.query('SELECT token FROM quizzes WHERE id = $1', [quizId], (err, token)=>{
                 result['token'] = token.rows[0];
-                res.status(201).send(result)
+                res.status(201).send(result.rows)
             })
         }
     })

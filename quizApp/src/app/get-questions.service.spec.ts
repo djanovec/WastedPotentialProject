@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GetQuestionsService } from './get-questions.service';
+import { GetQuestionsService } from './services/get-questions.service';
 
 describe('GetQuestionsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

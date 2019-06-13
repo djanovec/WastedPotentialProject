@@ -56,6 +56,10 @@ constructor(private http: HttpClient, private router: Router) {}
     return this.http.get("/api/:id")
   }
 
+  postQuiz(quiz) {
+    return this.http.post("/quizzes/postQuiz", quiz)
+  }
+
   // defineQuiz(){
   //   return this.quiz;
   // }

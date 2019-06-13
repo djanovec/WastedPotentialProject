@@ -42,6 +42,8 @@ table {
 }
 
 .width30{
+  position: sticky;
+  top: 0px;
   min-width: 325px;
   max-width: 325px;
   margin-top: 5px;

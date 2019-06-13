@@ -35,22 +35,62 @@
     </mat-card-content>
 
   </mat-card>
-<div>
+  <div>
+<mat-card>
+    <table *ngFor="let question of questions">
+      <tr>
+        <td>
+          <mat-form-field >
+            <mat-label>Insert Question Text</mat-label>
+            <input appearance="fill" matInput>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-radio-group [ngModel]="question.choice">
+            <span> Correct Answer </span>
+            <mat-radio-button value="i"></mat-radio-button>
+          </mat-radio-group>
+        <td>
+         
+          <mat-form-field  appearance="fill"> Insert A Choice Here:
+            <input matInput>
+          </mat-form-field>
+        </td>
+        <td>
+          <button mat-raised-button (click)=removeChoice()>Remove</button>
+        </td>
+      </tr>
+    </table>
+  
+  </mat-card>
+      <div>
+        <button mat-raised-button (click)=addQuestion(question)>Add New Question</button>
+    </div>
+  
+    <!-- <td><button mat-raised-button (click)=remove(time)>Remove</button></td> -->
 
-  <!-- Create and Add Questions -->
-  <mat-card class="width70 mat-elevation-z8" *ngFor="let question of quiz.questions; let i =index">
+    <!-- Create and Add Questions  -->
+    <!-- <table *ngFor="let question of quiz.questions">
+     <tr> 
+  <mat-card class="width70 mat-elevation-z8">
     <mat-card-title>Question #</mat-card-title>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
     Insert Question Text Here:
-    <mat-form-field class="questionText" appearance="fill">
+    <mat-form-field class="questionText" appearance="fill" [(ngModel)]="question[i]">
       <input matInput>
     </mat-form-field>
-    <button class="btnMargin" mat-raised-button color="primary" (click)=removeQuestion(quiz.question)> Remove
+    <button class="btnMargin" mat-raised-button color="primary" (click)=removeQuestion(quiz.question[i])> Remove
       Question</button>
     <br>
 
-    <mat-radio-group [ngModel]="question">
+    <mat-radio-group *ngFor="let choice of choices; let i = index">
       Choose the Correct Answer by Selecting a Radio Button
-      <mat-radio-button value="x">
+      <mat-radio-button value="i">
         Insert A Choice Here:
         <mat-form-field class="questionText" appearance="fill" >
           <input [(ngModel)]="nextChoice" matInput>
@@ -58,15 +98,15 @@
       </mat-radio-button>
 </mat-radio-group>
       <button class="btnMargin" mat-raised-button color="primary" (click)=removeChoice(question)>Remove
-        Choice</button>
+        Choice</button></tr>
       <div>
         <button class="btnMargin" mat-raised-button color="primary" (click)=addChoice()>Add
           Choices</button>
 
       </div>
     
-      <br><br>
-      <!-- add another question -->
-<div>
-      <button mat-raised-button (click)=addQuestion() >Add New Question</button>
-    </div>
+      <br><br> -->
+    <!-- add another question -->
+    <!-- <div>
+      <button mat-raised-button (click)=addQuestion()>Add New Question</button>
+    </div> -->

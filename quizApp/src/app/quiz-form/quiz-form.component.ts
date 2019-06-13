@@ -16,17 +16,16 @@ export class QuizFormComponent implements OnInit {
     title: '',
     description: '',
     instructions: '',
-    questions:[
+    questions: [{}]
+  };
+  questions: Questions[] =[
     {
       type: "multi",
       prompt: "",
       choices: [""],
       correct: "",
 
-    }]};
-
-// questionCard: Array<Questions> = [{}];
-  // types: string[] = ["multi"]
+    }];
 
   removeQuestion(val) {
     this.quiz.questions.splice(this.quiz.questions.indexOf(val), 1);
@@ -74,7 +73,7 @@ export class QuizFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.addQuestion();
+
 
   }
 }

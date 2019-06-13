@@ -21,8 +21,8 @@ constructor(private http: HttpClient) {}
     return this.http.get("/api/:id")
   }
 
-  postQuiz(newQuiz) {
-  return this.http.post("/quizzes/postQuiz", newQuiz)
+  postQuiz(quiz) {
+  return this.http.post("/quizzes/postQuiz", quiz)
 }
 
 getQuizByToken(token) {
@@ -49,11 +49,18 @@ getAllUserQuizScores(){
 export interface Quiz {
   title?: string;
   description?: string;
-  questions?: Questions[];
+  questions?: [{
+    type?: string;
+    prompt?: string;
+    choices?: Array<any>;
+    correct?: string;}
+  ]
+  instructions?: string;
 }
 
 export interface Questions {
+    type?: string;
     prompt?: string;
-    choices?: [string, string, string, string];
+    choices?: Array<any>;
     correct?: string;
   }

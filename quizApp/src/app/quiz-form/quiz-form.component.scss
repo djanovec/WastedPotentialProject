@@ -42,13 +42,14 @@ table {
 }
 
 .width30{
-  width: 30%;
+  min-width: 325px;
+  max-width: 325px;
   margin-top: 5px;
   margin-left: 5px;
 }
 
 .width70{
-  width: 70%;
+  width: calc(100% - 325px);
   margin-top: 5px;
 }
 

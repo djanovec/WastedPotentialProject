@@ -24,7 +24,7 @@ export class RegisterFormComponent implements OnInit {
         if (res['error']) {
           return this.error = res['error'];
         } else {
-          this.router.navigate(['/take_quiz'])
+          this.router.navigate(['/quiz_guard'])
         }
         this.userServ.userLogin();
       })

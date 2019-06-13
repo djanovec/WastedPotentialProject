@@ -31,9 +31,11 @@ const bcrypt = require('bcrypt');
 //     from answer a
 //     ) a on a.questionId = q.id
 // ) q on q.quizId = quiz.Id;
-function getQuiz(req, res, token) {
-    pool.query('SELECT questions, title, description, instructions FROM quizzes WHERE quizzes.token = $1', [token], (err, result) => {
-        if (result) {
+function getQuiz(req, res) {
+    token = req.body.token;
+    pool.query('SELECT questions, title, description, instructions FROM quizzes WHERE token = $1', [token], (err, result) => {
+        if (result.rows[0]) {
+            console.log(result)
             quizInfo = result.rows[0];
             res.status(201).send(quizInfo)
         } else if (err) {
@@ -93,14 +95,16 @@ function postQuiz(req, res) {
         }
     })
 }
-function getScoresAdmin(req,res,quizId){
-    pool.query('SELECT score, "userId" FROM "userAnswers" WHERE "quizId" = $1', [quizId], (err, result)=>{
+function getScoresAdmin(req,res){
+    quizId = req.params.quizid;
+    console.log(quizId);
+    pool.query('SELECT score, users.email , datestamp FROM "userAnswers" INNER JOIN users on "userAnswers"."userId" = users.id WHERE "quizId" = $1', [quizId], (err, result)=>{
         if(err){
             res.send({error: err})
-        } else{
-            pool.query('SELECT token FROM quizzes where id = $1', [quizId], (err, token)=>{
+        } else {
+            pool.query('SELECT token FROM quizzes WHERE id = $1', [quizId], (err, token)=>{
                 result['token'] = token.rows[0];
-                res.status(201).send(result)
+                res.status(201).send(result.rows)
             })
         }
     })

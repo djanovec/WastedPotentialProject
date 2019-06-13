@@ -18,14 +18,17 @@ export class QuizServiceService {
 
 constructor(private http: HttpClient, private router: Router) {}
 
-  getStudentsByQuizId(id){
-    return this.http.get("/api/:id")
-  }
+
 
   postQuiz(quiz) {
   return this.http.post("/quizzes/postQuiz", quiz)
 }
-
+getStudentsByQuizId(id){
+  return this.http.get(`/quizzes/getScoresAdmin/${id}`)
+}
+getQuizByAdmin(creatorId){
+  return this.http.get(`/quizzes/getQuizzesByAdmin/${creatorId}`)
+}
 quiz: Quiz;
   errorMsg: string;
 token: string;

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 
 export class QuizServiceService {
- token: {};
+//  token: {};
 
   
 // getQuiz(){

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {QuizServiceService} from '../services/quiz-service.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-quiz-guard',
@@ -6,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./quiz-guard.component.scss']
 })
 export class QuizGuardComponent implements OnInit {
-
-  constructor() { }
+token: string;
+submit() {
+  this.quizService.getQuizByToken(this.token);
+}
+  constructor(private quizService: QuizServiceService, private router: Router) { }
 
   ngOnInit() {
   }

@@ -22,7 +22,7 @@ export class DisplayQuizComponent implements OnInit {
   matButton: MatButton;
   selectedRadio: string;
   userAnswers: any[] = [];
-  token: string = '1234';
+  token;
   quiz: Quiz;
   currentQuestion;
   currentChoices;

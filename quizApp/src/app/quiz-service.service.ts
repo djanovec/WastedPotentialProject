@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +10,21 @@ export class QuizServiceService {
 // getQuiz(){
 //   this.http.get();\
 
-constructor(private http: HttpClient) {}
+constructor(private http: HttpClient, private router: Router) {}
 
   quiz: any;
+  errorMsg: string;
 
   getQuizByToken(token){
-    this.quiz=this.http.get(`quizzes/getQuizById/${token}`);
-    this.quiz.subscribe(res=>this.quiz=res);
-    return this.quiz;
+    this.http.get(`quizzes/getQuizById/${token}`)
+    .subscribe(res=>{
+      if (res['error']) {
+      return this.errorMsg="No quiz found";
+      }
+      else {
+      this.router.navigate(['/take_quiz'])
+      return;
+    }});
   }
 
   getStudentsByQuizId(id){

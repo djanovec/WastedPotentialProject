@@ -26,7 +26,7 @@
       </div>
       <div class="questionContainer" id="thankYou">
         <mat-card-subtitle class="questionText"> Thank you for taking the quiz!</mat-card-subtitle>
-        You received {{userScore}}!
+        You answered {{userScore.score}} of {{quiz.questions.length}}  questions correctly!
       </div>
     </mat-card>
 
@@ -39,7 +39,7 @@
           <mat-card-subtitle *ngFor="let n = index; let userAnswer of userAnswers">
             <li><strong>Question:</strong> {{quiz?.questions[n].prompt}}
              <strong> <br>You chose:</strong> {{userAnswerText[n]}}
-            <span id="hidden2">  <strong> <br> Correct answer:</strong> {{quiz?.questions[n].correct}}</span>
+            <span id="hidden2">  <strong> <br> Correct answer:</strong> {{quiz?.questions[n].choices[quiz.questions[n].correct]}}</span>
             </li>
           </mat-card-subtitle>
         </ol>

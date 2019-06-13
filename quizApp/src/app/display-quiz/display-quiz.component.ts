@@ -34,8 +34,10 @@ export class DisplayQuizComponent implements OnInit {
   correctAnswer;
   selectedAnswer;
   userAnswerText: any[] = [];
-  userScore;
-
+  userScore: any = {
+    score: ''
+  };
+  correctAnswerText;
 
 
   constructor(private questionService: QuizServiceService) { }

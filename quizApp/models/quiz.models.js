@@ -50,7 +50,7 @@ async function getScore(req, res) {
         quizId = req.body.token
         datestamp = new Date();
         score = 0;
-        await pool.query('SELECT quizzes.questions FROM quizzes where quizzes.token = $1', [quizId], (err, result) => {
+        await pool.query('SELECT quizzes.questions, quizzes.id FROM quizzes where quizzes.token = $1', [quizId], (err, result) => {
             if (err) {
                 res.send({error: err})
             } else {
@@ -60,9 +60,12 @@ async function getScore(req, res) {
                         score++;
                     }
                 }
-                pool.query('INSERT INTO "userAnswers" (answers, "userId", "quizId", datestamp, score) VALUES($1, $2, $3, $4, $5)', [userAnswers, userId, quizId, datestamp, score], (err, postRes) => {
+                theActualQuizId = result.rows[0].id;
+                answers = result.rows[0].questions;
+                pool.query('INSERT INTO "userAnswers" (answers, "userId", "quizId", datestamp, score) VALUES($1, $2, $3, $4, $5)', [userAnswers, userId, theActualQuizId, datestamp, score], (err, postRes) => {
                     if(postRes){
-                        postRes['score'] = score
+                        postRes['score'] = score;
+                        postRes['questions'] = answers;
                         res.status(201).send(postRes);
                     } else {
                         res.send({error: err})

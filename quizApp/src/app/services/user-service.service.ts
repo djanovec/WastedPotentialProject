@@ -12,14 +12,14 @@ export class UserServiceService {
   loggedInId = new BehaviorSubject<Number>(0);
   constructor(private http: HttpClient) { }
   signup(loginData) {
-    return this.http.post('users/create', loginData)
+    return this.http.post('/users/create', loginData)
   }
 
   login(loginData) {
-    return this.http.post('users/login', loginData)
+    return this.http.post('/users/login', loginData)
   }
   deleteUser(email){
-    return this.http.delete('users/delete', email)
+    return this.http.delete('/users/delete', email)
   }
   userLogin(){
     this.isLoggedOut.next(false);

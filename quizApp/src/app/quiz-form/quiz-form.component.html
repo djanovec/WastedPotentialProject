@@ -31,7 +31,7 @@
           </mat-form-field>
         </div>
         <mat-card-actions class="center">
-          <button mat-raised-button color="accent" type="submit" (ngSubmit)="quizFormSubmit()">Create
+          <button mat-raised-button color="accent" type="submit" (click)="quizFormSubmit()">Create
             Quiz</button>
         </mat-card-actions>
       </mat-card-content>
@@ -48,9 +48,7 @@
           <mat-card-title>Question #{{i+1}}</mat-card-title>
         </tr>
         <tr>
-          <mat-radio-group [(ngModel)]="questions">
-
-
+          <mat-radio-group [(ngModel)]="i">
             <td>
               <mat-form-field class="questionText" appearance="fill">
                 <mat-label>Insert Question Here</mat-label>

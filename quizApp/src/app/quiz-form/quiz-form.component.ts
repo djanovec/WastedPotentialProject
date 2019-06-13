@@ -60,7 +60,7 @@ types: string [] = ["multi"]
  }
    quizFormSubmit(quiz){
     // if(this.quizForm.valid){
-    this.quizService['this.quiz'].subscribe(res => console.log(res))
+    this.quizService.postQuiz(quiz).subscribe(res => console.log(res))
   // }
 
 }

@@ -7,6 +7,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserServiceService {
   isLoggedIn = new BehaviorSubject<boolean>(false);
+  isAdmin = new BehaviorSubject<boolean>(false);
+  isLoggedOut = new BehaviorSubject<boolean>(true);
   constructor(private http: HttpClient) { }
   signup(loginData) {
     return this.http.post('/users/create', loginData)
@@ -19,9 +21,14 @@ export class UserServiceService {
     return this.http.delete('/users/delete', email)
   }
   userLogin(){
+    this.isLoggedOut.next(false);
     this.isLoggedIn.next(true);
   }
-  logout(){
-    this.isLoggedIn.next(false); 
+  userLogout(){
+    this.isLoggedIn.next(false);
+    this.isLoggedOut.next(true); 
+  }
+  userAdmin(){
+    this.isAdmin.next(true);
   }
 }

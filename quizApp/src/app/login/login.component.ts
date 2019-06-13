@@ -17,14 +17,16 @@ export class LoginComponent implements OnInit {
       "email": this.email,
       "password": this.password
     }).subscribe(res => {
+      if(res['admin'] == true) {
+        this.userServ.userAdmin();
+      }
       if (res['error']) {
         return this.error = res['error'];
-      } else if(res['logged']) {
-        this.router.navigate(['/quiz_guard'])
+      } else if (res['loggedIn']){
+        this.userServ.userLogin();
+        this.router.navigate(['/take_quiz'])
       }
-      this.userServ.userLogin();
-console.log(this.email);  
-  }) 
+    })
 }
   ngOnInit() {
   }

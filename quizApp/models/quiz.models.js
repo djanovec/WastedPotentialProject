@@ -106,8 +106,8 @@ function getScoresAdmin(req,res){
             res.send({error: err})
         } else {
             pool.query('SELECT token FROM quizzes WHERE id = $1', [quizId], (err, token)=>{
-                result.rows[0]['token'] = token.rows[0];
-                res.status(201).send(result.rows)
+                let response = {scores: result.rows, token: token.rows[0]}
+                res.status(201).send(response)
             })
         }
     })
@@ -119,7 +119,8 @@ function getQuizzesByAdmin(req,res,admin){
             res.send({error: err});
         }
         else {
-            res.status(201).send(result);
+            info = result.rows
+            res.status(201).send(info);
         }
     })
 }

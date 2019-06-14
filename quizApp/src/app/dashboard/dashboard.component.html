@@ -1,20 +1,20 @@
 <app-nav-bar></app-nav-bar>
   <mat-card class="matCard">
-    <mat-card-header class="center centerText">
+    <mat-card-header class="center">
       <mat-card-title class="fontSize">Please Select A Quiz</mat-card-title>
-    </mat-card-header > 
-  <mat-form-field>
+    </mat-card-header >
+  <mat-form-field >
     <mat-label>Select Quiz</mat-label>
-    <mat-select>
+    <mat-select  >
       <mat-option  *ngFor="let quiz of quizzes" [value]="quiz.id">
-        <div (click)="getScores(quiz.id)"> {{quiz.title}}</div>
+        <button (click)="getScores(quiz.id)"> {{quiz.title}}</button>
       </mat-option>
     </mat-select>
-  </mat-form-field> 
-    <a class="right" [routerLink]="['/quiz_form']"><button class="btnMargin" mat-raised-button color="primary">Create Quiz</button></a>
-  <div class="centerText" *ngIf="token"><h3>Quiz token: {{token.token}}</h3></div>
+    <a [routerLink]="['/quiz_form']"><button>Create Quiz</button></a>
+  </mat-form-field>
+  <div *ngIf="token"><h3>{{token.token}}</h3></div>
 
-<table mat-table [dataSource]="results" color="primary" >
+<table mat-table [dataSource]="results" >
 
   <ng-container matColumnDef="score">
     <th mat-header-cell *matHeaderCellDef> Score </th>

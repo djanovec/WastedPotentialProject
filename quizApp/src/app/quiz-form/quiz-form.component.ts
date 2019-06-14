@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { QuizServiceService, Quiz, Questions } from '../services/quiz-service.service';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class QuizFormComponent implements OnInit {
   correctAnswers;
 
 
-  constructor( private quizService: QuizServiceService) { }
+  constructor( private quizService: QuizServiceService, private router: Router) { }
 
   questions: Array<Object> = [
     {
@@ -74,6 +75,7 @@ export class QuizFormComponent implements OnInit {
     console.log(quiz);
     this.quizService.postQuiz(quiz).subscribe(res => {
       console.log(res);
+      this.router.navigate(['/dashboard']);
     });
 
   }

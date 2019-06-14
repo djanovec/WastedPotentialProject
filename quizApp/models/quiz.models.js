@@ -106,7 +106,7 @@ function getScoresAdmin(req,res){
             res.send({error: err})
         } else {
             pool.query('SELECT token FROM quizzes WHERE id = $1', [quizId], (err, token)=>{
-                result['token'] = token.rows[0];
+                result.rows[0]['token'] = token.rows[0];
                 res.status(201).send(result.rows)
             })
         }

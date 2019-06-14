@@ -10,7 +10,9 @@
         <button (click)="getScores(quiz.id)"> {{quiz.title}}</button>
       </mat-option>
     </mat-select>
+    <a [routerLink]="['/quiz_form']"><button>Create Quiz</button></a>
   </mat-form-field>
+  <div *ngIf="token"><h3>{{token}}</h3></div>
 
   <table mat-table>
      

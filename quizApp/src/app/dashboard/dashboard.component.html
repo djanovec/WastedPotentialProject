@@ -13,7 +13,7 @@
    
   </mat-form-field> 
   <a [routerLink]="['/quiz_form']"> <button class="btnMargin" color="primary" mat-raised-button>Create Quiz</button></a>
-  <div *ngIf="token"><h3>{{token}}</h3></div>
+  <div *ngIf="token"><h3>{{token.token}}</h3></div>
 
 <table mat-table [dataSource]="results" >
 

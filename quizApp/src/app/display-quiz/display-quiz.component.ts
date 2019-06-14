@@ -38,7 +38,7 @@ export class DisplayQuizComponent implements OnInit {
     score: ''
   };
   correctAnswerText;
-  done: Boolean = false;
+  nextButton: Boolean = false;
 
 
   constructor(private questionService: QuizServiceService) { }
@@ -119,11 +119,15 @@ export class DisplayQuizComponent implements OnInit {
       this.currentChoices = this.quiz[`questions`][this.x].choices;
       this.correctAnswer = this.quiz[`questions`][this.x].correct;
     }
+    console.log({length: this.quiz['questions'].length});
+    console.log({x: this.x})
     if (this.x === 1) {
       this.unhidePreviousButton();
     }
     if (this.x === this.quiz[`questions`].length) {
       this.unhideSubmitButton();
+      this.nextButton = true;
+      console.log(this.nextButton);
     }
   }
 

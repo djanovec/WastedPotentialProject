@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormControl, FormGroup, NgForm } from '@angula
 import { QuizServiceService, Quiz, Questions } from '../services/quiz-service.service';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { UserServiceService } from '../services/user-service.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class QuizFormComponent implements OnInit {
   quizToken;
 
 
-  constructor( private quizService: QuizServiceService, private router: Router) { }
+  constructor( private quizService: QuizServiceService, private router: Router, private userServ: UserServiceService) { }
 
   questions: Array<Object> = [
     {
@@ -83,7 +84,7 @@ sideBar.remove();
       description: this.quizDescription,
       instrutions: this.quizInstructions,
       questions: this.questions,
-      creatorId: 1,
+      creatorId: this.userServ.logger,
     };
     console.log(quiz);
     this.quizService.postQuiz(quiz).subscribe(res => {

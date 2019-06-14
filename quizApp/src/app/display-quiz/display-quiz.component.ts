@@ -38,6 +38,7 @@ export class DisplayQuizComponent implements OnInit {
     score: ''
   };
   correctAnswerText;
+  done: Boolean = false;
 
 
   constructor(private questionService: QuizServiceService) { }

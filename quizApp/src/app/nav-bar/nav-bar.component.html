@@ -5,7 +5,7 @@
   <img src="./assets/images/quizWhipSemiBold300.png" alt="Quiz Whip Logo" class="center">
   <span class="fill-space"></span>
 
-  <button mat-button [matMenuTriggerFor]="options" id="optionsButton">Options</button>
+  <button mat-button [matMenuTriggerFor]="options" id="optionsButton"><mat-icon>menu</mat-icon></button>
 
   <mat-menu class="white" #options="matMenu">
     <button mat-menu-item><a class="navLink" [routerLink]="[ '/login' ]" routerLinkActive="active">Login</a></button>

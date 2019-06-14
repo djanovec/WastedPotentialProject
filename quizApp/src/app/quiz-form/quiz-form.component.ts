@@ -10,70 +10,75 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./quiz-form.component.scss']
 })
 export class QuizFormComponent implements OnInit {
+  quizTitle;
+  quizDescription;
+  quizInstructions;
+  quizQuestions;
+  correctAnswers;
 
-  constructor(private quizService: QuizServiceService) { }
-  public quiz: Quiz = {
-    title: '',
-    description: '',
-    // instructions: '',
-    questions: [{}]
-  };
-  questions: Questions[] =[
+
+  constructor( private quizService: QuizServiceService) { }
+
+  questions: Array<Object> = [
     {
       type: "multi",
       prompt: "",
-      choices: [""],
+      choices: [],
       correct: "",
 
-    }];
+    }
+  ]
 
-  removeQuestion(val) {
-    this.quiz.questions.splice(this.quiz.questions.indexOf(val), 1);
+  types: string[] = ["multi"]
+
+  title = ""
+  description = ""
+  instructions = ""
+
+  trackByFn(index: any, item: any) {
+    return index;
+ }
+  removeQuestion(idx) {
+    this.questions.splice(idx, 1)
   }
 
   addQuestion() {
-    this.quiz.questions.push({
+    this.questions.push({
       type: "multi",
       prompt: "",
-      choices: [""],
+      choices: [],
       correct: "",
 
+    })
+  }
+
+  removeChoice(question, cidx) {
+    console.log(cidx);
+   question['choices'].splice(cidx, 1);
+   console.log(this.questions);
+  }
+
+  addChoice(val) {
+    console.log(this.questions[val]);
+    this.questions[val]['choices'].push('');
+
+  }
+  quizFormSubmit() {
+    let quiz: any = {
+      title: this.quizTitle,
+      description: this.quizDescription,
+      instrutions: this.quizInstructions,
+      questions: this.questions,
+      creatorId: 1,
+    }
+    console.log(quiz);
+    this.quizService.postQuiz(quiz).subscribe(res => {
+      console.log(res);
     });
-  }
-
-  // addChoice(i) {
-  //   this.questions[i].choices.push;
-  //   // this.quiz.questions
-
-  // }
-
-  // addChoice(nextChoice) {
-  //   let x = this.quiz.questions.indexOf(nextChoice);
-  //   this.quiz.questions['this.quiz.questions[].choices'].push(i);
-  //   console.log(this.quiz.questions);
-  //   // this.quiz.questions
-
-  // }
-  removeChoice(val, arr) {
-    let x = this.quiz.questions.indexOf(arr);
-    this.quiz.questions['this.quiz.questions'].choices.splice(x).indexOf(val, 1);
-  }
-
- 
-
-  quizFormSubmit(quiz) {
-    console.log(this.quiz);
-    this.quizService.postQuiz(quiz).subscribe(res =>
-      console.log(res)
-    
-
-    );
-    // }
 
   }
 
   ngOnInit() {
-
 
   }
 }

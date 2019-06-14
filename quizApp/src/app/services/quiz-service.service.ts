@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
 
 
@@ -16,7 +16,7 @@ export class QuizServiceService {
 // getQuiz(){
 //   this.http.get();\
 
-constructor(private http: HttpClient, private router: Router) {}
+constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
 
 
 
@@ -37,12 +37,13 @@ token: string;
     this.http.get(`quizzes/getQuizById/${token}`)
     .subscribe(res=>{
       if (res['error']) {
-      return this.errorMsg="No quiz found";
+      return console.log(res['error']);
       }
       else {
+        console.log(res);
         this.quiz = res as Quiz;
-        this.router.navigate(['/take_quiz'])
-      return;
+        this.router.navigate(['../take_quiz'], {relativeTo: this.route});
+        return;
     }});
   }
 

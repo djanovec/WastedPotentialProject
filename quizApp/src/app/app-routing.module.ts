@@ -18,8 +18,13 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [UserGuard]},
   { path: 'register', component: RegisterFormComponent, canActivate: [UserGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AdminGuard] },
+<<<<<<< HEAD
   { path: 'quiz_form', component: QuizFormComponent },
   { path: 'quiz_guard', component: QuizGuardComponent },
+=======
+  { path: 'quiz_form', component: QuizFormComponent, canActivate: [AdminGuard] },
+  { path: 'quiz_guard', component: QuizGuardComponent, canActivate: [LoggedInGuard]},
+>>>>>>> b7af212062d7c14e3f82906a85215a2c6b763b38
   { path: 'take_quiz',  component: DisplayQuizComponent, canActivate: [LoggedInGuard]}
 ];
 

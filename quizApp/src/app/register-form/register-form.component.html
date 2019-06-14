@@ -45,7 +45,7 @@
     <mat-card-actions>
       <mat-card-actions align="center">
         <button mat-raised-button color="primary" (click)="signup()">Submit</button>
-        <button type="button" mat-raised-button color="accent">Cancel</button>
+        <button [routerLink]="['/login']" type="button" mat-raised-button color="accent">Log In</button>
       </mat-card-actions>
     </mat-card-actions>
   </form>

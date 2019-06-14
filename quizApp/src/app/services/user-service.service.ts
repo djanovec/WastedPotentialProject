@@ -9,7 +9,8 @@ export class UserServiceService {
   isLoggedIn = new BehaviorSubject<boolean>(false);
   isAdmin = new BehaviorSubject<boolean>(false);
   isLoggedOut = new BehaviorSubject<boolean>(true);
-  loggedInId = new BehaviorSubject<Number>(0);
+  private loggedInId = new BehaviorSubject<Number>(0);
+  logger = this.loggedInId.asObservable();
   constructor(private http: HttpClient) { }
   signup(loginData) {
     return this.http.post('/users/create', loginData)

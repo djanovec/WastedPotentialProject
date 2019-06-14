@@ -9,43 +9,35 @@ import { UserServiceService } from '../services/user-service.service';
 })
 export class DashboardComponent implements OnInit {
   creatorId: Number;
-  quizzes: any;
+  quizzes: Object[] = [];
+  quizResults: Object[] = [];
   results: Object[] = [];
-  scores: Object[];
-  names: Object[];
-  dates: Object[];
   token;
-  displayedColumns = ['name', 'score', 'date', ];
+  displayedColumns = ['score', 'email', 'datestamp', ];
   constructor(private quizService: QuizServiceService, private userServ: UserServiceService) { }
-  getId(){
-    this.creatorId = this.userServ.loggedInId.value;
-  }
   getQuizzes(creatorId){
-    this.quizService.getQuizByAdmin(creatorId).subscribe(res =>{
-      res['quizzes'] = this.quizzes;
+    this.quizService.getQuizByAdmin(creatorId).subscribe((res: Object[]) =>{
+      this.quizResults = res;
+      this.quizResults.forEach(quizResult => {
+        this.quizzes.push(quizResult);
+      })
+      console.log(this.quizzes);
     })
   }
   getScores(quizId){
+    console.log(quizId);
     this.quizService.getStudentsByQuizId(quizId).subscribe((res: Object[]) => {
-      this.results = res;
-      this.token = this.results[0]['token'][0].token;
-      console.log(res);
-      this.results.forEach(result => {
-        this.scores.push(result['score']);
-        this.names.push(result['email']);
-        this.dates.push(result['datestamp']);
-      });
+      this.results = res['scores'];
+      this.token = res['token'];
+      console.log(this.results);
     })
   }
-  reload(){
-
-  }
   ngOnInit() {
-    async function setup(){
-      await this.getId();
-      await this.getQuizzes(this.creatorId);
-    }
-    setup();
+    this.userServ.logger.subscribe(res => {
+      this.creatorId = res;
+      console.log(this.creatorId);
+      this.getQuizzes(this.creatorId);
+    })
   }
 
 }

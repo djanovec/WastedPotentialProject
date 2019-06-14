@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { QuizServiceService, Quiz, Questions } from '../services/quiz-service.service';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class QuizFormComponent implements OnInit {
   quizToken;
 
 
-  constructor( private quizService: QuizServiceService) { }
+  constructor( private quizService: QuizServiceService, private router: Router) { }
 
   questions: Array<Object> = [
     {
@@ -72,6 +73,9 @@ sideBar.remove();
 
   showThankYou() {
     document.getElementById('thankYou').id = 'visible';
+  }
+  dashboardButton() {
+    this.router.navigate(['/dashboard']);
   }
   quizFormSubmit() {
     let quiz: any = {

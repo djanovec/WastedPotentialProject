@@ -1,5 +1,6 @@
 const pool = require("../connections")
 const bcrypt = require('bcrypt');
+var Buffer = require('buffer/').Buffer
 // 01110111 01101000 01100001 01110100 00100000 01100001 00100000 01110111 01100001 01110011 01110100 01100101 00100000 01101111 01100110 00100000 01110100 01101001 01101101 01100101
 // for future cohorts, change this to pseudo tables from a json object column okay ty 
 // Possible solution for getQuiz function
@@ -32,11 +33,11 @@ const bcrypt = require('bcrypt');
 //     ) a on a.questionId = q.id
 // ) q on q.quizId = quiz.Id;
 function getQuiz(req, res) {
-    token = req.body.token;
-    pool.query('SELECT questions, title, description, instructions FROM quizzes WHERE token = $1', [token], (err, result) => {
+    token = req.params.token;
+    pool.query('SELECT * FROM quizzes WHERE token = $1', [token], (err, result) => {
         if (result.rows[0]) {
-            console.log(result)
             quizInfo = result.rows[0];
+            console.log(quizInfo);
             res.status(201).send(quizInfo)
         } else if (err) {
             console.log("ERROR: " + err);
@@ -80,8 +81,10 @@ async function getScore(req, res) {
 }
 function postQuiz(req, res) {
     title = req.body.title;
-    rndNum = Math.floor(Math.random() * 10000000).toString();
-    token = bcrypt.hashSync(rndNum, 5);
+    curDate = new Date();
+    milTime = curDate.getTime().toString();
+    bufferText = Buffer.from(milTime).toString('hex');
+    token = bufferText;
     description = req.body.description;
     instructions = req.body.instructions;
     creatorId = req.body.creatorId;
@@ -103,7 +106,7 @@ function getScoresAdmin(req,res){
             res.send({error: err})
         } else {
             pool.query('SELECT token FROM quizzes WHERE id = $1', [quizId], (err, token)=>{
-                result['token'] = token.rows[0];
+                result.rows[0]['token'] = token.rows[0];
                 res.status(201).send(result.rows)
             })
         }

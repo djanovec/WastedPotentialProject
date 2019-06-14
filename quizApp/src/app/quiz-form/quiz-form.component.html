@@ -50,14 +50,13 @@
             </mat-form-field>
             <button mat-raised-button color="primary" (click)=removeQuestion(qi)>Remove Question</button>
           
-          <ng-container *ngFor="let choice of question.choices; let ci = index; trackBy: ci" > <!-- Moved the ng-container to be a parent of the mat-radio-group and added the ngFor statemtn
-          -->
+          <ng-container *ngFor="let choice of question.choices; let ci = index" > <!-- Moved the ng-container to be a parent of the mat-radio-group and added the ngFor statemtn-->
             <mat-radio-group [name]="'correct' + ci" [(ngModel)]="question.correct">
               
                 <mat-radio-button [value]="ci">
                 <mat-form-field class="questionText" appearance="fill">
                     <mat-label>Insert Multiple Choice</mat-label>
-                    <input matInput [(ngModel)]="questions[qi].choices[ci]" [name]="'choice'+qi+ci"> <!-- changed the ngModel to include the indices -->
+                    <input matInput [(ngModel)]="questions[qi].choices[ci]" [name]="'choice'+'qi'+'ci'"> <!-- changed the ngModel to include the indices -->
                 </mat-form-field>
                 {{choice}} {{ci}} 
                 <button mat-raised-button color="primary" (click)="removeChoice(question, ci)">Remove Choice</button>

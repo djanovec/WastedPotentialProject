@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormGroup, NgForm, FormArray } from '@angular/forms';
 import { QuizServiceService, Quiz, Questions } from '../services/quiz-service.service';
 import { Title } from '@angular/platform-browser';
 
@@ -16,9 +16,13 @@ export class QuizFormComponent implements OnInit {
   quizQuestions;
   correctAnswers;
 
+  public myForm: FormGroup;
 
-  constructor(private quizService: QuizServiceService) { }
+  constructor(private quizService: QuizServiceService, private _fb: FormBuilder) { }
 
+  save(thing){
+    console.log(thing);
+  }
   questions: Array<Object> = [
     {
       type: "multi",
@@ -64,6 +68,11 @@ return index;
     this.questions[val]['choices'].push('');
 
   }
+
+  trackByFn(index, item){
+    return index;
+  }
+
   quizFormSubmit() {
     let quiz: any = {
       title: this.quizTitle,

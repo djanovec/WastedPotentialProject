@@ -5,13 +5,14 @@
     </mat-card-header >
   <mat-form-field >
     <mat-label>Select Quiz</mat-label>
-    <mat-select  >
+    <mat-select>
       <mat-option  *ngFor="let quiz of quizzes" [value]="quiz.id">
-        <button (click)="getScores(quiz.id)"> {{quiz.title}}</button>
+        <button class="btnMargin" (click)="getScores(quiz.id)"> {{quiz.title}}</button>
       </mat-option>
     </mat-select>
-    <a [routerLink]="['/quiz_form']"><button>Create Quiz</button></a>
-  </mat-form-field>
+   
+  </mat-form-field> 
+  <a [routerLink]="['/quiz_form']"> <button class="btnMargin" color="primary" mat-raised-button>Create Quiz</button></a>
   <div *ngIf="token"><h3>{{token}}</h3></div>
 
   <table mat-table>

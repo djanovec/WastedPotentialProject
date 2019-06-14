@@ -84,8 +84,7 @@ sideBar.remove();
       description: this.quizDescription,
       instrutions: this.quizInstructions,
       questions: this.questions,
-      // creatorId: this.userServ.logger,
-      creatorId: 20,
+      creatorId: this.userServ.logger,
     };
     console.log(quiz);
     this.quizService.postQuiz(quiz).subscribe(res => {

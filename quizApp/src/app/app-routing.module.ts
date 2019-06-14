@@ -10,7 +10,10 @@ import { UserGuard } from './guards/user.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { LoggedInGuard } from './guards/logged-in.guard';
 
+
 const routes: Routes = [
+
+
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [UserGuard]},
   { path: 'register', component: RegisterFormComponent, canActivate: [UserGuard] },
@@ -18,7 +21,7 @@ const routes: Routes = [
   { path: 'quiz_form', component: QuizFormComponent },
   { path: 'quiz_guard', component: QuizGuardComponent },
   { path: 'take_quiz',  component: DisplayQuizComponent, canActivate: [LoggedInGuard]}
-]
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -17,7 +17,7 @@ export class QuizFormComponent implements OnInit {
   correctAnswers;
 
 
-  constructor(private quizService: QuizServiceService) { }
+  constructor( private quizService: QuizServiceService) { }
 
   questions: Array<Object> = [
     {
@@ -35,10 +35,9 @@ export class QuizFormComponent implements OnInit {
   description = ""
   instructions = ""
 
-indexTracker(index, value){
-return index;
-}
-
+  trackByFn(index: any, item: any) {
+    return index;
+ }
   removeQuestion(idx) {
     this.questions.splice(idx, 1)
   }
@@ -69,17 +68,13 @@ return index;
       title: this.quizTitle,
       description: this.quizDescription,
       instrutions: this.quizInstructions,
-      questions: this.quizQuestions,
+      questions: this.questions,
       creatorId: 1,
     }
     console.log(quiz);
-
-    // if(this.quizForm.valid){
     this.quizService.postQuiz(quiz).subscribe(res => {
-      console.log(res)
+      console.log(res);
     });
-
-    // }
 
   }
 

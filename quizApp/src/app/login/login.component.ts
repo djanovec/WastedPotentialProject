@@ -20,6 +20,9 @@ export class LoginComponent implements OnInit {
     }).subscribe(res => {
       console.log(res)
       if(res['isAdmin'] == true) {
+        this.userId = res['id'];
+        console.log(this.userId);
+        this.userServ.userId(this.userId);
         this.userServ.userAdmin();
         this.userServ.userLogin();
         console.log("IS ADMIN!")
@@ -31,6 +34,7 @@ export class LoginComponent implements OnInit {
       } else {
         console.log(res);
         this.userId = res['id'];
+        console.log(this.userId);
         this.userServ.userId(this.userId);
         this.userServ.userLogin();
         this.router.navigate(['/quiz_guard'])

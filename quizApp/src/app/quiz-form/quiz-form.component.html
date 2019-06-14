@@ -48,7 +48,7 @@
                 <mat-label>Insert Question Here</mat-label>
                 <input matInput [(ngModel)]="question.prompt" [name]="'prompt'+qi">
             </mat-form-field>
-            <button mat-raised-button color="primary" (click)=removeQuestion(qi)>Remove Question</button>
+            <button mat-raised-button color="primary" (click)=removeQuestion[qi]>Remove Question</button>
           
              
           <mat-radio-group [name]="'correct' + ci" [(ngModel)]="question.correct">
@@ -56,7 +56,7 @@
                 <mat-radio-button [value]="ci" *ngFor="let choice of question.choices; let ci = index; trackBy: ci" >
                 <mat-form-field class="questionText" appearance="fill">
                     <mat-label>Insert Multiple Choice</mat-label>
-                    <input matInput [(ngModel)]="choice" [name]="'choice'+qi+ci">
+                    <input matInput [(ngModel)]="questions[qi].choices[ci]" [name]="'choice'+qi+ci">
                 </mat-form-field>
                 {{choice}} {{ci}} 
                 <button mat-raised-button color="primary" (click)="removeChoice(question, ci)">Remove Choice</button>

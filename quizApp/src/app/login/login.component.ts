@@ -21,7 +21,9 @@ export class LoginComponent implements OnInit {
       console.log(res)
       if(res['isAdmin'] == true) {
         this.userServ.userAdmin();
+        this.userServ.userLogin();
         console.log("IS ADMIN!")
+        return this.router.navigate(['/dashboard']);
       }
       if (res['error']) {
         console.log('ERROR!')

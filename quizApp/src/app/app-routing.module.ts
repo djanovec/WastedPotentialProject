@@ -23,6 +23,8 @@ const routes: Routes = [
   { path: 'take_quiz',  component: DisplayQuizComponent, canActivate: [LoggedInGuard]}
 ];
 
+
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

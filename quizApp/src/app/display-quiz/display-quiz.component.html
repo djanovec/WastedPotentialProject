@@ -27,6 +27,8 @@
       <div class="questionContainer" id="thankYou">
         <mat-card-subtitle class="questionText"> Thank you for taking the quiz!</mat-card-subtitle>
         You answered {{userScore.score}} of {{quiz.questions.length}}  questions correctly!
+        <br>
+        <a [routerLink]="[ '/quiz_guard' ]"><button mat-raised-button color="primary">Take another quiz!</button></a>
       </div>
     </mat-card>
 

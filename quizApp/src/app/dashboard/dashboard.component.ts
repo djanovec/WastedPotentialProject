@@ -33,16 +33,11 @@ export class DashboardComponent implements OnInit {
     })
   }
   ngOnInit() {
-<<<<<<< HEAD
-    this.getId();
-    this.getQuizzes(this.creatorId);
-=======
     this.userServ.logger.subscribe(res => {
       this.creatorId = res;
       console.log(this.creatorId);
       this.getQuizzes(this.creatorId);
     })
->>>>>>> 0a790962d05fde3d1192c34e446c35fb949c3fd7
   }
 
 }

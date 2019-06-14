@@ -37,9 +37,15 @@ export class DashboardComponent implements OnInit {
       });
     })
   }
+  reload(){
+
+  }
   ngOnInit() {
-    this.getId();
-    this.getQuizzes(this.creatorId);
+    async function setup(){
+      await this.getId();
+      await this.getQuizzes(this.creatorId);
+    }
+    setup();
   }
 
 }

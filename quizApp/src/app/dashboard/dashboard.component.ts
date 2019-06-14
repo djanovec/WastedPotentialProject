@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   scores: Object[];
   names: Object[];
   dates: Object[];
+  token;
   displayedColumns = ['name', 'score', 'date', ];
   constructor(private quizService: QuizServiceService, private userServ: UserServiceService) { }
   getId(){
@@ -27,6 +28,8 @@ export class DashboardComponent implements OnInit {
   getScores(quizId){
     this.quizService.getStudentsByQuizId(quizId).subscribe((res: Object[]) => {
       this.results = res;
+      this.token = this.results[0]['token'][0].token;
+      console.log(res);
       this.results.forEach(result => {
         this.scores.push(result['score']);
         this.names.push(result['email']);

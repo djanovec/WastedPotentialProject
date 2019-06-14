@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { QuizServiceService, Quiz, Questions } from '../services/quiz-service.service';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,9 +16,11 @@ export class QuizFormComponent implements OnInit {
   quizInstructions;
   quizQuestions;
   correctAnswers;
+  currentQuizToken;
+  quizToken;
 
 
-  constructor( private quizService: QuizServiceService) { }
+  constructor( private quizService: QuizServiceService, private router: Router) { }
 
   questions: Array<Object> = [
     {
@@ -63,6 +66,17 @@ export class QuizFormComponent implements OnInit {
     this.questions[val]['choices'].push('');
 
   }
+hideCreateQuiz(){
+  let sideBar = document.getElementById('sideBarContent');
+sideBar.remove();
+}
+
+  showThankYou() {
+    document.getElementById('thankYou').id = 'visible';
+  }
+  dashboardButton() {
+    this.router.navigate(['/dashboard']);
+  }
   quizFormSubmit() {
     let quiz: any = {
       title: this.quizTitle,
@@ -70,13 +84,17 @@ export class QuizFormComponent implements OnInit {
       instrutions: this.quizInstructions,
       questions: this.questions,
       creatorId: 1,
-    }
+    };
     console.log(quiz);
     this.quizService.postQuiz(quiz).subscribe(res => {
       console.log(res);
+      this.quizToken = res;
+      this.currentQuizToken = res['token'];
     });
-
+    this.hideCreateQuiz();
+this.showThankYou();
   }
+
 
   ngOnInit() {
 

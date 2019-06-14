@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup, NgForm } from '@angular/forms';
-// import { QuizServiceService, Quiz, Questions } from '../services/quiz-service.service';
+import { QuizServiceService, Quiz, Questions } from '../services/quiz-service.service';
 import { Title } from '@angular/platform-browser';
 
 
@@ -17,7 +17,7 @@ export class QuizFormComponent implements OnInit {
   correctAnswers;
 
 
-  constructor() { }
+  constructor( private quizService: QuizServiceService) { }
 
   questions: Array<Object> = [
     {
@@ -68,17 +68,13 @@ export class QuizFormComponent implements OnInit {
       title: this.quizTitle,
       description: this.quizDescription,
       instrutions: this.quizInstructions,
-      questions: this.quizQuestions,
+      questions: this.questions,
       creatorId: 1,
     }
     console.log(quiz);
-
-    // if(this.quizForm.valid){
-    // this.quizService.postQuiz(quiz).subscribe(res => {
-    //   console.log(res)
-    // });
-
-    // }
+    this.quizService.postQuiz(quiz).subscribe(res => {
+      console.log(res);
+    });
 
   }
 

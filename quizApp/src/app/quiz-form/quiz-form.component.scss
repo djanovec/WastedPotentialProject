@@ -69,3 +69,19 @@ table {
   position: sticky;
   top: 0;
 }
+.paragraphSpacing{
+  line-height: 32px;  
+}
+#thankYou{
+  visibility: hidden;
+}
+
+#visible { 
+visibility: visible;
+}
+#hidden{
+  visibility: hidden;
+}
+#sideBarContent{
+  margin-bottom: 1em;
+}

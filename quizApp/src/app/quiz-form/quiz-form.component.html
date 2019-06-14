@@ -1,5 +1,5 @@
 <app-nav-bar></app-nav-bar>
-
+<!-- Refactor with reactive forms someday -->
 <div class="flex">
 
     <mat-card class="width30 matCard sticky">
@@ -7,7 +7,7 @@
       <mat-card-header class="center">
         <mat-card-title class="titleFont">Whip Up a Quiz</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content id="sideBarContent">
         <!-- Quiz Name/Title -->
         <div class="center">
           <mat-form-field class="width">
@@ -33,8 +33,22 @@
           <button mat-raised-button color="accent" type="submit" (click)="quizFormSubmit()">Create
             Quiz</button>
         </mat-card-actions>
-      </mat-card-content>
 
+      </mat-card-content>
+<!-- thank you message hidden until submit -->
+
+<div class="tokenMessage" id="thankYou">
+          <mat-card-subtitle>Your quiz has been submitted!</mat-card-subtitle>
+          <mat-card-content>The token below can be shared to access the quiz. </mat-card-content>
+          <mat-card-content>{{currentQuizToken}}</mat-card-content>
+          <mat-card-content>*Only those who are logged-in can take the quiz.*</mat-card-content>
+          
+          <a href="https://quizwhip.herokuapp.com/quiz_guard"> https://quizwhip.herokuapp.com/quiz_guard</a>
+
+   <mat-card-actions class="center">
+          <button mat-raised-button color="primary" (click)="dashboardButton() ">Admin Dashboard</button>
+        </mat-card-actions>
+        </div>
     </mat-card>
 
 

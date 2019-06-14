@@ -115,6 +115,7 @@ export class DisplayQuizComponent implements OnInit {
     console.log(this.userAnswers);
     this.x = this.x + 1;
     if (this.x < this.quiz[`questions`].length) {
+      console.log('back');
       this.currentQuestion = this.quiz[`questions`][this.x].prompt;
       this.currentChoices = this.quiz[`questions`][this.x].choices;
       this.correctAnswer = this.quiz[`questions`][this.x].correct;
@@ -134,6 +135,7 @@ export class DisplayQuizComponent implements OnInit {
 
   // previous button
   previousQuestion() {
+    this.nextButton = false;
     this.userAnswers.pop();
     this.userAnswerText.pop();
     console.log(this.userAnswers);
